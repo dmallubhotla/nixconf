@@ -2,7 +2,7 @@
   description = "Configuration v1";
 
   inputs = {
-    nixpkgs.url = "flake:nixpkgs";
+    nixpkgs.url = "github:NixOS/nixpkgs/release-21.11";
     homeManager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
