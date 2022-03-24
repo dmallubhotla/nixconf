@@ -6,9 +6,16 @@
     (pkgs.writeScriptBin "nixFlakes" ''
       exec ${pkgs.nixUnstable}/bin/nix --experimental-features "nix-command flakes" "$@"
     '')
+    pkgs.obsidian
   ];
   
   home.homeDirectory = "/home/deepak";
   home.username = "deepak";
+
+  programs.git = {
+    enable = true;
+    userName  = "Deepak Mallubhotla";
+    userEmail = "dmallubhotla+github@gmail.com";
+  };
 
 }
