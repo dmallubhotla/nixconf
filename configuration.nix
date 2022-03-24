@@ -20,7 +20,7 @@
 
   boot.kernelParams = [
     "hid_apple.swap_fn_leftctrl=1"
-    "swap_opt_cmd=1"
+    "hid_apple.swap_opt_cmd=1"
   ];
 
   networking.hostName = "maxos"; # Define your hostname.
