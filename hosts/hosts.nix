@@ -20,7 +20,7 @@
 			homeManager.nixosModules.home-manager {
 				home-manager.useGlobalPkgs = true;
 				home-manager.users.deepak = {
-					imports = [ ../home/deepak/home.nix ];
+					imports = [ ../home/deepak/home_no_gui.nix ];
 				};
 			}
 		];

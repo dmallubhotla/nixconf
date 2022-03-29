@@ -13,9 +13,10 @@
 	outputs = { self, nixpkgs, homeManager, ...}@inputs: {
 		
 		nixosConfigurations = (
-			import ./hosts.nix {
+			import ./hosts/hosts.nix {
 				inherit nixpkgs;
 				inherit homeManager;
+				inherit inputs;
 				inherit (nixpkgs) lib;
 			}
 		);
