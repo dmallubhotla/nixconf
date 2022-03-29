@@ -50,6 +50,10 @@ in
     git
   ];
   
+  environment.etc = {
+    "wsl.conf".source = ./wsl.conf;
+  };
+
   nixpkgs.config.allowUnfree = true;
 
   security.sudo.wheelNeedsPassword = false;
