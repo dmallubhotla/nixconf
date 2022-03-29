@@ -2,38 +2,27 @@
 
 with lib;
 let
-  defaultUser = "nixos";
   syschdemd = import ./syschdemd.nix { inherit lib pkgs config defaultUser; };
+  nixos-wsl = import ./nixos-wsl;
 in
 {
   imports = [
     "${modulesPath}/profiles/minimal.nix"
+
+    nixos-wsl.nixosModules.wsl
   ];
 
-  # WSL is closer to a container than anything else
-  boot.isContainer = true;
-
-  environment.etc.hosts.enable = false;
-  environment.etc."resolv.conf".enable = false;
-
-  networking.dhcpcd.enable = false;
-
-  users.users.${defaultUser} = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-  };
-  
   networking.hostName = "nixosWSL"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Set your time zone.
   time.timeZone = "America/Chicago";
 
+  wsl = {
+    enable = true;
+    automountPath = "/mnt";
+    defaultUser = "deepak";
+    startMenuLaunchers = true;
 
-  users.users.root = {
-    shell = "${syschdemd}/bin/syschdemd";
-    # Otherwise WSL fails to login as root with "initgroups failed 5"
-    extraGroups = [ "root" ];
+    # Enable integration with Docker Desktop (needs to be installed)
+    # docker.enable = true;
   };
 
   users.users.deepak = {
@@ -43,36 +32,14 @@ in
     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
     wget vim
     git
   ];
-  
-  environment.etc = {
-    "wsl.conf".source = ./wsl.conf;
-  };
 
-  nixpkgs.config.allowUnfree = true;
-
-  security.sudo.wheelNeedsPassword = false;
-
-  # Disable systemd units that don't make sense on WSL
-  systemd.services."serial-getty@ttyS0".enable = false;
-  systemd.services."serial-getty@hvc0".enable = false;
-  systemd.services."getty@tty1".enable = false;
-  systemd.services."autovt@".enable = false;
-
-  systemd.services.firewall.enable = false;
-  systemd.services.systemd-resolved.enable = false;
-  systemd.services.systemd-udevd.enable = false;
-
-  # Don't allow emergency mode, because we don't have a console.
-  systemd.enableEmergencyMode = false;
-
-  nix = {
-    package = pkgs.nixFlakes;
-    extraOptions = ''experimental-features = nix-command flakes'';
-  };
+  # Enable nix flakes
+  nix.package = pkgs.nixFlakes;
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+  '';
 }
