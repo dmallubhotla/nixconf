@@ -4,6 +4,9 @@
 
 { config, pkgs, ... }:
 
+let
+  custom-fonts = import ./fonts { inherit pkgs; };
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -53,7 +56,12 @@
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
-  
+
+  fonts.fonts = with pkgs; [
+    fira-code
+    fira-code-symbols
+    custom-fonts.input-font
+  ];
 
   # Configure keymap in X11
   services.xserver = {
@@ -87,7 +95,7 @@
     firefox
     git
   ];
-  
+
   nixpkgs.config.allowUnfree = true;
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -118,4 +126,3 @@
   system.stateVersion = "20.09"; # Did you read the comment?
 
 }
-

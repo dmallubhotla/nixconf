@@ -7,6 +7,7 @@
       exec ${pkgs.nixUnstable}/bin/nix --experimental-features "nix-command flakes" "$@"
     '')
     pkgs.obsidian
+    pkgs.atom
   ];
   
   home.homeDirectory = "/home/deepak";
