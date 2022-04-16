@@ -60,7 +60,7 @@ in
   fonts.fonts = with pkgs; [
     fira-code
     fira-code-symbols
-    custom-fonts.input-font
+    custom-fonts.custom-fonts
   ];
 
   # Configure keymap in X11

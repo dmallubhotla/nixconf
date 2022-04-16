@@ -1,9 +1,9 @@
 { pkgs ? import <nixpkgs> {} }:
 
 let
-  input-font = pkgs.stdenvNoCC.mkDerivation {
+  custom-fonts = pkgs.stdenvNoCC.mkDerivation {
     pname = "input";
-    version = "1.0.1";
+    version = "1.0.2";
     src = ./.;
     dontConfigure = true;
 
@@ -19,5 +19,5 @@ let
   };
 in
 {
-  inherit input-font;
+  inherit custom-fonts;
 }
