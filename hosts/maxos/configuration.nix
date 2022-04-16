@@ -5,7 +5,7 @@
 { config, pkgs, ... }:
 
 let
-  custom-fonts = import ./fonts { inherit pkgs; };
+  custom-fonts = import ../../fonts { inherit pkgs; };
 in
 {
   imports =
