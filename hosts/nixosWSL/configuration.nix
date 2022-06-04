@@ -44,7 +44,7 @@ in
   '';
 
   nix.settings = {
-    substituters = [
+    extra-substituters = [
       "https://nix-community.cachix.org"
       "https://dmallubhotla-testing-1.cachix.org"
       "https://cache.nixos.org/"
