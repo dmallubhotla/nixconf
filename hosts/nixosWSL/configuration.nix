@@ -46,10 +46,12 @@ in
   nix.settings = {
     substituters = [
       "https://nix-community.cachix.org"
+      "https://dmallubhotla-testing-1.cachix.org"
       "https://cache.nixos.org/"
     ];
     trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "dmallubhotla-testing-1.cachix.org-1:6Xc9n6kRtYCP8Sofhs4WHM5lYz9cDUgObe3USePVX1s="
     ];
   };
 }
