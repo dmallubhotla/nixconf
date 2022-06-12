@@ -86,6 +86,7 @@ in
     home = "/home/deepak";
     description = "Deepak Mallubhotla";
     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    shell = pkgs.zsh;
   };
 
   # List packages installed in system profile. To search, run:
@@ -95,6 +96,7 @@ in
     firefox
     git
   ];
+  programs.zsh.enable = true;
 
   nixpkgs.config.allowUnfree = true;
 
