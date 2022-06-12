@@ -64,6 +64,9 @@
         };
       }
     ];
+    initExtra = mkIf cfg.enableZshIntegration ''
+      eval "$(${pkgs.direnv}/bin/direnv hook zsh)"
+    '';
   };
 
 
