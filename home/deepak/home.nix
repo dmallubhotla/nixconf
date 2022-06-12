@@ -21,6 +21,11 @@
     enable = true;
     userName  = "Deepak Mallubhotla";
     userEmail = "dmallubhotla+github@gmail.com";
+    extraConfig = {
+      core = {
+        fileMode = false;
+      };
+    };
   };
 
   programs.zsh = {
