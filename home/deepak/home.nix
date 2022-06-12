@@ -14,6 +14,9 @@
   home.homeDirectory = "/home/deepak";
   home.username = "deepak";
 
+  programs.direnv.enable = true;
+  programs.direnv.nix-direnv.enable = true;
+
   programs.git = {
     enable = true;
     userName  = "Deepak Mallubhotla";
