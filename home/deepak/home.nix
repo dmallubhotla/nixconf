@@ -64,7 +64,7 @@
         };
       }
     ];
-    initExtra = mkIf cfg.enableZshIntegration ''
+    initExtra = ''
       eval "$(${pkgs.direnv}/bin/direnv hook zsh)"
     '';
   };
