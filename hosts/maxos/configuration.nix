@@ -99,6 +99,9 @@ in
     wget vim
     firefox
     git
+    pinentry
+    pinentry-curses
+    gnupg
   ];
   programs.zsh.enable = true;
 
@@ -110,7 +113,7 @@ in
   services.pcscd.enable = true;
   programs.gnupg.agent = {
     enable = true;
-    pinentryFlavor = "gtk2";
+    pinentryFlavor = "curses";
     enableSSHSupport = true;
   };
 
