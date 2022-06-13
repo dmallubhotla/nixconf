@@ -21,6 +21,10 @@
     enable = true;
     userName  = "Deepak Mallubhotla";
     userEmail = "dmallubhotla+github@gmail.com";
+    signing = {
+      key = "976F3357369149AB";
+      signByDefault = true;
+    };
     extraConfig = {
       core = {
         fileMode = false;
