@@ -102,6 +102,7 @@ in
     pinentry
     pinentry-curses
     gnupg
+    tailscale
   ];
   programs.zsh.enable = true;
 
@@ -117,6 +118,12 @@ in
     enableSSHSupport = true;
   };
 
+  services.tailscale.enable = true;
+
+  # Optional (default: 41641):
+  services.tailscale.port = 62532;
+
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
@@ -125,6 +132,7 @@ in
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall.allowedUDPPorts = [ 62532 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 

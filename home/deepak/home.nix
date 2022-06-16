@@ -9,6 +9,7 @@
     pkgs.obsidian
     pkgs.atom
     pkgs.cachix
+    pkgs.tailscale
   ];
 
   home.homeDirectory = "/home/deepak";
