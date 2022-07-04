@@ -10,6 +10,7 @@
     pkgs.atom
     pkgs.cachix
     pkgs.kubectl
+    pkgs.discord
   ];
 
   home.homeDirectory = "/home/deepak";
