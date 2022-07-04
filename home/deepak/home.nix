@@ -1,4 +1,4 @@
-{ pkgs, config, ...}: {
+{ pkgs, config, mysd, ...}: {
 
   programs.home-manager.enable = true;
   home.packages = [
@@ -15,6 +15,7 @@
 
   home.homeDirectory = "/home/deepak";
   home.username = "deepak";
+  home.file.mysd.source = "${mysd}";
 
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;

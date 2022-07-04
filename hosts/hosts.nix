@@ -1,10 +1,16 @@
-{ lib, inputs, nixpkgs, homeManager, ... }:
+{ lib, inputs, nixpkgs, mysd, homeManager, ... }:
 {
 	"maxos" = lib.nixosSystem {
 		system = "x86_64-linux";
+		/* specialArgs = {
+			inherit mysd;
+		}; */
 		modules = [
 			./maxos/configuration.nix
 			homeManager.nixosModules.home-manager {
+				home-manager.extraSpecialArgs = {
+					inherit mysd;
+				};
 				home-manager.useGlobalPkgs = true;
 				home-manager.users.deepak = {
 					imports = [ ../home/deepak/home.nix ];
