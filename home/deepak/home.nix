@@ -11,14 +11,20 @@
     pkgs.cachix
     pkgs.kubectl
     pkgs.discord
+    pkgs.nextcloud-client
   ];
 
   home.homeDirectory = "/home/deepak";
   home.username = "deepak";
   home.file.mysd.source = "${mysd}";
 
+  # required, was previously default
+  home.stateVersion = "18.09";
+
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
+
+  services.nextcloud-client.enable = true;
 
   programs.git = {
     enable = true;
