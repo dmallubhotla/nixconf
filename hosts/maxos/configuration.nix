@@ -103,6 +103,7 @@ in
     pinentry-curses
     gnupg
     tailscale
+    openconnect
   ];
   programs.zsh.enable = true;
 
