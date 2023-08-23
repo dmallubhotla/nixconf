@@ -9,3 +9,8 @@ Quite incomplete.
 * auth `discord`
 * auth `kubectl`
 * `nextcloud-client` setup?
+
+## Update
+
+* `nix flake update --recreate-lock-file`
+* rebuild nixos (sd)
