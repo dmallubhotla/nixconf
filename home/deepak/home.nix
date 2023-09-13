@@ -47,7 +47,7 @@
     extraConfig = ''
       inoremap jj <Esc>
       inoremap kk <Esc>
-    ''
+    '';
   };
 
   programs.zsh = {
