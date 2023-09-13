@@ -43,7 +43,11 @@
 
   programs.vim = {
     enable = true;
-    plugins = with pkgs.vimPlugins; [ vimtex ];
+    plugins = with pkgs.vimPlugins; [ vimtex vim-nix ];
+    extraConfig = ''
+      inoremap jj <Esc>
+      inoremap kk <Esc>
+    ''
   };
 
   programs.zsh = {
