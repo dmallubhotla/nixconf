@@ -41,6 +41,11 @@
     };
   };
 
+  programs.vim = {
+    enable = true;
+    plugins = with pkgs.vimPlugins; [ vimtex ];
+  };
+
   programs.zsh = {
     enable = true;
     shellAliases = {
