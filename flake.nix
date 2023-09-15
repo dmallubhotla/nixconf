@@ -13,9 +13,13 @@
 				url = "git+ssh://git@gitea.deepak.science:2222/deepak/sd.git";
 				flake = false;
 			};
+			NixOS-WSL = {
+			  url = "github:nix-community/NixOS-WSL";
+			  inputs.nixpkgs.follows = "nixpkgs";
+			};
 		};
 
-	outputs = { self, nixpkgs, homeManager, mysd, ...}@inputs: {
+	outputs = { self, nixpkgs, homeManager, mysd, NixOS-WSL, ...}@inputs: {
 
 		nixosConfigurations = (
 			import ./hosts/hosts.nix {
@@ -24,6 +28,7 @@
 				inherit inputs;
 				inherit mysd;
 				inherit (nixpkgs) lib;
+				inherit NixOS-WSL;
 			}
 		);
 

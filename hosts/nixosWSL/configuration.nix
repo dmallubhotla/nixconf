@@ -1,41 +1,29 @@
 { lib, pkgs, config, modulesPath, ... }:
 
-with lib;
-let
-  syschdemd = import ./syschdemd.nix { inherit lib pkgs config defaultUser; };
-  nixos-wsl = import ./nixos-wsl;
-in
 {
   imports = [
     "${modulesPath}/profiles/minimal.nix"
 
-    nixos-wsl.nixosModules.wsl
   ];
-
-  networking.hostName = "nixosWSL"; # Define your hostname.
-  time.timeZone = "America/Chicago";
 
   wsl = {
     enable = true;
-    automountPath = "/mnt";
+    wslConf.automount.root = "/mnt";
     defaultUser = "deepak";
     startMenuLaunchers = true;
 
+    # Enable native Docker support
+    # docker-native.enable = true;
+
     # Enable integration with Docker Desktop (needs to be installed)
-    # docker.enable = true;
+    # docker-desktop.enable = true;
+    nativeSystemd = true;
+
+    wslConf.interop.appendWindowsPath = false;
+
   };
 
-  users.users.deepak = {
-    isNormalUser = true;
-    home = "/home/deepak";
-    description = "Deepak Mallubhotla";
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
-  };
-
-  environment.systemPackages = with pkgs; [
-    wget vim
-    git
-  ];
+  networking.hostName = "nixosWSL"; # Define your hostname.
 
   # Enable nix flakes
   nix.package = pkgs.nixFlakes;
@@ -43,15 +31,28 @@ in
     experimental-features = nix-command flakes
   '';
 
-  nix.settings = {
-    extra-substituters = [
-      "https://nix-community.cachix.org"
-      "https://dmallubhotla-testing-1.cachix.org"
-      "https://cache.nixos.org/"
-    ];
-    trusted-public-keys = [
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "dmallubhotla-testing-1.cachix.org-1:6Xc9n6kRtYCP8Sofhs4WHM5lYz9cDUgObe3USePVX1s="
-    ];
+  system.stateVersion = "22.05";
+
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.deepak = {
+    isNormalUser = true;
+    home = "/home/deepak";
+    description = "Deepak Mallubhotla";
+    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    shell = pkgs.zsh;
   };
+
+  programs.zsh.enable = true;
+
+  # default packages because otherwise configuration is a nightmare!
+  environment.systemPackages = with pkgs; [
+    wget
+    vim
+    git
+  ];
+  
+  environment.variables = {
+    DPK_NIX_CONF_DIR = "/mnt/d/Projects/nixconf";
+  };
+
 }
