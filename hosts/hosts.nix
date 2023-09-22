@@ -10,6 +10,7 @@
 			homeManager.nixosModules.home-manager {
 				home-manager.extraSpecialArgs = {
 					inherit mysd;
+                                        withGUI = true;
 				};
 				home-manager.useGlobalPkgs = true;
 				home-manager.users.deepak = {
@@ -26,10 +27,11 @@
 			homeManager.nixosModules.home-manager {
 				home-manager.extraSpecialArgs = {
 					inherit mysd;
+                                        withGUI = false;
 				};
 				home-manager.useGlobalPkgs = true;
 				home-manager.users.deepak = {
-					imports = [ ../home/deepak/home_no_gui.nix ];
+					imports = [ ../home/deepak/home.nix ];
 				};
 			}
 			NixOS-WSL.nixosModules.wsl
