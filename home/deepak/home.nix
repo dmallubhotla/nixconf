@@ -41,9 +41,12 @@
     };
   };
 
-  programs.vim = {
+  programs.neovim = {
     enable = true;
-    plugins = with pkgs.vimPlugins; [ vimtex vim-nix ];
+    vimAlias = true;
+
+    plugins = with pkgs.vimPlugins; [ vimtex vim-nix
+    ];
     extraConfig = ''
       inoremap jj <Esc>
       inoremap kk <Esc>
