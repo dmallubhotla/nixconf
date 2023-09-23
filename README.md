@@ -9,6 +9,8 @@ Quite incomplete.
 * auth `discord`
 * auth `kubectl`
 * `nextcloud-client` setup?
+* git clone sd and nixconf directories 
+* nixconf path will need to be set in env var most likely
 
 ## Update
 
