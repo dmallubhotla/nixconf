@@ -1,4 +1,4 @@
-{ pkgs, config, mysd, ...}: {
+{ pkgs, config, mysd, specialArgs, ...}: {
 
   programs.home-manager.enable = true;
   home.packages = [
@@ -6,11 +6,13 @@
     (pkgs.writeScriptBin "nixFlakes" ''
       exec ${pkgs.nixUnstable}/bin/nix --experimental-features "nix-command flakes" "$@"
     '')
-    pkgs.obsidian
-    pkgs.atom
     pkgs.cachix
     pkgs.kubectl
+    pkgs.bat
+    pkgs.eza
+  ] ++ pkgs.lib.optionals specialArgs.withGUI [
     pkgs.discord
+    pkgs.obsidian
     pkgs.nextcloud-client
   ];
 
@@ -24,7 +26,9 @@
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
 
-  services.nextcloud-client.enable = true;
+  services.nextcloud-client = pkgs.lib.mkIf specialArgs.withGUI {
+    enable = true;
+  };
 
   programs.git = {
     enable = true;
@@ -57,6 +61,7 @@
     enable = true;
     shellAliases = {
       doo="./do.sh";
+      wttr="curl wttr.in";
     };
     history = {
       size = 10000;
