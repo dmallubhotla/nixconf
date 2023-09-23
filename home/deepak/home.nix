@@ -10,6 +10,8 @@
     pkgs.kubectl
     pkgs.bat
     pkgs.eza
+    pkgs.fd
+    pkgs.ripgrep
   ] ++ pkgs.lib.optionals specialArgs.withGUI [
     pkgs.discord
     pkgs.obsidian
@@ -50,7 +52,11 @@
     defaultEditor = true;
     vimAlias = true;
 
-    plugins = with pkgs.vimPlugins; [ vimtex vim-nix
+    plugins = with pkgs.vimPlugins; [ vimtex 
+      vim-nix
+      # plenary and stuff for telescope
+      plenary-nvim telescope-nvim telescope-file-browser-nvim
+      ctrlp-vim
     ];
     extraConfig = ''
       inoremap jj <Esc>
