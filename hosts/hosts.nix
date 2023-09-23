@@ -11,6 +11,7 @@
 				home-manager.extraSpecialArgs = {
 					inherit mysd;
                                         withGUI = true;
+                                        gitSigningKey = "976F3357369149AB";
 				};
 				home-manager.useGlobalPkgs = true;
 				home-manager.users.deepak = {
@@ -28,6 +29,7 @@
 				home-manager.extraSpecialArgs = {
 					inherit mysd;
                                         withGUI = false;
+                                        gitSigningKey = "8F904A3FC7021497";
 				};
 				home-manager.useGlobalPkgs = true;
 				home-manager.users.deepak = {

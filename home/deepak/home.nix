@@ -12,6 +12,9 @@
     pkgs.eza
     pkgs.fd
     pkgs.ripgrep
+
+    # lsps
+    pkgs.nil
   ] ++ pkgs.lib.optionals specialArgs.withGUI [
     pkgs.discord
     pkgs.obsidian
@@ -37,7 +40,7 @@
     userName  = "Deepak Mallubhotla";
     userEmail = "dmallubhotla+github@gmail.com";
     signing = {
-      key = "976F3357369149AB";
+      key = specialArgs.gitSigningKey;
       signByDefault = true;
     };
     extraConfig = {
@@ -57,10 +60,14 @@
       # plenary and stuff for telescope
       plenary-nvim telescope-nvim telescope-file-browser-nvim
       ctrlp-vim
+      # lsp stuff
+      nvim-lspconfig
     ];
     extraConfig = ''
       inoremap jj <Esc>
       inoremap kk <Esc>
+      lua << EOF
+      require'lspconfig'.nil_ls.setup{}
     '';
   };
 

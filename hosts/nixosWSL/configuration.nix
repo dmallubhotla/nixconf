@@ -1,4 +1,4 @@
-{ lib, pkgs, config, modulesPath, ... }:
+{ pkgs, modulesPath, ... }:
 
 {
   imports = [
@@ -49,8 +49,17 @@
     wget
     vim
     git
+    pinentry
+    pinentry-curses
+    gnupg
   ];
   
+  programs.gnupg.agent = {
+    enable = true;
+    pinentryFlavor = "curses";
+    enableSSHSupport = true;
+  };
+
   environment.variables = {
     DPK_NIX_CONF_DIR = "/mnt/d/Projects/nixconf";
   };
