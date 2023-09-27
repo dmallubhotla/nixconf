@@ -76,22 +76,6 @@
         "type": "github"
       }
     },
-    "mysd": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1694730567,
-        "narHash": "sha256-UPZ/9zfJZ/m6vLrn4YQiBH8BwCUS6BosoVw5WYEDr9o=",
-        "ref": "refs/heads/master",
-        "rev": "fa36b0a612ba8ead953a840a9837aef44ac879b5",
-        "revCount": 10,
-        "type": "git",
-        "url": "ssh://git@gitea.deepak.science:2222/deepak/sd.git"
-      },
-      "original": {
-        "type": "git",
-        "url": "ssh://git@gitea.deepak.science:2222/deepak/sd.git"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1694728460,
@@ -111,7 +95,6 @@
       "inputs": {
         "NixOS-WSL": "NixOS-WSL",
         "homeManager": "homeManager",
-        "mysd": "mysd",
         "nixpkgs": "nixpkgs"
       }
     },

@@ -1,4 +1,4 @@
-{ pkgs, config, mysd, specialArgs, ...}: {
+{ pkgs, config, specialArgs, ...}: {
 
   programs.home-manager.enable = true;
   home.packages = [
@@ -23,7 +23,6 @@
 
   home.homeDirectory = "/home/deepak";
   home.username = "deepak";
-  home.file.mysd.source = "${mysd}";
 
   # required, was previously default
   home.stateVersion = "18.09";

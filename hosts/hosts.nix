@@ -1,15 +1,11 @@
-{ lib, inputs, nixpkgs, mysd, homeManager, NixOS-WSL, ... }:
+{ lib, inputs, nixpkgs, homeManager, NixOS-WSL, ... }:
 {
 	"maxos" = lib.nixosSystem {
 		system = "x86_64-linux";
-		/* specialArgs = {
-			inherit mysd;
-		}; */
 		modules = [
 			./maxos/configuration.nix
 			homeManager.nixosModules.home-manager {
 				home-manager.extraSpecialArgs = {
-					inherit mysd;
                                         withGUI = true;
                                         gitSigningKey = "976F3357369149AB";
 				};
@@ -27,7 +23,6 @@
 			./nixosWSL/configuration.nix
 			homeManager.nixosModules.home-manager {
 				home-manager.extraSpecialArgs = {
-					inherit mysd;
                                         withGUI = false;
                                         gitSigningKey = "8F904A3FC7021497";
 				};
