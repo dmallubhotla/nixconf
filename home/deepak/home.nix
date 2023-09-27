@@ -69,6 +69,8 @@
       lua << EOF
       require'lspconfig'.nil_ls.setup{}
       ${builtins.readFile ./neovim/wiki-vim.lua}
+
+      EOF
     '';
   };
 
