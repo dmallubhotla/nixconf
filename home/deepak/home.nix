@@ -61,12 +61,14 @@
       ctrlp-vim
       # lsp stuff
       nvim-lspconfig
+      wiki-vim
     ];
     extraConfig = ''
       inoremap jj <Esc>
       inoremap kk <Esc>
       lua << EOF
       require'lspconfig'.nil_ls.setup{}
+      ${builtins.readFile ./neovim/wiki-vim.lua}
     '';
   };
 
