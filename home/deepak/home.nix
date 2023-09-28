@@ -62,6 +62,7 @@
       # lsp stuff
       nvim-lspconfig
       wiki-vim
+      vim-markdown
     ];
     extraConfig = ''
       inoremap jj <Esc>
