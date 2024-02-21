@@ -24,6 +24,7 @@ in
     pkgs.eza
     pkgs.fd
     pkgs.ripgrep
+    pkgs.just
 
     # lsps
     pkgs.nil
