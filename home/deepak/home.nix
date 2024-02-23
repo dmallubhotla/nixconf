@@ -31,6 +31,7 @@ in
   ] ++ pkgs.lib.optionals specialArgs.withGUI [
     pkgs.discord
     obsidian
+    pkgs.audacity
     pkgs.nextcloud-client
   ];
 
