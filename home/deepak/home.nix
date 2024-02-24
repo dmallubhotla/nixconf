@@ -97,6 +97,7 @@ in
     };
     history = {
       size = 10000;
+      path = "${lib.removePrefix "/home/deepak/" config.xdg.dataHome}/zsh/history";
     };
     oh-my-zsh = {
         enable = true;
