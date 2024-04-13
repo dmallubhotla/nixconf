@@ -1,4 +1,4 @@
-{ lib, inputs, nixpkgs, homeManager, NixOS-WSL, ... }:
+{ lib, inputs, nixpkgs, nixpkgs-23-11, homeManager, homeManager-23-11, NixOS-WSL, ... }:
 {
 	"maxos" = lib.nixosSystem {
 		system = "x86_64-linux";
@@ -17,11 +17,11 @@
 		];
 	};
 
-	"nixosWSL" = lib.nixosSystem {
+	"nixosWSL" = nixpkgs-23-11.lib.nixosSystem {
 		system = "x86_64-linux";
 		modules = [
 			./nixosWSL/configuration.nix
-			homeManager.nixosModules.home-manager {
+			homeManager-23-11.nixosModules.home-manager {
 				home-manager.extraSpecialArgs = {
                                         withGUI = false;
                                         gitSigningKey = "8F904A3FC7021497";
