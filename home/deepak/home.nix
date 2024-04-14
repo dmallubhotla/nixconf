@@ -73,6 +73,8 @@
       inoremap kk <Esc>
       lua << EOF
       require'lspconfig'.nil_ls.setup{}
+
+      vim.g.vim_markdown_folding_level = 2
       ${builtins.readFile ./neovim/wiki-vim.lua}
 
       EOF
