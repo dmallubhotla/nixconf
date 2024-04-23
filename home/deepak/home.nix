@@ -51,6 +51,10 @@
         fileMode = false;
       };
     };
+    includes = [
+      # this allows us to have a local gitconfig maybe?
+      { path = "~/.gitconfig.local"; }
+    ];
   };
 
   programs.neovim = {
