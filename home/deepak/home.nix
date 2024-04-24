@@ -107,10 +107,13 @@
         },
         formatting = cmp_format,
         mapping = cmp.mapping.preset.insert({
-          ['<Tab>'] = cmp_action.tab_complete(),
-          ['<S-Tab>'] = cmp_action.select_prev_or_fallback(),
+          -- ['<Tab>'] = cmp_action.tab_complete(),
+          -- ['<S-Tab>'] = cmp_action.select_prev_or_fallback(),
+          ['<Tab>'] = cmp_action.luasnip_supertab(),
+          ['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
           ['<C-f>'] = cmp_action.luasnip_jump_forward(),
           ['<C-b>'] = cmp_action.luasnip_jump_backward(),
+          ['<CR>'] = cmp.mapping.confirm({select = false}),
         }),
         window = {
           completion = cmp.config.window.bordered(),
