@@ -28,7 +28,7 @@
 	};
 
 	outputs = { self, nixpkgs, homeManager, NixOS-WSL, nixpkgs-23-11, homeManager-23-11, cmp-vimtex, ...}@inputs:
-        let
+	let
 		customPackageOverlay = import ./overlays/cmp-vimtex.nix { inherit cmp-vimtex; };
 	in
 	{

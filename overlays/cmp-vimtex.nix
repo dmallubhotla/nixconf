@@ -8,8 +8,8 @@
        };
      in
      {
-       customVimPlugins = [
-         cmpVimtexPlugin
-       ];
+       customVimPlugins = { 
+         cmp-vimtex = cmpVimtexPlugin;
+       };
      };
 }

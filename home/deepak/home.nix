@@ -64,7 +64,10 @@
     vimAlias = true;
 
     plugins = with pkgs.vimPlugins; [
-      vimtex
+      {
+        plugin = vimtex;
+        config = "let g:nix_recommended_style = 0";
+      }
       vim-nix
       # plenary and stuff for telescope
       plenary-nvim telescope-nvim telescope-file-browser-nvim
@@ -88,12 +91,12 @@
       inoremap jj <Esc>
       inoremap kk <Esc>
 
-      set tabstop=4
-      set noexpandtab
-      set list
-      set listchars=eol:¬,tab:▸\,trail:·
-
       lua << EOF
+
+      vim.opt.tabstop = 4
+      vim.opt.expandtab = false
+      vim.opt.list = true
+      vim.opt.listchars = { eol = "¬", tab = "▸┈" , trail = '·', multispace = '·' }
 
       local lsp_zero = require('lsp-zero')
       lsp_zero.on_attach(function(client, bufnr)
