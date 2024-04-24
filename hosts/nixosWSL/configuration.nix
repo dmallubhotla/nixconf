@@ -1,4 +1,4 @@
-{ pkgs, modulesPath, ... }:
+{ pkgs, customPackageOverlay, modulesPath, ... }:
 
 let
   custom-fonts = import ../../fonts { inherit pkgs; };
@@ -33,6 +33,10 @@ in
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';
+
+  nixpkgs.overlays = [
+    customPackageOverlay.overlay
+  ];
 
   system.stateVersion = "22.05";
 

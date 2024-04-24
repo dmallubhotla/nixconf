@@ -82,10 +82,17 @@
       vim-fugitive
       friendly-snippets
       luasnip
+      pkgs.customVimPlugins.cmp-vimtex
     ];
     extraConfig = ''
       inoremap jj <Esc>
       inoremap kk <Esc>
+
+      set tabstop=4
+      set noexpandtab
+      set list
+      set listchars=eol:¬,tab:▸\,trail:·
+
       lua << EOF
 
       local lsp_zero = require('lsp-zero')
@@ -104,6 +111,7 @@
           {name = 'nvim_lsp'},
           {name = 'buffer'},
           {name = 'luasnip'},
+          {name = 'vimtex'},
         },
         formatting = cmp_format,
         mapping = cmp.mapping.preset.insert({

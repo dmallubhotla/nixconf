@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, ... }:
+{ pkgs, customPackageOverlay, ... }:
 
 let
   custom-fonts = import ../../fonts { inherit pkgs; };
@@ -109,6 +109,9 @@ in
   programs.zsh.enable = true;
 
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.overlays = [
+    customPackageOverlay.overlay
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
