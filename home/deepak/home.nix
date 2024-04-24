@@ -83,6 +83,7 @@
       cmp-buffer
       vim-airline
       vim-fugitive
+      flash-nvim
       gitsigns-nvim
       friendly-snippets
       luasnip
@@ -103,7 +104,10 @@
       vim.opt.list = true
       vim.opt.listchars = { eol = "¬", tab = "▸┈" , trail = '·', multispace = '·' }
 
+      vim.keymap.set("n", "<leader>n", "R<Enter><Esc>")
       require('gitsigns').setup()
+
+      require('flash').setup()
 
       ${builtins.readFile ./neovim/lsp.lua}
       vim.g.vim_markdown_folding_level = 2
