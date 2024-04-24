@@ -83,6 +83,7 @@
       cmp-buffer
       vim-airline
       vim-fugitive
+      gitsigns-nvim
       friendly-snippets
       luasnip
       pkgs.customVimPlugins.cmp-vimtex
@@ -98,6 +99,8 @@
       vim.opt.expandtab = false
       vim.opt.list = true
       vim.opt.listchars = { eol = "¬", tab = "▸┈" , trail = '·', multispace = '·' }
+
+      require('gitsigns').setup()
 
       ${builtins.readFile ./neovim/lsp.lua}
       vim.g.vim_markdown_folding_level = 2
