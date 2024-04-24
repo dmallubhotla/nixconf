@@ -64,6 +64,7 @@ in
   fonts.packages = with pkgs; [
     fira-code
     fira-code-symbols
+    powerline-fonts
     custom-fonts.custom-fonts
   ];
 

@@ -1,5 +1,8 @@
 { pkgs, modulesPath, ... }:
 
+let
+  custom-fonts = import ../../fonts { inherit pkgs; };
+in
 {
   imports = [
     "${modulesPath}/profiles/minimal.nix"
@@ -54,6 +57,14 @@
     gnupg
   ];
   
+  fonts.packages = with pkgs; [
+    fira-code
+    fira-code-symbols
+    powerline-fonts
+    custom-fonts.custom-fonts
+  ];
+
+
   programs.gnupg.agent = {
     enable = true;
     pinentryFlavor = "curses"; 

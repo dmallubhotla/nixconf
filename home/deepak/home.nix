@@ -57,25 +57,71 @@
     ];
   };
 
+
   programs.neovim = {
     enable = true;
     defaultEditor = true;
     vimAlias = true;
 
-    plugins = with pkgs.vimPlugins; [ vimtex 
+    plugins = with pkgs.vimPlugins; [
+      vimtex
       vim-nix
       # plenary and stuff for telescope
       plenary-nvim telescope-nvim telescope-file-browser-nvim
       ctrlp-vim
       # lsp stuff
+      lsp-zero-nvim
+      nvim-cmp
+      cmp-nvim-lsp
+      cmp_luasnip
       nvim-lspconfig
       wiki-vim
       vim-markdown
+      cmp-buffer
+      vim-airline
+      vim-fugitive
+      friendly-snippets
+      luasnip
     ];
     extraConfig = ''
       inoremap jj <Esc>
       inoremap kk <Esc>
       lua << EOF
+
+      local lsp_zero = require('lsp-zero')
+      lsp_zero.on_attach(function(client, bufnr)
+        lsp_zero.default_keymaps({buffer = bufnr})
+      end)
+
+      local cmp = require('cmp')
+      local cmp_format = lsp_zero.cmp_format({details = true})
+      local cmp_action = lsp_zero.cmp_action()
+
+      require("luasnip.loaders.from_vscode").lazy_load()
+
+      cmp.setup({
+        sources = {
+          {name = 'nvim_lsp'},
+          {name = 'buffer'},
+          {name = 'luasnip'},
+        },
+        formatting = cmp_format,
+        mapping = cmp.mapping.preset.insert({
+          ['<Tab>'] = cmp_action.tab_complete(),
+          ['<S-Tab>'] = cmp_action.select_prev_or_fallback(),
+          ['<C-f>'] = cmp_action.luasnip_jump_forward(),
+          ['<C-b>'] = cmp_action.luasnip_jump_backward(),
+        }),
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+        },
+        snippet = {
+          expand = function(args)
+            require('luasnip').lsp_expand(args.body)
+          end,
+        }
+      })
       require'lspconfig'.nil_ls.setup{}
 
       vim.g.vim_markdown_folding_level = 2
