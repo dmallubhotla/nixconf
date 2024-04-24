@@ -87,6 +87,9 @@
       friendly-snippets
       luasnip
       pkgs.customVimPlugins.cmp-vimtex
+
+      # syntax highlighting
+      vim-just
     ];
     extraConfig = ''
       inoremap jj <Esc>
