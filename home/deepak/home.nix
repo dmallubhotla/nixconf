@@ -87,6 +87,8 @@
       gitsigns-nvim
       friendly-snippets
       luasnip
+      which-key-nvim
+      rose-pine
       pkgs.customVimPlugins.cmp-vimtex
       pkgs.customVimPlugins.spaceport-nvim
 
@@ -107,14 +109,22 @@
 
       vim.keymap.set("n", "<leader>n", "R<Enter><Esc>")
 
+      -- spaceport
       require('spaceport').setup({})
       require('telescope').load_extension('spaceport')
+      -- spaceport breaks a bit if whitespace visible
       vim.api.nvim_create_autocmd("User", { pattern = "SpaceportEnter", callback = function(ev) vim.opt.list = false end})
       vim.api.nvim_create_autocmd("User", { pattern = "SpaceportDone", callback = function(ev) vim.opt.list = true end})
+
       require('gitsigns').setup()
+      
+      -- color scheme
+      require("rose-pine").setup({})
+      vim.cmd("colorscheme rose-pine")
 
       require('flash').setup()
 
+      require('which-key').setup({})
       ${builtins.readFile ./neovim/lsp.lua}
       vim.g.vim_markdown_folding_level = 2
       ${builtins.readFile ./neovim/wiki-vim.lua}
