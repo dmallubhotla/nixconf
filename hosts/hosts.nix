@@ -1,9 +1,9 @@
-{ lib, inputs, nixpkgs-23-11, homeManager, homeManager-23-11, NixOS-WSL, customPackageOverlays, ... }:
+{ lib, inputs, nixpkgs-23-11, homeManager, homeManager-23-11, NixOS-WSL, customPackageOverlay, ... }:
 {
 	"maxos" = lib.nixosSystem {
 		system = "x86_64-linux";
 		specialArgs = {
-			inherit customPackageOverlays;
+			inherit customPackageOverlay;
 		};
 		modules = [
 			./maxos/configuration.nix
@@ -23,7 +23,7 @@
 	"nixosWSL" = nixpkgs-23-11.lib.nixosSystem {
 		system = "x86_64-linux";
 		specialArgs = {
-			inherit customPackageOverlays;
+			inherit customPackageOverlay;
 		};
 		modules = [
 			./nixosWSL/configuration.nix

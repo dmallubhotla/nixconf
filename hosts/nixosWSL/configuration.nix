@@ -1,4 +1,4 @@
-{ pkgs, customPackageOverlays, modulesPath, ... }:
+{ pkgs, customPackageOverlay, modulesPath, ... }:
 
 let
   custom-fonts = import ../../fonts { inherit pkgs; };
@@ -35,7 +35,9 @@ in
   '';
 
 
-  nixpkgs.overlays = customPackageOverlays;
+  nixpkgs.overlays = [
+    customPackageOverlay
+  ];
 
   system.stateVersion = "22.05";
 

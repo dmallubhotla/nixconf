@@ -33,10 +33,7 @@
 
 	outputs = { self, nixpkgs, homeManager, NixOS-WSL, nixpkgs-23-11, homeManager-23-11, cmp-vimtex, spaceport-nvim, ...}@inputs:
 	let
-		customPackageOverlays = [
-			(import ./overlays/cmp-vimtex.nix { inherit cmp-vimtex; }).overlay
-			(import ./overlays/spaceport.nix { inherit spaceport-nvim; }).overlay
-		];
+		customPackageOverlay = (import ./overlays/default.nix { inherit cmp-vimtex; inherit spaceport-nvim; }).overlay;
 	in
 	{
 		nixosConfigurations = (
@@ -49,7 +46,7 @@
 				inherit nixpkgs-23-11;
 				inherit homeManager-23-11;
 				inherit cmp-vimtex;
-				inherit customPackageOverlays;
+				inherit customPackageOverlay;
 			}
 		);
 

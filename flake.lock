@@ -153,7 +153,25 @@
         "homeManager": "homeManager",
         "homeManager-23-11": "homeManager-23-11",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-23-11": "nixpkgs-23-11"
+        "nixpkgs-23-11": "nixpkgs-23-11",
+        "spaceport-nvim": "spaceport-nvim"
+      }
+    },
+    "spaceport-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1712518037,
+        "narHash": "sha256-kCPRJBLzQpXYUAte2dK1WL7zhWs8X7V1npNpI8THw44=",
+        "owner": "CWood-sdf",
+        "repo": "spaceport.nvim",
+        "rev": "d91a0ae673b4f0f82420e0e1a9b0c0f3f21aa061",
+        "type": "github"
+      },
+      "original": {
+        "owner": "CWood-sdf",
+        "ref": "main",
+        "repo": "spaceport.nvim",
+        "type": "github"
       }
     },
     "systems": {

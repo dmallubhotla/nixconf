@@ -88,6 +88,7 @@
       friendly-snippets
       luasnip
       pkgs.customVimPlugins.cmp-vimtex
+      pkgs.customVimPlugins.spaceport-nvim
 
       # syntax highlighting
       vim-just
@@ -105,6 +106,11 @@
       vim.opt.listchars = { eol = "¬", tab = "▸┈" , trail = '·', multispace = '·' }
 
       vim.keymap.set("n", "<leader>n", "R<Enter><Esc>")
+
+      require('spaceport').setup({})
+      require('telescope').load_extension('spaceport')
+      vim.api.nvim_create_autocmd("User", { pattern = "SpaceportEnter", callback = function(ev) vim.opt.list = false end})
+      vim.api.nvim_create_autocmd("User", { pattern = "SpaceportDone", callback = function(ev) vim.opt.list = true end})
       require('gitsigns').setup()
 
       require('flash').setup()
