@@ -26,7 +26,7 @@
 			flake = false;
 		};
 		spaceport-nvim = {
-			url = "github:CWood-sdf/spaceport.nvim/master";
+			url = "github:CWood-sdf/spaceport.nvim/main";
 			flake = false;
 		};
 	};
