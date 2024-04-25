@@ -34,6 +34,8 @@
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
 
+  xdg.enable = true;
+
   services.nextcloud-client = pkgs.lib.mkIf specialArgs.withGUI {
     enable = true;
   };
