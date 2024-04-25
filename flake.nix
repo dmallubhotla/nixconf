@@ -25,11 +25,18 @@
 			url = "github:micangl/cmp-vimtex/master";
 			flake = false;
 		};
+		spaceport-nvim = {
+			url = "github:CWood-sdf/spaceport.nvim/master";
+			flake = false;
+		};
 	};
 
-	outputs = { self, nixpkgs, homeManager, NixOS-WSL, nixpkgs-23-11, homeManager-23-11, cmp-vimtex, ...}@inputs:
+	outputs = { self, nixpkgs, homeManager, NixOS-WSL, nixpkgs-23-11, homeManager-23-11, cmp-vimtex, spaceport-nvim, ...}@inputs:
 	let
-		customPackageOverlay = import ./overlays/cmp-vimtex.nix { inherit cmp-vimtex; };
+		customPackageOverlays = [
+			(import ./overlays/cmp-vimtex.nix { inherit cmp-vimtex; }).overlay
+			(import ./overlays/spaceport.nix { inherit spaceport-nvim; }).overlay
+		];
 	in
 	{
 		nixosConfigurations = (
@@ -42,7 +49,7 @@
 				inherit nixpkgs-23-11;
 				inherit homeManager-23-11;
 				inherit cmp-vimtex;
-				inherit customPackageOverlay;
+				inherit customPackageOverlays;
 			}
 		);
 
