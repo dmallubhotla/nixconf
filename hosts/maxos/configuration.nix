@@ -56,6 +56,12 @@ in
   #   keyMap = "us";
   # };
 
+  virtualisation.docker.enable = true;
+  virtualisation.docker.rootless = {
+    enable = true;
+    setSocketVariable = true;
+  };
+
   # Enable the GNOME 3 Desktop Environment.
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
@@ -90,7 +96,7 @@ in
     isNormalUser = true;
     home = "/home/deepak";
     description = "Deepak Mallubhotla";
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "networkmanager" "docker" ]; # Enable ‘sudo’ for the user.
     shell = pkgs.zsh;
   };
 
