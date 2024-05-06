@@ -9,7 +9,8 @@ let
 
     installPhase = ''
       runHook preInstall
-      cp -R out $out/
+      mkdir -p $out/share
+      cp -R out $out/share/fonts
       runHook postInstall
     '';
 
