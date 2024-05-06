@@ -10,6 +10,8 @@ vim.opt.expandtab = false
 vim.opt.list = true
 vim.opt.listchars = { eol = "¬", tab = "▸┈" , trail = '·', multispace = '·' }
 
+vim.opt.foldlevelstart = 99
+
 vim.keymap.set("n", "<leader>n", "R<Enter><Esc>")
 
 ${builtins.readFile ./spaceport.lua}
