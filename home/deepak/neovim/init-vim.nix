@@ -26,5 +26,7 @@ ${builtins.readFile ./lsp.lua}
 vim.g.vim_markdown_folding_level = 2
 ${builtins.readFile ./wiki-vim.lua}
 
+vim.g.vimtex_fold_enabled = true
+
 EOF
 ''
