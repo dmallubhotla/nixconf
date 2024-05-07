@@ -12,6 +12,9 @@ vim.opt.listchars = { eol = "¬", tab = "▸┈" , trail = '·', multispace = '�
 
 vim.opt.foldlevelstart = 99
 
+vim.opt.number = true
+vim.opt.relativenumber = true
+
 vim.keymap.set("n", "<leader>n", "R<Enter><Esc>")
 
 -- ctrlp setup
