@@ -90,7 +90,14 @@
 			friendly-snippets
 			luasnip
 			which-key-nvim
+
+			overseer-nvim
+
+			# color schemes
 			rose-pine
+			kanagawa-nvim
+
+			# custom plugins from flakes
 			pkgs.customVimPlugins.cmp-vimtex
 			pkgs.customVimPlugins.spaceport-nvim
 

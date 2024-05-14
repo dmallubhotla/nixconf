@@ -27,6 +27,7 @@ require('gitsigns').setup()
 
 -- color scheme
 require("rose-pine").setup({})
+require("kanagawa").setup({})
 vim.cmd("colorscheme rose-pine")
 
 require('flash').setup()
@@ -37,6 +38,8 @@ vim.g.vim_markdown_folding_level = 2
 ${builtins.readFile ./wiki-vim.lua}
 
 vim.g.vimtex_fold_enabled = true
+
+require("overseer").setup()
 
 EOF
 ''
