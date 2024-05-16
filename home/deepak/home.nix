@@ -82,6 +82,9 @@
 			cmp-nvim-lsp
 			cmp_luasnip
 			nvim-lspconfig
+
+			vim-vinegar
+
 			wiki-vim
 			vim-markdown
 			cmp-buffer
