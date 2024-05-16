@@ -19,7 +19,7 @@ vim.keymap.set("n", "<leader>n", "R<Enter><Esc>")
 
 -- ctrlp setup
 vim.g.ctrlp_custom_ignore = {
-	file = '\\v\\.(aux|bbl|blg|bcf|fdb_latexmk|fls|run.xml|tdo|toc)$'
+	file = '\\v\\.(aux|bbl|blg|bcf|fdb_latexmk|fls|run.xml|tdo|toc|log|pdf)$'
 }
 
 ${builtins.readFile ./spaceport.lua}
