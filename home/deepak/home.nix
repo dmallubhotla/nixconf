@@ -18,6 +18,8 @@
 
 		# lsps
 		pkgs.nil
+
+		pkgs.thefuck
 	] ++ pkgs.lib.optionals specialArgs.withGUI [
 		pkgs.discord
 		pkgs.obsidian
@@ -106,6 +108,8 @@
 		];
 		extraConfig = import ./neovim/init-vim.nix;
 	};
+
+	programs.thefuck.enable = true;
 
 	programs.zsh = {
 		enable = true;
