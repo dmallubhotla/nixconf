@@ -98,6 +98,10 @@
 
 			overseer-nvim
 
+			# prettiness
+			goyo-vim
+			limelight-vim
+
 			# color schemes
 			rose-pine
 			kanagawa-nvim
