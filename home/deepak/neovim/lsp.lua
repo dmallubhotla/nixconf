@@ -44,5 +44,6 @@ cmp.setup({
 	}
 })
 require'lspconfig'.nil_ls.setup{}
+require'lspconfig'.pyright.setup{}
 
 

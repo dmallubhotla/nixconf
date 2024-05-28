@@ -18,6 +18,7 @@
 
 		# lsps
 		pkgs.nil
+		pkgs.nodePackages.pyright
 
 		pkgs.thefuck
 	] ++ pkgs.lib.optionals specialArgs.withGUI [
