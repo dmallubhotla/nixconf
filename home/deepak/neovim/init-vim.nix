@@ -22,18 +22,6 @@ vim.g.ctrlp_custom_ignore = {
 	file = '\\v\\.(aux|bbl|blg|bcf|fdb_latexmk|fls|run.xml|tdo|toc|log|pdf)$'
 }
 
-require('lualine').setup({
-	extensions = {"fugitive", "overseer"},
-	sections = {
-		lualine_c = {
-			"filename", require("nomodoro").status
-		},
-		lualine_x = {
-			"encoding", {"fileformat", icons_enabled = false}, "filetype"
-		}
-	}
-})
-
 ${builtins.readFile ./spaceport.lua}
 require('gitsigns').setup()
 
@@ -60,6 +48,24 @@ require("nomodoro").setup({})
 vim.api.nvim_set_keymap("n", "<leader>nw", "<cmd>NomoWork<CR>", { noremap = true})
 vim.api.nvim_set_keymap("n", "<leader>nb", "<cmd>NomoBreak<CR>", { noremap = true})
 vim.api.nvim_set_keymap("n", "<leader>ns", "<cmd>NomoStop<CR>", { noremap = true})
+
+-- put this at the end in case it depends on other things being configured
+require('lualine').setup({
+	extensions = {"fugitive", "overseer"},
+	sections = {
+		lualine_c = {
+			"filename",
+			{
+				"overseer",
+				icons_enabled = false,
+			},
+			require("nomodoro").status
+		},
+		lualine_x = {
+			"encoding", {"fileformat", icons_enabled = false}, "filetype"
+		}
+	}
+})
 
 EOF
 ''
