@@ -15,12 +15,24 @@ vim.opt.foldlevelstart = 99
 vim.opt.number = true
 vim.opt.relativenumber = true
 
-vim.keymap.set("n", "<leader>n", "R<Enter><Esc>")
+vim.keymap.set("n", "<leader>N", "R<Enter><Esc>")
 
 -- ctrlp setup
 vim.g.ctrlp_custom_ignore = {
 	file = '\\v\\.(aux|bbl|blg|bcf|fdb_latexmk|fls|run.xml|tdo|toc|log|pdf)$'
 }
+
+require('lualine').setup({
+	extensions = {"fugitive", "overseer"},
+	sections = {
+		lualine_c = {
+			"filename", require("nomodoro").status
+		},
+		lualine_x = {
+			"encoding", {"fileformat", icons_enabled = false}, "filetype"
+		}
+	}
+})
 
 ${builtins.readFile ./spaceport.lua}
 require('gitsigns').setup()
@@ -43,6 +55,11 @@ require("overseer").setup()
 -- set keymap for commands
 vim.api.nvim_set_keymap('n', '<leader>oo', '<cmd>OverseerToggle<CR>', { noremap = true})
 vim.api.nvim_set_keymap('n', '<leader>or', '<cmd>OverseerRun<CR>', { noremap = true})
+
+require("nomodoro").setup({})
+vim.api.nvim_set_keymap("n", "<leader>nw", "<cmd>NomoWork<CR>", { noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>nb", "<cmd>NomoBreak<CR>", { noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>ns", "<cmd>NomoStop<CR>", { noremap = true})
 
 EOF
 ''

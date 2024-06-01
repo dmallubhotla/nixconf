@@ -29,11 +29,15 @@
 			url = "github:CWood-sdf/spaceport.nvim/main";
 			flake = false;
 		};
+		nomodoro = {
+			url = "github:dbinagi/nomodoro/main";
+			flake = false;
+		};
 	};
 
-	outputs = { self, nixpkgs, homeManager, NixOS-WSL, nixpkgs-23-11, homeManager-23-11, cmp-vimtex, spaceport-nvim, ...}@inputs:
+	outputs = { self, nixpkgs, homeManager, NixOS-WSL, nixpkgs-23-11, homeManager-23-11, cmp-vimtex, spaceport-nvim, nomodoro, ...}@inputs:
 	let
-		customPackageOverlay = (import ./overlays/default.nix { inherit cmp-vimtex; inherit spaceport-nvim; }).overlay;
+		customPackageOverlay = (import ./overlays/default.nix { inherit cmp-vimtex; inherit spaceport-nvim; inherit nomodoro; }).overlay;
 	in
 	{
 		nixosConfigurations = (

@@ -146,6 +146,23 @@
         "type": "github"
       }
     },
+    "nomodoro": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1716340390,
+        "narHash": "sha256-suGTjP5dROISQMd96GispnRk624sA5BVoLYz6xqwO6o=",
+        "owner": "dbinagi",
+        "repo": "nomodoro",
+        "rev": "104583311eb6f39fedcd2e1759c75fbfccb5aec6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dbinagi",
+        "ref": "main",
+        "repo": "nomodoro",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "NixOS-WSL": "NixOS-WSL",
@@ -154,6 +171,7 @@
         "homeManager-23-11": "homeManager-23-11",
         "nixpkgs": "nixpkgs",
         "nixpkgs-23-11": "nixpkgs-23-11",
+        "nomodoro": "nomodoro",
         "spaceport-nvim": "spaceport-nvim"
       }
     },

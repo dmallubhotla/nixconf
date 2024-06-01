@@ -89,7 +89,7 @@
 			wiki-vim
 			vim-markdown
 			cmp-buffer
-			vim-airline
+			# vim-airline
 			vim-fugitive
 			flash-nvim
 			gitsigns-nvim
@@ -100,8 +100,10 @@
 			overseer-nvim
 
 			# prettiness
+			lualine-nvim
 			goyo-vim
 			limelight-vim
+			nui-nvim
 
 			# color schemes
 			rose-pine
@@ -110,6 +112,7 @@
 			# custom plugins from flakes
 			pkgs.customVimPlugins.cmp-vimtex
 			pkgs.customVimPlugins.spaceport-nvim
+			pkgs.customVimPlugins.nomodoro
 
 			# syntax highlighting
 			vim-just
