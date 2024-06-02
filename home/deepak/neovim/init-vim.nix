@@ -48,24 +48,9 @@ require("nomodoro").setup({})
 vim.api.nvim_set_keymap("n", "<leader>nw", "<cmd>NomoWork<CR>", { noremap = true})
 vim.api.nvim_set_keymap("n", "<leader>nb", "<cmd>NomoBreak<CR>", { noremap = true})
 vim.api.nvim_set_keymap("n", "<leader>ns", "<cmd>NomoStop<CR>", { noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>nm", "<cmd>NomoMenu<CR>", { noremap = true})
 
--- put this at the end in case it depends on other things being configured
-require('lualine').setup({
-	extensions = {"fugitive", "overseer"},
-	sections = {
-		lualine_c = {
-			"filename",
-			{
-				"overseer",
-				icons_enabled = false,
-			},
-			require("nomodoro").status
-		},
-		lualine_x = {
-			"encoding", {"fileformat", icons_enabled = false}, "filetype"
-		}
-	}
-})
+${builtins.readFile ./lualine.lua}
 
 EOF
 ''
