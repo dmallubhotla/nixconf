@@ -15,6 +15,9 @@ vim.opt.foldlevelstart = 99
 vim.opt.number = true
 vim.opt.relativenumber = true
 
+vim.opt.spell = true
+vim.opt.spelllang = 'en_gb'
+
 vim.keymap.set("n", "<leader>N", "R<Enter><Esc>")
 
 -- ctrlp setup
@@ -44,7 +47,12 @@ require("overseer").setup()
 vim.api.nvim_set_keymap('n', '<leader>oo', '<cmd>OverseerToggle<CR>', { noremap = true})
 vim.api.nvim_set_keymap('n', '<leader>or', '<cmd>OverseerRun<CR>', { noremap = true})
 
-require("nomodoro").setup({})
+require("nomodoro").setup({
+	work_time = 10,
+	short_break_time = 2,
+	long_break_time = 5,
+	break_cycle=5,
+})
 vim.api.nvim_set_keymap("n", "<leader>nw", "<cmd>NomoWork<CR>", { noremap = true})
 vim.api.nvim_set_keymap("n", "<leader>nb", "<cmd>NomoBreak<CR>", { noremap = true})
 vim.api.nvim_set_keymap("n", "<leader>ns", "<cmd>NomoStop<CR>", { noremap = true})
