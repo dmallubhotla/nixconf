@@ -37,6 +37,9 @@ require('flash').setup()
 
 require('which-key').setup({})
 ${builtins.readFile ./lsp.lua}
+vim.keymap.set('n', "]d", vim.diagnostic.goto_next, { noremap = true, desc = "Next diagnostic" })
+vim.keymap.set('n', "[d", vim.diagnostic.goto_prev, { noremap = true, desc = "Previous diagnostic" })
+vim.keymap.set('n', "<leader>d", vim.diagnostic.open_float, { noremap = true, desc = "Open diagnostic" })
 vim.g.vim_markdown_folding_level = 2
 ${builtins.readFile ./wiki-vim.lua}
 
