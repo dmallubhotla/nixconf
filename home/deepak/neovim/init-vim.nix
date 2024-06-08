@@ -33,6 +33,8 @@ require("rose-pine").setup({})
 require("kanagawa").setup({})
 vim.cmd("colorscheme rose-pine")
 
+vim.keymap.set('n', "<leader>zm", '<cmd>ZenMode<CR>', { noremap = true, desc = "Toggle zen-mode" })
+
 require('flash').setup()
 
 require('which-key').setup({})

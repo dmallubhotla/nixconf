@@ -104,6 +104,8 @@
 			goyo-vim
 			limelight-vim
 			nui-nvim
+			zen-mode-nvim
+			twilight-nvim
 
 			# color schemes
 			rose-pine
