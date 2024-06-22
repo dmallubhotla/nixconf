@@ -15,6 +15,9 @@ vim.opt.foldlevelstart = 99
 vim.opt.number = true
 vim.opt.relativenumber = true
 
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
 vim.opt.spell = true
 vim.opt.spelllang = 'en_gb'
 
