@@ -5,9 +5,9 @@
 	programs.home-manager.enable = true;
 	home.packages = [
 		pkgs.hello
-		(pkgs.writeScriptBin "nixFlakes" ''
-			exec ${pkgs.nixUnstable}/bin/nix --experimental-features "nix-command flakes" "$@"
-		'')
+		# (pkgs.writeScriptBin "nixFlakes" ''
+		# 	exec ${pkgs.nixVersions.git}/bin/nix --experimental-features "nix-command flakes" "$@"
+		# '')
 		pkgs.cachix
 		pkgs.kubectl
 		pkgs.bat
@@ -18,7 +18,7 @@
 
 		# lsps
 		pkgs.nil
-		pkgs.nodePackages.pyright
+		# pkgs.nodePackages.pyright
 
 		pkgs.thefuck
 	] ++ pkgs.lib.optionals specialArgs.withGUI [
