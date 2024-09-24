@@ -71,6 +71,7 @@ in
     fira-code
     fira-code-symbols
     powerline-fonts
+    lohit-fonts.telugu
     custom-fonts.custom-fonts
   ];
 
