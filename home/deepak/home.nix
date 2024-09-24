@@ -26,6 +26,7 @@
 		pkgs.obsidian
 		pkgs.audacity
 		pkgs.nextcloud-client
+		pkgs.libreoffice-qt6-fresh
 	];
 
 	home.homeDirectory = "/home/deepak";
