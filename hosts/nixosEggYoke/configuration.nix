@@ -26,7 +26,7 @@ in
 
   };
 
-  networking.hostName = "nixosWSL"; # Define your hostname.
+  networking.hostName = "nixosEggYoke"; # Define your hostname.
 
   # Enable nix flakes
   nix.package = pkgs.nixFlakes;
@@ -61,6 +61,9 @@ in
     pinentry-curses
     gnupg
   ];
+
+  # try this out to fix WSL issue
+  environment.noXlibs = false;
   
   fonts.packages = with pkgs; [
     fira-code
@@ -72,7 +75,7 @@ in
 
   programs.gnupg.agent = {
     enable = true;
-    pinentryFlavor = "curses"; 
+    pinentryPackage = pkgs.pinentry-qt;
     enableSSHSupport = true;
   };
 

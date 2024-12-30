@@ -6,6 +6,9 @@
 		nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
 		nixpkgs-23-11.url = "github:NixOS/nixpkgs/nixos-23.11";
+
+		nixpkgs-24-05.url = "github:NixOS/nixpkgs/nixos-24.05";
+
 		homeManager = {
 			url = "github:nix-community/home-manager";
 			inputs.nixpkgs.follows = "nixpkgs";
@@ -14,6 +17,17 @@
 		homeManager-23-11 = {
 			url = "github:nix-community/home-manager/release-23.11";
 			inputs.nixpkgs.follows = "nixpkgs-23-11";
+		};
+
+		homeManager-24-05 = {
+			url = "github:nix-community/home-manager/release-24.05";
+			inputs.nixpkgs.follows = "nixpkgs-24-05";
+		};
+
+
+		NixOS-WSL-2405 = {
+			url = "github:nix-community/NixOS-WSL";
+			inputs.nixpkgs.follows = "nixpkgs-24-05";
 		};
 
 		NixOS-WSL = {
@@ -35,7 +49,7 @@
 		};
 	};
 
-	outputs = { self, nixpkgs, homeManager, NixOS-WSL, nixpkgs-23-11, homeManager-23-11, cmp-vimtex, spaceport-nvim, nomodoro, ...}@inputs:
+	outputs = { self, nixpkgs, homeManager, NixOS-WSL, NixOS-WSL-2405, nixpkgs-23-11, nixpkgs-24-05, homeManager-23-11, homeManager-24-05, cmp-vimtex, spaceport-nvim, nomodoro, ...}@inputs:
 	let
 		customPackageOverlay = (import ./overlays/default.nix { inherit cmp-vimtex; inherit spaceport-nvim; inherit nomodoro; }).overlay;
 	in
@@ -47,8 +61,11 @@
 				inherit inputs;
 				inherit (nixpkgs) lib;
 				inherit NixOS-WSL;
+				inherit NixOS-WSL-2405;
 				inherit nixpkgs-23-11;
+				inherit nixpkgs-24-05;
 				inherit homeManager-23-11;
+				inherit homeManager-24-05;
 				inherit cmp-vimtex;
 				inherit customPackageOverlay;
 			}
