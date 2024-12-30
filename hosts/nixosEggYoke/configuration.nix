@@ -60,6 +60,7 @@ in
     pinentry
     pinentry-curses
     gnupg
+    tailscale
   ];
 
   # try this out to fix WSL issue
