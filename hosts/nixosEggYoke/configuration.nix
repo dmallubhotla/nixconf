@@ -80,8 +80,8 @@ in
     enableSSHSupport = true;
   };
 
-  environment.variables = {
-    DPK_NIX_CONF_DIR = "/mnt/d/Projects/nixconf";
-  };
+  # environment.variables = {
+  #   DPK_NIX_CONF_DIR = "/mnt/d/Projects/nixconf";
+  # };
 
 }
