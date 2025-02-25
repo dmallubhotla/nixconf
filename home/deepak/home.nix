@@ -130,6 +130,7 @@
 		shellAliases = {
 			doo="./do.sh";
 			wttr="curl wttr.in";
+			gcd="_t=$(git rev-parse --show-toplevel) && cd \"$_t\" && pwd";
 		};
 		history = {
 			size = 10000;
@@ -138,7 +139,6 @@
 		oh-my-zsh = {
 				enable = true;
 				plugins = [
-					"git"
 					"poetry"
 					"themes"
 					"emoji-clock"
