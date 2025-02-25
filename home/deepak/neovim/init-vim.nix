@@ -18,6 +18,9 @@ vim.opt.relativenumber = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
+-- scary hopefully secure in neovim
+vim.opt.exrc = true
+
 vim.opt.spell = true
 vim.opt.spelllang = 'en_gb'
 
