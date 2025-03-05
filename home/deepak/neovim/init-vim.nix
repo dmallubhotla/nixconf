@@ -59,7 +59,7 @@ vim.api.nvim_set_keymap('n', '<leader>oo', '<cmd>OverseerToggle<CR>', { noremap 
 vim.api.nvim_set_keymap('n', '<leader>or', '<cmd>OverseerRun<CR>', { noremap = true})
 
 require("parrot").setup({
-	providers {
+	providers = {
 		anthropic = {
 			api_key = os.getenv "ANTHROPIC_API_KEY",
 		},
