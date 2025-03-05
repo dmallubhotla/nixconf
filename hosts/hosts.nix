@@ -54,6 +54,7 @@ in
 		};
 		modules = [
 			./nixosEggYoke/configuration.nix
+			inputs.sops-nix.nixosModules.sops
 			homeManager-24-05.nixosModules.home-manager {
 				home-manager.extraSpecialArgs = {
 					withGUI = false;
@@ -64,6 +65,9 @@ in
 				home-manager.users.deepak = {
 					imports = [ ../home/deepak/home.nix ];
 				};
+				home-manager.sharedModules = [
+					inputs.sops-nix.homeManagerModules.sops
+				];
 			}
 			NixOS-WSL-2405.nixosModules.wsl
 		];
