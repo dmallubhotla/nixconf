@@ -174,7 +174,6 @@ in
 		];
 		initExtra = ''
 			eval "$(${pkgs.direnv}/bin/direnv hook zsh)"
-			export ANTHROPIC_API_KEY=$(cat ${config.sops.secrets.anthropic_api_key.path})
 		'';
 	};
 	
