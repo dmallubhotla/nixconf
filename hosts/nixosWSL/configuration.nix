@@ -61,6 +61,8 @@ in
     pinentry-curses
     gnupg
   ];
+
+  environment.noXlibs = false;
   
   fonts.packages = with pkgs; [
     fira-code
@@ -72,7 +74,7 @@ in
 
   programs.gnupg.agent = {
     enable = true;
-    pinentryFlavor = "curses"; 
+    pinentryPackage = pkgs.pinentry-qt; 
     enableSSHSupport = true;
   };
 

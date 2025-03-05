@@ -20,44 +20,44 @@
 		];
 	};
 
-	"nixosWSL" = nixpkgs-23-11.lib.nixosSystem {
+	"nixosWSL" = nixpkgs-24-05.lib.nixosSystem {
 		system = "x86_64-linux";
 		specialArgs = {
 			inherit customPackageOverlay;
 		};
 		modules = [
 			./nixosWSL/configuration.nix
-			homeManager-23-11.nixosModules.home-manager {
+			homeManager-24-05.nixosModules.home-manager {
 				home-manager.extraSpecialArgs = {
-                                        withGUI = false;
-                                        gitSigningKey = "8F904A3FC7021497";
+					withGUI = false;
+					gitSigningKey = "8F904A3FC7021497";
 				};
 				home-manager.useGlobalPkgs = true;
 				home-manager.users.deepak = {
 					imports = [ ../home/deepak/home.nix ];
 				};
 			}
-			NixOS-WSL.nixosModules.wsl
+			NixOS-WSL-2405.nixosModules.wsl
 		];
 	};
-        "nixosEggYoke" = nixpkgs-24-05.lib.nixosSystem {
-                system = "x86_64-linux";
-                specialArgs = {
-                        inherit customPackageOverlay;
-                };
-                modules = [
-                        ./nixosEggYoke/configuration.nix
-                        homeManager-24-05.nixosModules.home-manager {
-                                home-manager.extraSpecialArgs = {
-                                        withGUI = false;
-                                        gitSigningKey = "47831B15427F5A55";
-                                };
-                                home-manager.useGlobalPkgs = true;
-                                home-manager.users.deepak = {
-                                        imports = [ ../home/deepak/home.nix ];
-                                };
-                        }
-                        NixOS-WSL-2405.nixosModules.wsl
-                ];
-        };
+	"nixosEggYoke" = nixpkgs-24-05.lib.nixosSystem {
+		system = "x86_64-linux";
+		specialArgs = {
+			inherit customPackageOverlay;
+		};
+		modules = [
+			./nixosEggYoke/configuration.nix
+			homeManager-24-05.nixosModules.home-manager {
+				home-manager.extraSpecialArgs = {
+					withGUI = false;
+					gitSigningKey = "47831B15427F5A55";
+				};
+				home-manager.useGlobalPkgs = true;
+				home-manager.users.deepak = {
+					imports = [ ../home/deepak/home.nix ];
+				};
+			}
+			NixOS-WSL-2405.nixosModules.wsl
+		];
+	};
 }
