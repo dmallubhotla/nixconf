@@ -65,6 +65,106 @@ require("parrot").setup({
 			api_key = { "cat", "${ config.sops.secrets.anthropic_api_key.path }" },
 		},
 	},
+	hooks = {
+		Complete = function(prt, params)
+			local template = [[
+			I have the following code from {{filename}}:
+
+			```{{filetype}}
+			{{selection}}
+			```
+
+			Please finish the code above carefully and logically.
+			Respond just with the snippet of code that should be inserted."
+			]]
+			local model_obj = prt.get_model "command"
+			prt.Prompt(params, prt.ui.Target.append, model_obj, nil, template)
+		end,
+		CompleteFullContext = function(prt, params)
+			local template = [[
+			I have the following code from {{filename}}:
+
+			```{{filetype}}
+			{{filecontent}}
+			```
+
+			Please look at the following section specifically:
+			```{{filetype}}
+			{{selection}}
+			```
+
+			Please finish the code above carefully and logically.
+			Respond just with the snippet of code that should be inserted.
+			]]
+			local model_obj = prt.get_model "command"
+			prt.Prompt(params, prt.ui.Target.append, model_obj, nil, template)
+		end,
+		CompleteMultiContext = function(prt, params)
+			local template = [[
+			I have the following code from {{filename}} and other realted files:
+
+			```{{filetype}}
+			{{multifilecontent}}
+			```
+
+			Please look at the following section specifically:
+			```{{filetype}}
+			{{selection}}
+			```
+
+			Please finish the code above carefully and logically.
+			Respond just with the snippet of code that should be inserted.
+			]]
+			local model_obj = prt.get_model "command"
+			prt.Prompt(params, prt.ui.Target.append, model_obj, nil, template)
+		end,
+		Explain = function(prt, params)
+			local template = [[
+			Your task is to take the code snippet from {{filename}} and explain it with gradually increasing complexity.
+			Break down the code's functionality, purpose, and key components.
+			The goal is to help the reader understand what the code does and how it works.
+
+			```{{filetype}}
+			{{selection}}
+			```
+
+			Use the markdown format with codeblocks and inline code.
+			Explanation of the code above:
+			]]
+			local model = prt.get_model "command"
+			prt.logger.info("Explaining selection with model: " .. model.name)
+			prt.Prompt(params, prt.ui.Target.new, model, nil, template)
+		end,
+		ProofReader = function(prt, params)
+			local chat_prompt = [[
+			I want you to act as a proofreader. I will provide you with texts and
+			I would like you to review them for any spelling, grammar, or
+			punctuation errors. Once you have finished reviewing the text,
+			provide me with any necessary corrections or suggestions to improve the
+			text. Highlight the corrected fragments (if any) using markdown backticks.
+
+			When you have done that subsequently provide me with a slightly better
+			version of the text, but keep close to the original text.
+
+			Finally provide me with an ideal version of the text.
+
+			Whenever I provide you with text, you reply in this format directly:
+
+			## Corrected text:
+
+			{corrected text, or say "NO_CORRECTIONS_NEEDED" instead if there are no corrections made}
+
+			## Slightly better text
+
+			{slightly better text}
+
+			## Ideal text
+
+			{ideal text}
+			]]
+			prt.ChatNew(params, chat_prompt)
+		end,
+	},
 })
 
 require("nomodoro").setup({
