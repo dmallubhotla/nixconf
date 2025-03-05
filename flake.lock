@@ -149,27 +149,6 @@
         "type": "github"
       }
     },
-    "homeManager-23-11": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs-23-11"
-        ]
-      },
-      "locked": {
-        "lastModified": 1719827415,
-        "narHash": "sha256-pvh+1hStXXAZf0sZ1xIJbWGx4u+OGBC1rVx6Wsw0fBw=",
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "rev": "f2e3c19867262dbe84fdfab42467fc8dd83a2005",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "ref": "release-23.11",
-        "repo": "home-manager",
-        "type": "github"
-      }
-    },
     "homeManager-24-05": {
       "inputs": {
         "nixpkgs": [
@@ -207,22 +186,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-23-11": {
-      "locked": {
-        "lastModified": 1720535198,
-        "narHash": "sha256-zwVvxrdIzralnSbcpghA92tWu2DV2lwv89xZc8MTrbg=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "205fd4226592cc83fd4c0885a3e4c9c400efabb5",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-23.11",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs-24-05": {
       "locked": {
         "lastModified": 1735286948,
@@ -235,6 +198,22 @@
       "original": {
         "owner": "NixOS",
         "ref": "nixos-24.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1731763621,
+        "narHash": "sha256-ddcX4lQL0X05AYkrkV2LMFgGdRvgap7Ho8kgon3iWZk=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "c69a9bffbecde46b4b939465422ddc59493d3e4d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -256,19 +235,54 @@
         "type": "github"
       }
     },
+    "parrot-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1740995822,
+        "narHash": "sha256-eKGoks9KP+cHKHZP8UXw59Yo0ovjfNn9/sdLFcj0GlM=",
+        "owner": "frankroeder",
+        "repo": "parrot.nvim",
+        "rev": "2ce83dfe94975da6b5f02fffeebcd6588753ab44",
+        "type": "github"
+      },
+      "original": {
+        "owner": "frankroeder",
+        "ref": "main",
+        "repo": "parrot.nvim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "NixOS-WSL": "NixOS-WSL",
         "NixOS-WSL-2405": "NixOS-WSL-2405",
         "cmp-vimtex": "cmp-vimtex",
         "homeManager": "homeManager",
-        "homeManager-23-11": "homeManager-23-11",
         "homeManager-24-05": "homeManager-24-05",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-23-11": "nixpkgs-23-11",
         "nixpkgs-24-05": "nixpkgs-24-05",
         "nomodoro": "nomodoro",
+        "parrot-nvim": "parrot-nvim",
+        "sops-nix": "sops-nix",
         "spaceport-nvim": "spaceport-nvim"
+      }
+    },
+    "sops-nix": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1741043164,
+        "narHash": "sha256-9lfmSZLz6eq9Ygr6cCmvQiiBEaPb54pUBcjvbEMPORc=",
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "rev": "3f2412536eeece783f0d0ad3861417f347219f4d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "type": "github"
       }
     },
     "spaceport-nvim": {

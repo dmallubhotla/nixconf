@@ -1,9 +1,14 @@
-{ lib, inputs, nixpkgs-23-11, nixpkgs-24-05, homeManager, homeManager-23-11, homeManager-24-05, NixOS-WSL, NixOS-WSL-2405, customPackageOverlay, ... }:
+{ lib, inputs, nixpkgs-24-05, homeManager, homeManager-24-05, NixOS-WSL-2405, customPackageOverlay, ... }:
+let
+	linuxSystem = "x86_64-linux";
+	nixpkgs-unstable = inputs.nixpkgs.legacyPackages.${linuxSystem};
+in 
 {
 	"maxos" = lib.nixosSystem {
-		system = "x86_64-linux";
+		system = linuxSystem;
 		specialArgs = {
 			inherit customPackageOverlay;
+			inherit nixpkgs-unstable;
 		};
 		modules = [
 			./maxos/configuration.nix
@@ -24,6 +29,7 @@
 		system = "x86_64-linux";
 		specialArgs = {
 			inherit customPackageOverlay;
+			inherit nixpkgs-unstable;
 		};
 		modules = [
 			./nixosWSL/configuration.nix
@@ -44,6 +50,7 @@
 		system = "x86_64-linux";
 		specialArgs = {
 			inherit customPackageOverlay;
+			inherit nixpkgs-unstable;
 		};
 		modules = [
 			./nixosEggYoke/configuration.nix
@@ -51,6 +58,7 @@
 				home-manager.extraSpecialArgs = {
 					withGUI = false;
 					gitSigningKey = "47831B15427F5A55";
+					inherit nixpkgs-unstable;
 				};
 				home-manager.useGlobalPkgs = true;
 				home-manager.users.deepak = {

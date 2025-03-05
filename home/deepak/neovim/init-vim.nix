@@ -58,6 +58,15 @@ require("overseer").setup()
 vim.api.nvim_set_keymap('n', '<leader>oo', '<cmd>OverseerToggle<CR>', { noremap = true})
 vim.api.nvim_set_keymap('n', '<leader>or', '<cmd>OverseerRun<CR>', { noremap = true})
 
+require("parrot").setup({
+	providers {
+		anthropic = {
+			api_key = os.getenv "ANTHROPIC_API_KEY",
+		},
+		ollama = {},
+	},
+})
+
 require("nomodoro").setup({
 	work_time = 10,
 	short_break_time = 2,

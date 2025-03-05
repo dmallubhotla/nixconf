@@ -1,5 +1,6 @@
 { pkgs, config, specialArgs, lib, ...}:
-
+let pkgs-unstable = specialArgs.nixpkgs-unstable;
+in 
 {
 
 	programs.home-manager.enable = true;
@@ -66,6 +67,7 @@
 
 	programs.neovim = {
 		enable = true;
+		package = pkgs-unstable.neovim-unwrapped;
 		defaultEditor = true;
 		vimAlias = true;
 
@@ -77,6 +79,8 @@
 			vim-nix
 			# plenary and stuff for telescope
 			plenary-nvim telescope-nvim telescope-file-browser-nvim
+			# need fzf for parrot
+			fzf-lua
 			ctrlp-vim
 			# lsp stuff
 			lsp-zero-nvim
@@ -116,6 +120,7 @@
 			pkgs.customVimPlugins.cmp-vimtex
 			pkgs.customVimPlugins.spaceport-nvim
 			pkgs.customVimPlugins.nomodoro
+			pkgs.customVimPlugins.parrot-nvim
 
 			# syntax highlighting
 			vim-just

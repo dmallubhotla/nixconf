@@ -1,4 +1,4 @@
-{ cmp-vimtex, spaceport-nvim, nomodoro }:
+{ cmp-vimtex, spaceport-nvim, nomodoro, parrot-nvim }:
 {
 	overlay = final: prev:
 	let
@@ -14,12 +14,18 @@
 			src = nomodoro;
 			name = "nomodoro";
 		};
+
+		parrotNvimPlugin = prev.vimUtils.buildVimPlugin {
+			src = parrot-nvim;
+			name = "parrot-nvim";
+		};
 	in
 	{
 		customVimPlugins = { 
 			cmp-vimtex = cmpVimtexPlugin;
 			spaceport-nvim = spaceportNvimPlugin;
 			nomodoro = nomodoroNvimPlugin;
+			parrot-nvim = parrotNvimPlugin;
 		};
 	};
 }
