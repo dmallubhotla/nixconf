@@ -22,6 +22,7 @@ in
 		pkgs.nodePackages.pyright
 
 		pkgs.thefuck
+		pkgs.fzf
 	] ++ pkgs.lib.optionals specialArgs.withGUI [
 		pkgs.discord
 		pkgs.obsidian
