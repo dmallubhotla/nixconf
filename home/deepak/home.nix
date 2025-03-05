@@ -125,7 +125,7 @@ in
 			# syntax highlighting
 			vim-just
 		];
-		extraConfig = import ./neovim/init-vim.nix;
+		extraConfig = import ./neovim/init-vim.nix { inherit config; };
 	};
 
 	programs.thefuck.enable = true;
@@ -174,6 +174,7 @@ in
 		];
 		initExtra = ''
 			eval "$(${pkgs.direnv}/bin/direnv hook zsh)"
+			export ANTHROPIC_API_KEY=$(cat ${config.sops.secrets.anthropic_api_key.path})
 		'';
 	};
 	
@@ -182,13 +183,9 @@ in
 		# It's also possible to use a ssh key, but only when it has no password:
 		#age.sshKeyPaths = [ "/home/user/path-to-ssh-key" ];
 		defaultSopsFile = ./secrets.yaml;
-		secrets.test = {
-			# sopsFile = ./secrets.yml.enc; # optionally define per-secret files
-
-			# %r gets replaced with a runtime directory, use %% to specify a '%'
-			# sign. Runtime dir is $XDG_RUNTIME_DIR on linux and $(getconf
-			# DARWIN_USER_TEMP_DIR) on darwin.
-			path = "%r/test.txt"; 
+		secrets = {
+			anthropic_api_key = {
+			};
 		};
 	};
 

@@ -1,3 +1,4 @@
+{ config }:
 ''
 inoremap jj <Esc>
 inoremap kk <Esc>
@@ -61,9 +62,8 @@ vim.api.nvim_set_keymap('n', '<leader>or', '<cmd>OverseerRun<CR>', { noremap = t
 require("parrot").setup({
 	providers = {
 		anthropic = {
-			api_key = os.getenv "ANTHROPIC_API_KEY",
+			api_key = { "cat", "${ config.sops.secrets.anthropic_api_key.path }" },
 		},
-		ollama = {},
 	},
 })
 
