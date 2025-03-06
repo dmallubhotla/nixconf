@@ -148,8 +148,15 @@ require("parrot").setup({
 
 			Finally provide me with an ideal version of the text.
 
+			For each of these versions, you can elide sections which include long unchanged text with NO_CHANGES_HERE.
+
 			Whenever I provide you with text, you reply in this format directly:
 
+
+			## Summary of suggestions:
+
+			{a brief list of spelling, grammar and punctuation errors, with brief snippets of the original text so I can search and find each change, followed by summaries of what types of changes are in the slightly better and ideal versions}
+			
 			## Corrected text:
 
 			{corrected text, or say "NO_CORRECTIONS_NEEDED" instead if there are no corrections made}
