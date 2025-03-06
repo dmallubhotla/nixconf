@@ -1,5 +1,6 @@
 keys:
   - &nixosEggYoke age1tk3vdafrm93dyqpnjymns92z9gmcrnr23cd6fh7ten8092j4tfas84wyhe
+  - &nixosWSL age1dtgm8nwnkwpn7s0xvnzzuvk6rfhm5f5rzuw7nnwxu45p5ns56eusrfwe20
 creation_rules:
   - path_regex: secrets.yaml$
     key_groups:
