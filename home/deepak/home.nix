@@ -187,7 +187,9 @@ in
 		defaultSopsFile = ./secrets.yaml;
 		
 		secrets = {
-			anthropic_api_key = {};
+			anthropic_api_key = {
+				sopsFile = ./secrets.yaml;
+			};
 		};
 	};
 
