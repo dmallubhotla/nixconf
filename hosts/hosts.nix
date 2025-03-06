@@ -37,12 +37,18 @@ in
 				home-manager.extraSpecialArgs = {
 					withGUI = false;
 					gitSigningKey = "8F904A3FC7021497";
+					inherit nixpkgs-unstable;
 				};
 				home-manager.useGlobalPkgs = true;
 				home-manager.users.deepak = {
 					imports = [ ../home/deepak/home.nix ];
 				};
+
+				home-manager.sharedModules = [
+					inputs.sops-nix.homeManagerModules.sops
+				];
 			}
+
 			NixOS-WSL-2405.nixosModules.wsl
 		];
 	};
