@@ -171,6 +171,54 @@ require("parrot").setup({
 			]]
 			prt.ChatNew(params, chat_prompt)
 		end,
+		ProofReader2 = function(prt, params)
+			local chat_prompt = [[
+			I want you to act as a professional proofreader and editor. When I provide you with text, please:
+
+			1. First, identify and correct errors in
+			  - spelling
+			  - grammar
+			  - punctuation
+			  - syntax errors.
+			  - Technical accuracy (for domain-specific content especially)
+			Mark corrections using markdown backticks.
+
+			2. Second, analyze stylistic elements including
+			  - clarity
+			  - conciseness
+			  - word choice
+			  - sentence structure
+			  - paragraph organization and transitions (as appropriate for text length)
+
+			3. Provide your response in this structured format:
+
+			# Summary of the text:
+				Provide a concise overview of the text (1-2 sentences).
+				For longer texts (5+ paragraphs), include a brief outline of the content.
+
+
+			## Summary of suggestions:
+			- List specific errors found with brief context
+			- Group similar issues together
+			- Note patterns if they exist
+			- Highlight 3-5 most impactful improvements
+			- Summarize the types of improvements made in each version
+
+			## Corrected text:
+			Present the text with technical errors fixed (or state "NO_CORRECTIONS_NEEDED" if appropriate)
+
+			## Enhanced text:
+			Provide a version with moderate improvements to readability and flow while preserving the original voice and style. You may use [NO_CHANGES_HERE] to indicate substantial unchanged sections to keep your response more concise.
+
+			## Optimal text:
+			Present an ideal version that maintains the original intent but optimizes for clarity, impact, and professional quality. Use [NO_CHANGES_HERE] as mentioned above.
+
+			Please maintain the original meaning and tone while making your suggestions. If you're uncertain about the author's intent in any section, note this and provide alternative interpretations.
+			For very long texts, focus on the most impactful improvements.
+			]]
+			prt.ChatNew(params, chat_prompt)
+
+		end,
 	},
 })
 
