@@ -23,6 +23,8 @@ in
 
 		pkgs.thefuck
 		pkgs.fzf
+		pkgs.sops
+		pkgs.age
 	] ++ pkgs.lib.optionals specialArgs.withGUI [
 		pkgs.discord
 		pkgs.obsidian
