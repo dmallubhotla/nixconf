@@ -187,9 +187,7 @@ in
 		defaultSopsFile = ./secrets.yaml;
 		
 		secrets = {
-			anthropic_api_key = {
-				name = "anthropic_api_key";
-			};
+			anthropic_api_key = {};
 		};
 	};
 
