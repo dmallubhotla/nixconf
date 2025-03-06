@@ -33,6 +33,7 @@ in
 		};
 		modules = [
 			./nixosWSL/configuration.nix
+			inputs.sops-nix.nixosModules.sops
 			homeManager-24-05.nixosModules.home-manager {
 				home-manager.extraSpecialArgs = {
 					withGUI = false;
