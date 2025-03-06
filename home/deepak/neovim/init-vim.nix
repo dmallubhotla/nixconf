@@ -222,6 +222,8 @@ require("parrot").setup({
 	},
 })
 
+vim.api.nvim_set_keymap("n", "<leader>pt", "<cmd>PrtChatToggle<CR>", { noremap = true})
+
 require("nomodoro").setup({
 	work_time = 10,
 	short_break_time = 2,
