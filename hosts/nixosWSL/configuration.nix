@@ -60,8 +60,10 @@ in
     pinentry
     pinentry-curses
     gnupg
+    # tailscale (don't need here)
   ];
 
+  # Fix of WSL issue
   environment.noXlibs = false;
   
   fonts.packages = with pkgs; [
