@@ -42,12 +42,12 @@ in
 				};
 				home-manager.useGlobalPkgs = true;
 				home-manager.users.deepak = {
-					imports = [ ../home/deepak/home.nix ];
+					imports = [
+						../home/deepak/home.nix
+						inputs.sops-nix.homeManagerModules.sops
+					];
 				};
 
-				home-manager.sharedModules = [
-					inputs.sops-nix.homeManagerModules.sops
-				];
 			}
 
 			NixOS-WSL-2405.nixosModules.wsl
