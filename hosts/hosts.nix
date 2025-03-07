@@ -40,7 +40,6 @@ in
 				home-manager.extraSpecialArgs = {
 					withGUI = false;
 					gitSigningKey = "8F904A3FC7021497";
-					rundirnum = "1001";
 					inherit nixpkgs-unstable;
 				};
 				home-manager.useGlobalPkgs = true;
@@ -72,7 +71,6 @@ in
 				home-manager.extraSpecialArgs = {
 					withGUI = false;
 					gitSigningKey = "47831B15427F5A55";
-					rundirnum = "1000";
 					inherit nixpkgs-unstable;
 				};
 				home-manager.useGlobalPkgs = true;
