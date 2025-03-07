@@ -193,6 +193,9 @@ in
 				path = "${config.sops.defaultSymlinkPath}/anthropic_api_key";
 			};
 			hello = {};
+			newkey = {
+				path = "/home/deepak/newkeytest.txt";
+			};
 		};
 	};
 
