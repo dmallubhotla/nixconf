@@ -16,6 +16,7 @@ in
 				home-manager.extraSpecialArgs = {
                                         withGUI = true;
                                         gitSigningKey = "976F3357369149AB";
+										rundirnum = "1000";
 				};
 				home-manager.useGlobalPkgs = true;
 				home-manager.users.deepak = {
@@ -38,16 +39,19 @@ in
 				home-manager.extraSpecialArgs = {
 					withGUI = false;
 					gitSigningKey = "8F904A3FC7021497";
+					rundirnum = "1001";
 					inherit nixpkgs-unstable;
 				};
 				home-manager.useGlobalPkgs = true;
 				home-manager.users.deepak = {
 					imports = [
 						../home/deepak/home.nix
-						inputs.sops-nix.homeManagerModules.sops
 					];
 				};
-
+				home-manager.sharedModules = [
+					inputs.sops-nix.homeManagerModules.sops
+				];
+	
 			}
 
 			NixOS-WSL-2405.nixosModules.wsl
@@ -66,6 +70,7 @@ in
 				home-manager.extraSpecialArgs = {
 					withGUI = false;
 					gitSigningKey = "47831B15427F5A55";
+					rundirnum = "1000";
 					inherit nixpkgs-unstable;
 				};
 				home-manager.useGlobalPkgs = true;
