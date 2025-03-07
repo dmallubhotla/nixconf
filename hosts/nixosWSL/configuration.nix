@@ -60,7 +60,7 @@ in
     pinentry
     pinentry-curses
     gnupg
-    # tailscale (don't need here)
+    tailscale
   ];
 
   # Fix of WSL issue
@@ -79,6 +79,11 @@ in
     pinentryPackage = pkgs.pinentry-qt; 
     enableSSHSupport = true;
   };
+
+  services.tailscale.enable = true;
+
+  # Optional (default: 41641):
+  services.tailscale.port = 62532;
 
 
 }

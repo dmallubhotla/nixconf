@@ -86,8 +86,4 @@ in
   services.tailscale.port = 62532;
 
 
-  # environment.variables = {
-  #   DPK_NIX_CONF_DIR = "/mnt/d/Projects/nixconf";
-  # };
-
 }

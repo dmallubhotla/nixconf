@@ -31,9 +31,10 @@ in
 		specialArgs = {
 			inherit customPackageOverlay;
 			inherit nixpkgs-unstable;
+			hostname = "nixosWSL";
 		};
 		modules = [
-			./nixosWSL/configuration.nix
+			./commonWSL-configuration.nix
 			inputs.sops-nix.nixosModules.sops
 			homeManager-24-05.nixosModules.home-manager {
 				home-manager.extraSpecialArgs = {
