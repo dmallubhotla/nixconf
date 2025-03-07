@@ -25,7 +25,7 @@ in
 			}
 		];
 	};
-	"nixosWalrus" = nixpkgs-24-05.lib.nixosSystem {
+	"nixosWalrus" = inputs.nixpkgs-24-11.lib.nixosSystem {
 		system = "x86_64-linux";
 		specialArgs = {
 			inherit customPackageOverlay;
@@ -36,7 +36,7 @@ in
 		modules = [
 			./commonWSL-configuration.nix
 			inputs.sops-nix.nixosModules.sops
-			homeManager-24-05.nixosModules.home-manager {
+			inputs.homeManager-24-11.nixosModules.home-manager {
 				home-manager.extraSpecialArgs = {
 					withGUI = false;
 					gitSigningKey = "8F904A3FC7021497";
@@ -54,7 +54,7 @@ in
 	
 			}
 
-			NixOS-WSL-2405.nixosModules.wsl
+			inputs.NixOS-WSL-2411.nixosModules.wsl
 		];
 	};
 	"nixosWSL" = nixpkgs-24-05.lib.nixosSystem {

@@ -7,10 +7,9 @@
 
 		sops-nix.url = "github:Mic92/sops-nix";
 
-		# nixpkgs-23-11.url = "github:NixOS/nixpkgs/nixos-23.11";
 
 		nixpkgs-24-05.url = "github:NixOS/nixpkgs/nixos-24.05";
-		# nixpkgs-24-11.url = "github:NixOS/nixpkgs/nixos-24.11";
+		nixpkgs-24-11.url = "github:NixOS/nixpkgs/nixos-24.11";
 
 		# only use this for Maxos, prefer specifying version explicitly
 		homeManager = {
@@ -23,10 +22,15 @@
 			inputs.nixpkgs.follows = "nixpkgs-24-05";
 		};
 
-		# homeManager-24-11 = {
-		# 	url = "github:nix-community/home-manager/release-24.11";
-		# 	inputs.nixpkgs.follows = "nixpkgs-24-11";
-		# };
+		NixOS-WSL-2411 = {
+			url = "github:nix-community/NixOS-WSL";
+			inputs.nixpkgs.follows = "nixpkgs-24-11";
+		};
+
+		homeManager-24-11 = {
+			url = "github:nix-community/home-manager/release-24.11";
+		 	inputs.nixpkgs.follows = "nixpkgs-24-11";
+		};
 
 
 		NixOS-WSL-2405 = {
@@ -59,7 +63,7 @@
 		};
 	};
 
-	outputs = { self, nixpkgs, homeManager, NixOS-WSL, NixOS-WSL-2405, nixpkgs-24-05, homeManager-24-05, cmp-vimtex, spaceport-nvim, nomodoro, ...}@inputs:
+	outputs = { self, nixpkgs, homeManager, NixOS-WSL, NixOS-WSL-2405, nixpkgs-24-05, nixpkgs-24-11, homeManager-24-05, homeManager-24-11, cmp-vimtex, spaceport-nvim, nomodoro, ...}@inputs:
 	let
 		customPackageOverlay = (import ./overlays/default.nix { inherit cmp-vimtex; inherit spaceport-nvim; inherit nomodoro; parrot-nvim = inputs.parrot-nvim; }).overlay;
 	in

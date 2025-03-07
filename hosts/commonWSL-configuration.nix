@@ -20,7 +20,7 @@ in
 
     # Enable integration with Docker Desktop (needs to be installed)
     # docker-desktop.enable = true;
-    nativeSystemd = true;
+	# nativeSystemd = true;
 
     wslConf.interop.appendWindowsPath = false;
 
@@ -29,7 +29,7 @@ in
   networking.hostName = hostname; # Define your hostname.
 
   # Enable nix flakes
-  nix.package = pkgs.nixFlakes;
+  # nix.package = pkgs.nixFlakes;
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';
@@ -64,7 +64,7 @@ in
   ];
 
   # try this out to fix WSL issue
-  environment.noXlibs = false;
+  # environment.noXlibs = false;
   
   fonts.packages = with pkgs; [
     fira-code

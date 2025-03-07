@@ -19,7 +19,8 @@ in
 
 		# lsps
 		pkgs.nil
-		pkgs.nodePackages.pyright
+		# pkgs.nodePackages.pyright
+		pkgs.pyright
 
 		pkgs.thefuck
 		pkgs.fzf
