@@ -25,13 +25,45 @@ in
 			}
 		];
 	};
+	"nixosWalrus" = nixpkgs-24-05.lib.nixosSystem {
+		system = "x86_64-linux";
+		specialArgs = {
+			inherit customPackageOverlay;
+			inherit nixpkgs-unstable;
+			hostname = "nixosWalrus";
+			stateVersion = "24.11";
+		};
+		modules = [
+			./commonWSL-configuration.nix
+			inputs.sops-nix.nixosModules.sops
+			homeManager-24-05.nixosModules.home-manager {
+				home-manager.extraSpecialArgs = {
+					withGUI = false;
+					gitSigningKey = "8F904A3FC7021497";
+					inherit nixpkgs-unstable;
+				};
+				home-manager.useGlobalPkgs = true;
+				home-manager.users.deepak = {
+					imports = [
+						../home/deepak/home.nix
+					];
+				};
+				home-manager.sharedModules = [
+					inputs.sops-nix.homeManagerModules.sops
+				];
+	
+			}
 
+			NixOS-WSL-2405.nixosModules.wsl
+		];
+	};
 	"nixosWSL" = nixpkgs-24-05.lib.nixosSystem {
 		system = "x86_64-linux";
 		specialArgs = {
 			inherit customPackageOverlay;
 			inherit nixpkgs-unstable;
 			hostname = "nixosWSL";
+			stateVersion = "22.05";
 		};
 		modules = [
 			./commonWSL-configuration.nix
@@ -63,6 +95,7 @@ in
 			inherit customPackageOverlay;
 			inherit nixpkgs-unstable;
 			hostname = "nixosEggYoke";
+			stateVersion = "22.05";
 		};
 		modules = [
 			./commonWSL-configuration.nix

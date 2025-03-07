@@ -1,4 +1,4 @@
-{ pkgs, customPackageOverlay, modulesPath, hostname, ... }:
+{ pkgs, customPackageOverlay, stateVersion, modulesPath, hostname, ... }:
 
 let
   custom-fonts = import ../fonts { inherit pkgs; };
@@ -39,7 +39,7 @@ in
     customPackageOverlay
   ];
 
-  system.stateVersion = "22.05";
+  system.stateVersion = stateVersion;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.deepak = {
