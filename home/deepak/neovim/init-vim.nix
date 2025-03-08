@@ -43,6 +43,7 @@ vim.cmd("colorscheme kanagawa-dragon")
 vim.keymap.set('n', "<leader>zm", '<cmd>ZenMode<CR>', { noremap = true, desc = "Toggle zen-mode" })
 
 require('flash').setup()
+vim.keymap.set('n', "<leader>ft", function() require("flash").toggle() end, {desc = "Toggle flash.nvim search", noremap = true})
 
 require('which-key').setup({})
 ${builtins.readFile ./lsp.lua}
