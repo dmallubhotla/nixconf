@@ -13,6 +13,10 @@ local function parrot_status()
 end
 
 require('lualine').setup({
+	options = {
+		globalstatus = true,
+		ignore_focus = { "vimtex-toc", }
+	},
 	extensions = {"fugitive", "overseer"},
 	sections = {
 		lualine_c = {
