@@ -85,5 +85,6 @@ in
   # Optional (default: 41641):
   services.tailscale.port = 62532;
 
+  time.timeZone = "America/Chicago";
 
 }
