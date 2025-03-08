@@ -9,7 +9,7 @@ local function parrot_status()
 	else
 		status = status_info.prov.command.name
 	end
-	return string.format("%s(%.14s...)", status, status_info.model)
+	return string.format("%s(%s)", status, status_info.model)
 end
 
 require('lualine').setup({
