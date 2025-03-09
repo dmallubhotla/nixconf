@@ -124,6 +124,7 @@ in
 			# color schemes
 			rose-pine
 			kanagawa-nvim
+			nightfox-nvim
 
 			# custom plugins from flakes
 			pkgs.customVimPlugins.cmp-vimtex

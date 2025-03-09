@@ -38,6 +38,7 @@ require('gitsigns').setup()
 -- color scheme
 require("rose-pine").setup({})
 require("kanagawa").setup({})
+require("nightfox").setup({})
 vim.cmd("colorscheme kanagawa-dragon")
 
 vim.keymap.set('n', "<leader>zm", '<cmd>ZenMode<CR>', { noremap = true, desc = "Toggle zen-mode" })
