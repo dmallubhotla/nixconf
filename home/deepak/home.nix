@@ -63,6 +63,9 @@ in
 			core = {
 				fileMode = false;
 			};
+			init = {
+				defaultBranch = "master";
+			};
 		};
 		includes = [
 			# this allows us to have a local gitconfig maybe?
