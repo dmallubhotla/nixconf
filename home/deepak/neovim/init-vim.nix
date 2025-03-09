@@ -237,6 +237,10 @@ vim.api.nvim_set_keymap("n", "<leader>nb", "<cmd>NomoBreak<CR>", { noremap = tru
 vim.api.nvim_set_keymap("n", "<leader>ns", "<cmd>NomoStop<CR>", { noremap = true})
 vim.api.nvim_set_keymap("n", "<leader>nm", "<cmd>NomoMenu<CR>", { noremap = true})
 
+vim.api.nvim_set_keymap("n", "<leader>tt", "<cmd>Telescope<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>tg", "<cmd>Telescope live_grep<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>to", "<cmd>Telescope find_files<CR>", {noremap = true})
+
 ${builtins.readFile ./lualine.lua}
 
 EOF
