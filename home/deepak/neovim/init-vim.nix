@@ -26,7 +26,7 @@ vim.opt.spell = true
 vim.opt.spelllang = 'en_gb'
 
 vim.keymap.set("n", "<leader>N", "R<Enter><Esc>")
-
+vim.g.python_recommended_style = 0
 -- ctrlp setup
 vim.g.ctrlp_custom_ignore = {
 	file = '\\v\\.(aux|bbl|blg|bcf|fdb_latexmk|fls|run.xml|tdo|toc|log|pdf)$'

@@ -26,6 +26,8 @@ in
 		pkgs.fzf
 		pkgs.sops
 		pkgs.age
+		pkgs.ydiff
+		pkgs.delta
 	] ++ pkgs.lib.optionals specialArgs.withGUI [
 		pkgs.discord
 		pkgs.obsidian
