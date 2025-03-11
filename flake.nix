@@ -61,11 +61,16 @@
 			url = "github:dbinagi/nomodoro/main";
 			flake = false;
 		};
+
+		zsh-completions = {
+			url = "github:zsh-users/zsh-completions/master";
+			flake = false;
+		};
 	};
 
 	outputs = { self, nixpkgs, homeManager, NixOS-WSL, NixOS-WSL-2405, nixpkgs-24-05, nixpkgs-24-11, homeManager-24-05, homeManager-24-11, cmp-vimtex, spaceport-nvim, nomodoro, ...}@inputs:
 	let
-		customPackageOverlay = (import ./overlays/default.nix { inherit cmp-vimtex; inherit spaceport-nvim; inherit nomodoro; parrot-nvim = inputs.parrot-nvim; }).overlay;
+		customPackageOverlay = (import ./overlays/default.nix { inherit cmp-vimtex; inherit spaceport-nvim; inherit inputs; inherit nomodoro; parrot-nvim = inputs.parrot-nvim; }).overlay;
 	in
 	{
 		nixosConfigurations = (

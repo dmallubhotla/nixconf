@@ -341,7 +341,8 @@
         "nomodoro": "nomodoro",
         "parrot-nvim": "parrot-nvim",
         "sops-nix": "sops-nix",
-        "spaceport-nvim": "spaceport-nvim"
+        "spaceport-nvim": "spaceport-nvim",
+        "zsh-completions": "zsh-completions"
       }
     },
     "sops-nix": {
@@ -406,6 +407,23 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "zsh-completions": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1741073200,
+        "narHash": "sha256-6B6fsIFzLiPvn4VlL8Llh4OQUyhuTL8LeOjtYqTUOqw=",
+        "owner": "zsh-users",
+        "repo": "zsh-completions",
+        "rev": "6ea205dc14b76a0989c4d991df958cc44eaeee60",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zsh-users",
+        "ref": "master",
+        "repo": "zsh-completions",
         "type": "github"
       }
     }

@@ -1,4 +1,4 @@
-{ cmp-vimtex, spaceport-nvim, nomodoro, parrot-nvim }:
+{ cmp-vimtex, spaceport-nvim, nomodoro, parrot-nvim, inputs }:
 {
 	overlay = final: prev:
 	let
@@ -27,5 +27,10 @@
 			nomodoro = nomodoroNvimPlugin;
 			parrot-nvim = parrotNvimPlugin;
 		};
+
+		customZshPlugins = with inputs; [
+			zsh-completions
+		];
+
 	};
 }
