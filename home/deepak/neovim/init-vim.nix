@@ -56,11 +56,7 @@ ${builtins.readFile ./wiki-vim.lua}
 
 vim.g.vimtex_fold_enabled = true
 
-require("overseer").setup()
--- set keymap for commands
-vim.api.nvim_set_keymap('n', '<leader>oo', '<cmd>OverseerToggle<CR>', { noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>or', '<cmd>OverseerRun<CR>', { noremap = true})
-
+${builtins.readFile ./overseer.lua}
 require("parrot").setup({
 	providers = {
 		anthropic = {
