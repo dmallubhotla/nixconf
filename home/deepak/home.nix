@@ -28,6 +28,8 @@ in
 		pkgs.age
 		pkgs.ydiff
 		pkgs.delta
+
+		pkgs-unstable.claude-code
 	] ++ pkgs.lib.optionals specialArgs.withGUI [
 		pkgs.discord
 		pkgs.obsidian

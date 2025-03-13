@@ -1,7 +1,12 @@
 { lib, inputs, nixpkgs-24-05, homeManager, homeManager-24-05, NixOS-WSL-2405, customPackageOverlay, ... }:
 let
 	linuxSystem = "x86_64-linux";
-	nixpkgs-unstable = inputs.nixpkgs.legacyPackages.${linuxSystem};
+	nixpkgs-unstable = import inputs.nixpkgs {
+		system = linuxSystem;
+		config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+			"claude-code"
+		];
+	};
 in 
 {
 	"maxos" = lib.nixosSystem {
@@ -14,9 +19,9 @@ in
 			./maxos/configuration.nix
 			homeManager.nixosModules.home-manager {
 				home-manager.extraSpecialArgs = {
-                                        withGUI = true;
-                                        gitSigningKey = "976F3357369149AB";
-										rundirnum = "1000";
+					withGUI = true;
+					gitSigningKey = "976F3357369149AB";
+					rundirnum = "1000";
 				};
 				home-manager.useGlobalPkgs = true;
 				home-manager.users.deepak = {
