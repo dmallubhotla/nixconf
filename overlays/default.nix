@@ -19,6 +19,11 @@
 			src = parrot-nvim;
 			name = "parrot-nvim";
 		};
+
+		zshCompletionPlugin = {
+			name = "zsh-completions";
+			src = inputs.zsh-completions;
+		};
 	in
 	{
 		customVimPlugins = { 
@@ -28,9 +33,9 @@
 			parrot-nvim = parrotNvimPlugin;
 		};
 
-		customZshPlugins = with inputs; [
-			zsh-completions
-		];
+		customZshPlugins = {
+			zsh-completions = zshCompletionPlugin;
+		};
 
 	};
 }

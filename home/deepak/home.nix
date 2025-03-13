@@ -181,6 +181,7 @@ in
 					sha256 = "1gsgmsvl1sl9m3yfapx6bp0y15py8610kywh56bgsjf9wxkrc3nl";
 				};
 			}
+			pkgs.customZshPlugins.zsh-completions
 		];
 		initExtra = ''
 			eval "$(${pkgs.direnv}/bin/direnv hook zsh)"
