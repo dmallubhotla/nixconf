@@ -30,6 +30,9 @@ in
 		pkgs.delta
 
 		pkgs-unstable.claude-code
+		pkgs-unstable.uv
+		pkgs-unstable.nodejs
+
 	] ++ pkgs.lib.optionals specialArgs.withGUI [
 		pkgs.discord
 		pkgs.obsidian
@@ -43,6 +46,10 @@ in
 
 	# required, was previously default
 	home.stateVersion = "18.09";
+
+	home.sessionPath = [
+		"$HOME/.local/bin"
+	];
 
 	programs.direnv.enable = true;
 	programs.direnv.nix-direnv.enable = true;
