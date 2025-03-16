@@ -1,6 +1,6 @@
 { cmp-vimtex, spaceport-nvim, nomodoro, parrot-nvim, inputs }:
-{
-	overlay = final: prev:
+let 
+	pluginoverlay= final: prev:
 	let
 		cmpVimtexPlugin = prev.vimUtils.buildVimPlugin {
 			src = cmp-vimtex;
@@ -38,4 +38,9 @@
 		};
 
 	};
+in {
+	overlay = inputs.nixpkgs.lib.composeManyExtensions[
+		pluginoverlay
+		inputs.claude-mcp-bundle.overlays.default
+	];
 }

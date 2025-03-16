@@ -66,6 +66,12 @@
 			url = "github:zsh-users/zsh-completions/master";
 			flake = false;
 		};
+		
+		claude-mcp-bundle = {
+			url = "git+https://gitea.deepak.science/deepak/claude_mcp_bundle.git";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};
+
 	};
 
 	outputs = { self, nixpkgs, homeManager, NixOS-WSL, NixOS-WSL-2405, nixpkgs-24-05, nixpkgs-24-11, homeManager-24-05, homeManager-24-11, cmp-vimtex, spaceport-nvim, nomodoro, ...}@inputs:

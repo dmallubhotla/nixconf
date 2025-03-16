@@ -1,5 +1,7 @@
 { pkgs, config, specialArgs, lib, ...}:
-let pkgs-unstable = specialArgs.nixpkgs-unstable;
+let
+	pkgs-unstable = specialArgs.nixpkgs-unstable;
+	# default_python = pkgs-unstable.python313;
 in 
 {
 
@@ -20,7 +22,7 @@ in
 		# lsps
 		pkgs.nil
 		# pkgs.nodePackages.pyright
-		pkgs.pyright
+		# pkgs.pyright
 
 		pkgs.thefuck
 		pkgs.fzf
@@ -30,8 +32,14 @@ in
 		pkgs.delta
 
 		pkgs-unstable.claude-code
-		pkgs-unstable.uv
-		pkgs-unstable.nodejs
+		# default_python
+		# pkgs-unstable.uv
+		# pkgs-unstable.nodejs
+
+		# From our claude bundle
+		pkgs.custom-servers.arxiv-mcp-server
+		pkgs.custom-servers.basic-memory-server
+		pkgs.custom-servers.mcp-text-editor
 
 	] ++ pkgs.lib.optionals specialArgs.withGUI [
 		pkgs.discord
@@ -50,6 +58,10 @@ in
 	home.sessionPath = [
 		"$HOME/.local/bin"
 	];
+
+	home.sessionVariables = {
+		# UV_PYTHON = "${default_python}";
+	};
 
 	programs.direnv.enable = true;
 	programs.direnv.nix-direnv.enable = true;
