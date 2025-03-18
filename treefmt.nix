@@ -14,4 +14,7 @@
   programs.shellcheck.enable = true;
   programs.shfmt.enable = true;
   programs.yamlfmt.enable = true;
+  programs.just.enable = true;
+
+  programs.stylua.enable = true;
 }

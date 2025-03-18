@@ -27,20 +27,28 @@ local cwdProject = {
 	},
 }
 
-require('spaceport').setup({
+require("spaceport").setup({
 	sections = {
 		"_global_remaps",
 		"name_blue_green",
 		"remaps",
 		cwdProject,
 		"recents",
-	}
+	},
 })
 -- TODO do I really actually use the telescope spaceport extensions?
-require('telescope').load_extension('spaceport')
+require("telescope").load_extension("spaceport")
 -- spaceport breaks a bit if whitespace visible
 -- set up autocmd to set and unset vim.opt.list as needed
-vim.api.nvim_create_autocmd("User", { pattern = "SpaceportEnter", callback = function(ev) vim.opt.list = false end})
-vim.api.nvim_create_autocmd("User", { pattern = "SpaceportDone", callback = function(ev) vim.opt.list = true end})
-
-
+vim.api.nvim_create_autocmd("User", {
+	pattern = "SpaceportEnter",
+	callback = function(ev)
+		vim.opt.list = false
+	end,
+})
+vim.api.nvim_create_autocmd("User", {
+	pattern = "SpaceportDone",
+	callback = function(ev)
+		vim.opt.list = true
+	end,
+})

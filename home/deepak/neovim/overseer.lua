@@ -29,10 +29,8 @@ require("overseer").setup({
 			["<C-j>"] = "ScrollOutputDown",
 			["q"] = "Close",
 		},
-	}
+	},
 })
 -- set keymap for commands
-vim.api.nvim_set_keymap('n', '<leader>oo', '<cmd>OverseerToggle<CR>', { noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>or', '<cmd>OverseerRun<CR>', { noremap = true})
-
-
+vim.api.nvim_set_keymap("n", "<leader>oo", "<cmd>OverseerToggle<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>or", "<cmd>OverseerRun<CR>", { noremap = true })
