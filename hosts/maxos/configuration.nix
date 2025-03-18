@@ -8,10 +8,10 @@ let
   custom-fonts = import ../../fonts { inherit pkgs; };
 in
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   nix = {
     package = pkgs.nixFlakes;
@@ -97,14 +97,19 @@ in
     isNormalUser = true;
     home = "/home/deepak";
     description = "Deepak Mallubhotla";
-    extraGroups = [ "wheel" "networkmanager" "docker" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "docker"
+    ]; # Enable ‘sudo’ for the user.
     shell = pkgs.zsh;
   };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    wget vim
+    wget
+    vim
     firefox
     git
     pinentry
@@ -134,7 +139,6 @@ in
 
   # Optional (default: 41641):
   services.tailscale.port = 62532;
-
 
   # List services that you want to enable:
 

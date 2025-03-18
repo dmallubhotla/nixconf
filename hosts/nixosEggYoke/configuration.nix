@@ -1,4 +1,9 @@
-{ pkgs, customPackageOverlay, modulesPath, ... }:
+{
+  pkgs,
+  customPackageOverlay,
+  modulesPath,
+  ...
+}:
 
 let
   custom-fonts = import ../../fonts { inherit pkgs; };
@@ -34,7 +39,6 @@ in
     experimental-features = nix-command flakes
   '';
 
-
   nixpkgs.overlays = [
     customPackageOverlay
   ];
@@ -46,7 +50,10 @@ in
     isNormalUser = true;
     home = "/home/deepak";
     description = "Deepak Mallubhotla";
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+    ]; # Enable ‘sudo’ for the user.
     shell = pkgs.zsh;
   };
 
@@ -65,14 +72,13 @@ in
 
   # try this out to fix WSL issue
   environment.noXlibs = false;
-  
+
   fonts.packages = with pkgs; [
     fira-code
     fira-code-symbols
     powerline-fonts
     custom-fonts.custom-fonts
   ];
-
 
   programs.gnupg.agent = {
     enable = true;
@@ -84,6 +90,5 @@ in
 
   # Optional (default: 41641):
   services.tailscale.port = 62532;
-
 
 }
