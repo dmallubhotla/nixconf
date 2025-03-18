@@ -28,17 +28,22 @@ in
     };
     modules = [
       ./maxos/configuration.nix
+      inputs.sops-nix.nixosModules.sops
       homeManager.nixosModules.home-manager
       {
         home-manager.extraSpecialArgs = {
           withGUI = true;
           gitSigningKey = "976F3357369149AB";
           rundirnum = "1000";
+          inherit nixpkgs-unstable;
         };
         home-manager.useGlobalPkgs = true;
         home-manager.users.deepak = {
           imports = [ ../home/deepak/home.nix ];
         };
+        home-manager.sharedModules = [
+          inputs.sops-nix.homeManagerModules.sops
+        ];
       }
     ];
   };
