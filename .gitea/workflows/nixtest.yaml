@@ -18,7 +18,7 @@ jobs:
         run: |
           ls ${{ gitea.workspace }}
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@v9
+        uses: nixbuild/nix-quick-install-action@5bb6a3b3abe66fd09bbf250dce8ada94f856a703
 
       - run: nix build --version
 
