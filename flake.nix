@@ -68,7 +68,7 @@
     };
 
     claude-mcp-bundle = {
-      url = "git+https://gitea.deepak.science/deepak/claude_mcp_bundle.git";
+      url = "git+ssh://git@gitea.deepak.science:2222/deepak/claude_mcp_bundle.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
