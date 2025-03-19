@@ -1,0 +1,36 @@
+name: testing nix stuff
+run-name: ${{ gitea.actor }} is testing out Gitea Actions 🚀
+on: [push]
+
+jobs:
+  nix:
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ gitea.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by Gitea!"
+      - run: echo "🔎 The name of your branch is ${{ gitea.ref }} and your repository is ${{ gitea.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: List files in the repository
+        run: |
+          ls ${{ gitea.workspace }}
+      - uses: cachix/install-nix-action@v31
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v9
+
+      - run: nix build --version
+
+      - name: Setup Attic Cache
+        uses: ryanccn/attic-action@3354ae812cb672e1381be4c7914204c44db53866
+        with:
+          endpoint: ${{ secrets.ATTIC_ENDPOINT }}
+          cache: ${{ secrets.ATTIC_CACHE }}
+          token: ${{ secrets.ATTIC_TOKEN }}
+
+      - name: Build Nix Package
+        run: nix-build test.nix

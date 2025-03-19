@@ -19,6 +19,7 @@ in
       # 	exec ${pkgs.nixVersions.git}/bin/nix --experimental-features "nix-command flakes" "$@"
       # '')
       pkgs.cachix
+      pkgs.attic-client
       pkgs.kubectl
       pkgs.bat
       pkgs.eza

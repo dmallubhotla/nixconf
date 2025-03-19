@@ -41,6 +41,11 @@ in
     experimental-features = nix-command flakes
   '';
 
+  nix.settings = {
+    trusted-substituters = [ "http://attic.baklava" ];
+    trusted-public-keys = [ "systems:tvbHIThn7MAwvgMSiYR3ULVlL6cBrA40afqGuextnNQ=" ];
+  };
+
   nixpkgs.overlays = [
     customPackageOverlay
   ];
