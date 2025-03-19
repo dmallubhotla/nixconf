@@ -20,8 +20,10 @@ jobs:
           key: ${{ secrets.SSH_GITEA_SSH_KEY }}
           name: gitea_action
           known_hosts: ${{ secrets.SSH_GITEA_KNOWN_HOSTS }}
-      - name: Fix SSH key
-        run: sed -i 's/\r$//g' /root/.ssh/gitea_action
+          #- name: Fix SSH key
+          # run: sed -i 's/\r$//g' /root/.ssh/gitea_action
+      - name: List SSH dir
+        run: ls /root/.ssh/
       - name: List files in the repository
         run: |
           ls ${{ gitea.workspace }}
