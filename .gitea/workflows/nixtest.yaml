@@ -22,6 +22,8 @@ jobs:
           # known_hosts: ${{ secrets.SSH_GITEA_KNOWN_HOSTS }}
           #- name: Fix SSH key
           # run: sed -i 's/\r$//g' /root/.ssh/gitea_action
+      - name: set up hosts known
+        run: echo ${{ secrets.GITEA_KNOWN_HOSTS }} >> /root/.ssh/known_hosts
       - name: List SSH dir
         run: ls /root/.ssh/
       - name: List files in the repository
