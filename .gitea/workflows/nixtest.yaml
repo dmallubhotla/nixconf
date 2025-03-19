@@ -15,7 +15,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
       - name: Install SSH keys
-        uses: shimataro/ssh-key-actiond4fffb50872869abe2d9a9098a6d9c5aa7d16be4
+        uses: shimataro/ssh-key-action@d4fffb50872869abe2d9a9098a6d9c5aa7d16be4
         with:
           key: ${{ secrets.SSH_GITEA_SSH_KEY }}
           name: gitea_action
