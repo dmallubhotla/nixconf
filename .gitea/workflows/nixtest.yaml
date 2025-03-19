@@ -24,8 +24,6 @@ jobs:
           # run: sed -i 's/\r$//g' /root/.ssh/gitea_action
       - name: List SSH dir
         run: ls /root/.ssh/
-      - name: Cat ssh
-        run: cat /root/.ssh/gitea_action
       - name: List files in the repository
         run: |
           ls ${{ gitea.workspace }}
