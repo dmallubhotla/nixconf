@@ -23,6 +23,8 @@ jobs:
       - name: List files in the repository
         run: |
           ls ${{ gitea.workspace }}
+      - name: test ssh
+        run: ssh -p 2222 -T git@gitea.deepak.science
       - name: Install Nix
         uses: cachix/install-nix-action@v31
       - run: nix build --version
