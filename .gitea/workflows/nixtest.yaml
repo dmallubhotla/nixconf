@@ -14,6 +14,12 @@ jobs:
       - run: echo "🔎 The name of your branch is ${{ gitea.ref }} and your repository is ${{ gitea.repository }}."
       - name: Check out repository code
         uses: actions/checkout@v4
+      - name: Install SSH keys
+        uses: shimataro/ssh-key-actiond4fffb50872869abe2d9a9098a6d9c5aa7d16be4
+        with:
+          key: ${{ secrets.SSH_GITEA_SSH_KEY }}
+          name: gitea_action
+          known_hosts: ${{ secrets.SSH_GITEA_KNOWN_HOSTS }}
       - name: List files in the repository
         run: |
           ls ${{ gitea.workspace }}
