@@ -1,7 +1,6 @@
 name: testing nix stuff
 run-name: ${{ gitea.actor }} is testing out Gitea Actions 🚀
 on: [push]
-
 jobs:
   nix:
     strategy:
@@ -18,8 +17,6 @@ jobs:
       - name: List files in the repository
         run: |
           ls ${{ gitea.workspace }}
-      - uses: cachix/install-nix-action@v31
-
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v9
 
