@@ -19,15 +19,12 @@ jobs:
           ls ${{ gitea.workspace }}
       - name: Install Nix
         uses: cachix/install-nix-action@v31
-
       - run: nix build --version
-
       - name: Setup Attic Cache
         uses: ryanccn/attic-action@3354ae812cb672e1381be4c7914204c44db53866
         with:
           endpoint: ${{ secrets.ATTIC_ENDPOINT }}
           cache: ${{ secrets.ATTIC_CACHE }}
           token: ${{ secrets.ATTIC_TOKEN }}
-
       - name: Build Nix Package
-        run: nix-build test.nix
+        run: nix flake check
