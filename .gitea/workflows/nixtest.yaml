@@ -1,6 +1,10 @@
 name: testing nix stuff
 run-name: ${{ gitea.actor }} is testing out Gitea Actions 🚀
 on: [push]
+
+env:
+  NIX_PATH: nixpkgs=channel:nixos-24.11-small
+
 jobs:
   nix:
     strategy:
