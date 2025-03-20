@@ -2,9 +2,6 @@ name: testing nix stuff
 run-name: ${{ gitea.actor }} is testing out Gitea Actions 🚀
 on: [push]
 
-env:
-  NIX_PATH: nixpkgs=channel:nixos-24.11-small
-
 jobs:
   nix:
     strategy:
@@ -38,8 +35,6 @@ jobs:
       - name: Install Nix
         uses: cachix/install-nix-action@v31
       - run: nix build --version
-      - name: pre install Attic
-        run: nix-env -i attic-client -f '<nixpkgs>'
       - name: Setup Attic Cache
         uses: ryanccn/attic-action@3354ae812cb672e1381be4c7914204c44db53866
         with:
