@@ -1,7 +1,6 @@
 name: testing nix stuff
 run-name: ${{ gitea.actor }} is testing out Gitea Actions 🚀
 on: [push]
-
 jobs:
   nix:
     strategy:
