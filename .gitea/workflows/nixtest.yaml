@@ -15,6 +15,12 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
       - name: Install SSH keys
+        uses: shimataro/ssh-key-action@d4fffb50872869abe2d9a9098a6d9c5aa7d16be4
+        with:
+          key: ${{ secrets.SSH_GITEA_SSH_KEY }}
+          name: gitea_action
+          known_hosts: ${{ secrets.SSH_GITEA_KNOWN_HOSTS }}
+      - name: Agent SSH keys
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_GITEA_SSH_KEY }}
@@ -22,8 +28,6 @@ jobs:
           # known_hosts: ${{ secrets.SSH_GITEA_KNOWN_HOSTS }}
           #- name: Fix SSH key
           # run: sed -i 's/\r$//g' /root/.ssh/gitea_action
-      - name: set up hosts known
-        run: echo ${{ secrets.GITEA_KNOWN_HOSTS }} >> /root/.ssh/known_hosts
       - name: List SSH dir
         run: ls /root/.ssh/
       - name: List files in the repository
