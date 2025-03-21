@@ -35,6 +35,9 @@
   ${builtins.readFile ./spaceport.lua}
   require('gitsigns').setup()
 
+  -- load file browser
+  ${builtins.readFile ./telescope.lua}
+
   -- color scheme
   require("rose-pine").setup({})
   require("kanagawa").setup({})
@@ -236,6 +239,7 @@
   vim.api.nvim_set_keymap("n", "<leader>tt", "<cmd>Telescope<CR>", {noremap = true})
   vim.api.nvim_set_keymap("n", "<leader>tg", "<cmd>Telescope live_grep<CR>", {noremap = true})
   vim.api.nvim_set_keymap("n", "<leader>to", "<cmd>Telescope find_files<CR>", {noremap = true})
+  vim.api.nvim_set_keymap("n", "<leader>tb", "<cmd>Telescope file_browser<CR>", {noremap = true}) 
 
   ${builtins.readFile ./lualine.lua}
 

@@ -134,6 +134,8 @@ in
       # plenary and stuff for telescope
       plenary-nvim
       telescope-nvim
+      nvim-treesitter
+      telescope-fzf-native-nvim
       telescope-file-browser-nvim
       # need fzf for parrot
       fzf-lua
