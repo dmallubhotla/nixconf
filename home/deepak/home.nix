@@ -147,7 +147,8 @@ in
       cmp_luasnip
       nvim-lspconfig
 
-      vim-vinegar
+	  # vim-vinegar
+      oil-nvim
 
       wiki-vim
       vim-markdown
@@ -180,6 +181,7 @@ in
       pkgs.customVimPlugins.spaceport-nvim
       pkgs.customVimPlugins.nomodoro
       pkgs.customVimPlugins.parrot-nvim
+      pkgs.customVimPlugins.nvim-web-devicons
 
       # syntax highlighting
       vim-just

@@ -32,11 +32,15 @@
   	file = '\\v\\.(aux|bbl|blg|bcf|fdb_latexmk|fls|run.xml|tdo|toc|log|pdf)$'
   }
 
-  ${builtins.readFile ./spaceport.lua}
   require('gitsigns').setup()
+  require("oil").setup()
 
-  -- load file browser
+  -- require("nvim-web-devicons").setup({})
+
+  -- load file browser and telescope
   ${builtins.readFile ./telescope.lua}
+
+  ${builtins.readFile ./spaceport.lua}
 
   -- color scheme
   require("rose-pine").setup({})
@@ -235,11 +239,6 @@
   vim.api.nvim_set_keymap("n", "<leader>nb", "<cmd>NomoBreak<CR>", { noremap = true})
   vim.api.nvim_set_keymap("n", "<leader>ns", "<cmd>NomoStop<CR>", { noremap = true})
   vim.api.nvim_set_keymap("n", "<leader>nm", "<cmd>NomoMenu<CR>", { noremap = true})
-
-  vim.api.nvim_set_keymap("n", "<leader>tt", "<cmd>Telescope<CR>", {noremap = true})
-  vim.api.nvim_set_keymap("n", "<leader>tg", "<cmd>Telescope live_grep<CR>", {noremap = true})
-  vim.api.nvim_set_keymap("n", "<leader>to", "<cmd>Telescope find_files<CR>", {noremap = true})
-  vim.api.nvim_set_keymap("n", "<leader>tb", "<cmd>Telescope file_browser<CR>", {noremap = true}) 
 
   ${builtins.readFile ./lualine.lua}
 

@@ -365,6 +365,23 @@
         "type": "github"
       }
     },
+    "nvim-web-devicons": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1742215722,
+        "narHash": "sha256-JKOvXJr1s2lpP5aeRE7OC3IeOrF5uJxg/Tal3eScd6g=",
+        "owner": "nvim-tree",
+        "repo": "nvim-web-devicons",
+        "rev": "4c3a5848ee0b09ecdea73adcd2a689190aeb728c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-tree",
+        "ref": "master",
+        "repo": "nvim-web-devicons",
+        "type": "github"
+      }
+    },
     "parrot-nvim": {
       "flake": false,
       "locked": {
@@ -446,6 +463,7 @@
         "nixpkgs-24-05": "nixpkgs-24-05",
         "nixpkgs-24-11": "nixpkgs-24-11",
         "nomodoro": "nomodoro",
+        "nvim-web-devicons": "nvim-web-devicons",
         "parrot-nvim": "parrot-nvim",
         "sops-nix": "sops-nix",
         "spaceport-nvim": "spaceport-nvim",

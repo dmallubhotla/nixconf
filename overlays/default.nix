@@ -27,6 +27,11 @@ let
         name = "parrot-nvim";
       };
 
+      nvimWebDeviconPlugin = prev.vimUtils.buildVimPlugin {
+        src = inputs.nvim-web-devicons;
+        name = "nvim-web-devicons";
+      };
+
       zshCompletionPlugin = {
         name = "zsh-completions";
         src = inputs.zsh-completions;
@@ -38,6 +43,7 @@ let
         spaceport-nvim = spaceportNvimPlugin;
         nomodoro = nomodoroNvimPlugin;
         parrot-nvim = parrotNvimPlugin;
+        nvim-web-devicons = nvimWebDeviconPlugin;
       };
 
       customZshPlugins = {

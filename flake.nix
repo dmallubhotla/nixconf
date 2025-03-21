@@ -43,6 +43,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Custom Vim Plugins
     cmp-vimtex = {
       url = "github:micangl/cmp-vimtex/master";
       flake = false;
@@ -59,6 +60,11 @@
 
     nomodoro = {
       url = "github:dbinagi/nomodoro/main";
+      flake = false;
+    };
+
+    nvim-web-devicons = {
+      url = "github:nvim-tree/nvim-web-devicons/master";
       flake = false;
     };
 
