@@ -147,7 +147,7 @@ in
       cmp_luasnip
       nvim-lspconfig
 
-	  # vim-vinegar
+      # vim-vinegar
       oil-nvim
 
       wiki-vim

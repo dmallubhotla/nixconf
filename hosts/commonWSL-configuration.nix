@@ -1,6 +1,7 @@
 {
   pkgs,
   customPackageOverlay,
+  withDocker,
   stateVersion,
   modulesPath,
   hostname,
@@ -99,5 +100,10 @@ in
   services.tailscale.port = 62532;
 
   time.timeZone = "America/Chicago";
+
+  virtualisation.docker.rootless = pkgs.lib.mkIf withDocker {
+    enable = true;
+    setSocketVariable = true;
+  };
 
 }

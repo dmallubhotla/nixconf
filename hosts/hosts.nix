@@ -25,6 +25,7 @@ in
     specialArgs = {
       inherit customPackageOverlay;
       inherit nixpkgs-unstable;
+      withDocker = false;
     };
     modules = [
       ./maxos/configuration.nix
@@ -54,6 +55,7 @@ in
       inherit nixpkgs-unstable;
       hostname = "nixosWalrus";
       stateVersion = "24.11";
+      withDocker = false;
     };
     modules = [
       ./commonWSL-configuration.nix
@@ -87,6 +89,7 @@ in
       inherit nixpkgs-unstable;
       hostname = "nixosWSL";
       stateVersion = "22.05";
+      withDocker = false;
     };
     modules = [
       ./commonWSL-configuration.nix
@@ -120,6 +123,7 @@ in
       inherit nixpkgs-unstable;
       hostname = "nixosEggYoke";
       stateVersion = "22.05";
+      withDocker = true;
     };
     modules = [
       ./commonWSL-configuration.nix
