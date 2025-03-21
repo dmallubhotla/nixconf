@@ -101,9 +101,20 @@ in
 
   time.timeZone = "America/Chicago";
 
-  virtualisation.docker.rootless = pkgs.lib.mkIf withDocker {
+  virtualisation.docker = pkgs.lib.mkIf withDocker {
     enable = true;
-    setSocketVariable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
+  security.wrappers = pkgs.lib.mkIf withDocker {
+    docker-rootlesskit = {
+      owner = "root";
+      group = "root";
+      capabilities = "cap_net_bind_service+ep";
+      source = "${pkgs.rootlesskit}/bin/rootlesskit";
+    };
   };
 
 }
