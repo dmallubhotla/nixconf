@@ -1,5 +1,5 @@
 name: Test templates, puts into cache
-run-name: ${{ gitea.actor }} checking our nix flake 
+run-name: ${{ gitea.actor }} checking our nix flake
 on: [push]
 jobs:
   nix:
