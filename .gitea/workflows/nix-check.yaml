@@ -6,8 +6,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        # os: [ubuntu-latest, nix-runner]
-        os: [nix-runner]
+        os: [ubuntu-latest, nix-runner]
     runs-on: ${{ matrix.os }}
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ gitea.event_name }} event."
