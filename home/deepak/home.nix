@@ -243,12 +243,19 @@ in
   programs.tmux = {
     enable = true;
     historyLimit = 100000;
+    clock24 = true;
+    keyMode = "vi";
+    prefix = "M-,";
     plugins = [
       pkgs.tmuxPlugins.vim-tmux-navigator
       pkgs.tmuxPlugins.better-mouse-mode
       pkgs.tmuxPlugins.sensible
-      pkgs.tmuxPlugins.weather
+      # pkgs.tmuxPlugins.tmux-powerline
+
+      pkgs.tmuxPlugins.power-theme
     ];
+    extraConfig = ''
+    '';
   };
 
   sops = {
