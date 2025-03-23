@@ -147,6 +147,7 @@ in
       cmp_luasnip
       nvim-lspconfig
 
+      vim-tmux-navigator
       # vim-vinegar
       oil-nvim
 
@@ -237,6 +238,17 @@ in
     initExtra = ''
       			eval "$(${pkgs.direnv}/bin/direnv hook zsh)"
       		'';
+  };
+
+  programs.tmux = {
+    enable = true;
+    historyLimit = 100000;
+    plugins = [
+      pkgs.tmuxPlugins.vim-tmux-navigator
+      pkgs.tmuxPlugins.better-mouse-mode
+      pkgs.tmuxPlugins.sensible
+      pkgs.tmuxPlugins.weather
+    ];
   };
 
   sops = {
