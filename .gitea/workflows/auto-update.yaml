@@ -1,7 +1,7 @@
 name: Bump flake.lock
 on:
   schedule:
-    - cron: "0 6 * * *"
+    - cron: "41 4 * * *"
   workflow_dispatch:
 jobs:
   build:
@@ -12,6 +12,7 @@ jobs:
           fetch-depth: 0
       - uses: cachix/install-nix-action@v20
       - run: nix flake update
+      - run: nix flake check
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Bump flake.lock
