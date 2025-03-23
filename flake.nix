@@ -85,11 +85,6 @@
       self,
       systems,
       nixpkgs,
-      homeManager,
-      NixOS-WSL,
-      NixOS-WSL-2405,
-      nixpkgs-24-05,
-      homeManager-24-05,
       cmp-vimtex,
       spaceport-nvim,
       nomodoro,
@@ -113,15 +108,7 @@
     {
       nixosConfigurations = (
         import ./hosts/hosts.nix {
-          inherit nixpkgs;
-          inherit homeManager;
           inherit inputs;
-          inherit (nixpkgs) lib;
-          inherit NixOS-WSL;
-          inherit NixOS-WSL-2405;
-          inherit nixpkgs-24-05;
-          inherit homeManager-24-05;
-          inherit cmp-vimtex;
           inherit customPackageOverlay;
         }
       );
