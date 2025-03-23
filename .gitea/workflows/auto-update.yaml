@@ -31,6 +31,7 @@ jobs:
         with:
           commit_message: Bump flake.lock
           branch: flake-update
+          push_options: '--force'
           commit_options: '--no-verify --signoff'
           file_pattern: flake.lock
           commit_user_name: Flake Bot # defaults to "GitHub Actions"
