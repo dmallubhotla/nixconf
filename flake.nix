@@ -4,24 +4,10 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
-    treefmt-nix.url = "github:numtide/treefmt-nix";
-
-    sops-nix.url = "github:Mic92/sops-nix";
-
-    nixpkgs-24-05.url = "github:NixOS/nixpkgs/nixos-24.05";
     nixpkgs-24-11.url = "github:NixOS/nixpkgs/nixos-24.11";
 
-    # only use this for Maxos, prefer specifying version explicitly
-    homeManager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    homeManager-24-05 = {
-      url = "github:nix-community/home-manager/release-24.05";
-      inputs.nixpkgs.follows = "nixpkgs-24-05";
-    };
+    treefmt-nix.url = "github:numtide/treefmt-nix";
+    sops-nix.url = "github:Mic92/sops-nix";
 
     NixOS-WSL-2411 = {
       url = "github:nix-community/NixOS-WSL";
@@ -31,16 +17,6 @@
     homeManager-24-11 = {
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs-24-11";
-    };
-
-    NixOS-WSL-2405 = {
-      url = "github:nix-community/NixOS-WSL";
-      inputs.nixpkgs.follows = "nixpkgs-24-05";
-    };
-
-    NixOS-WSL = {
-      url = "github:nix-community/NixOS-WSL";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Custom Vim Plugins
