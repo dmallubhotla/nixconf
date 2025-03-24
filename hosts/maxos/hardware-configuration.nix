@@ -6,7 +6,8 @@
   lib,
   modulesPath,
   ...
-}: {
+}:
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -18,19 +19,20 @@
     "usbhid"
     "sd_mod"
   ];
-  boot.initrd.kernelModules = [];
+  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [
     "kvm-intel"
     "wl"
   ];
-  boot.extraModulePackages = [config.boot.kernelPackages.broadcom_sta];
+  boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/6d9433c6-2dab-4936-a924-d0a205381189";
     fsType = "ext4";
   };
 
-  boot.initrd.luks.devices."nixosroot".device = "/dev/disk/by-uuid/3b0d4c02-d9e5-44ab-8461-30797547ed70";
+  boot.initrd.luks.devices."nixosroot".device =
+    "/dev/disk/by-uuid/3b0d4c02-d9e5-44ab-8461-30797547ed70";
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/67E3-17ED";
@@ -38,7 +40,7 @@
   };
 
   swapDevices = [
-    {device = "/dev/disk/by-uuid/1e0f60e9-cf43-451d-8466-81887f27c7cf";}
+    { device = "/dev/disk/by-uuid/1e0f60e9-cf43-451d-8466-81887f27c7cf"; }
   ];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";

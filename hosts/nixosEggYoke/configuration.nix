@@ -3,9 +3,11 @@
   customPackageOverlay,
   modulesPath,
   ...
-}: let
-  custom-fonts = import ../../fonts {inherit pkgs;};
-in {
+}:
+let
+  custom-fonts = import ../../fonts { inherit pkgs; };
+in
+{
   imports = [
     "${modulesPath}/profiles/minimal.nix"
   ];

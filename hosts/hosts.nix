@@ -1,18 +1,21 @@
 {
   inputs,
   customPackageOverlay,
-  # ...
-}: let
+# ...
+}:
+let
   linuxSystem = "x86_64-linux";
   lib = inputs.nixpkgs.lib;
   nixpkgs-unstable = import inputs.nixpkgs {
     system = linuxSystem;
-    config.allowUnfreePredicate = pkg:
+    config.allowUnfreePredicate =
+      pkg:
       builtins.elem (lib.getName pkg) [
         "claude-code"
       ];
   };
-in {
+in
+{
   "maxos" = inputs.nixpkgs-24-11.lib.nixosSystem {
     system = linuxSystem;
     specialArgs = {
@@ -33,7 +36,7 @@ in {
         };
         home-manager.useGlobalPkgs = true;
         home-manager.users.deepak = {
-          imports = [../home/deepak/home.nix];
+          imports = [ ../home/deepak/home.nix ];
         };
         home-manager.sharedModules = [
           inputs.sops-nix.homeManagerModules.sops
@@ -95,7 +98,7 @@ in {
         };
         home-manager.useGlobalPkgs = true;
         home-manager.users.deepak = {
-          imports = [../home/deepak/home.nix];
+          imports = [ ../home/deepak/home.nix ];
         };
         home-manager.sharedModules = [
           inputs.sops-nix.homeManagerModules.sops

@@ -1,4 +1,5 @@
-{config}: ''
+{ config }:
+''
   inoremap jj <Esc>
   inoremap kk <Esc>
 

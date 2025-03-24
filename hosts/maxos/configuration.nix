@@ -5,9 +5,11 @@
   pkgs,
   customPackageOverlay,
   ...
-}: let
-  custom-fonts = import ../../fonts {inherit pkgs;};
-in {
+}:
+let
+  custom-fonts = import ../../fonts { inherit pkgs; };
+in
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -150,7 +152,7 @@ in {
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
-  networking.firewall.allowedUDPPorts = [62532];
+  networking.firewall.allowedUDPPorts = [ 62532 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 

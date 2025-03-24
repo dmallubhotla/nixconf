@@ -6,9 +6,11 @@
   modulesPath,
   hostname,
   ...
-}: let
-  custom-fonts = import ../fonts {inherit pkgs;};
-in {
+}:
+let
+  custom-fonts = import ../fonts { inherit pkgs; };
+in
+{
   imports = [
     "${modulesPath}/profiles/minimal.nix"
   ];
@@ -38,8 +40,8 @@ in {
   '';
 
   nix.settings = {
-    trusted-substituters = ["http://attic.baklava"];
-    trusted-public-keys = ["systems:tvbHIThn7MAwvgMSiYR3ULVlL6cBrA40afqGuextnNQ="];
+    trusted-substituters = [ "http://attic.baklava" ];
+    trusted-public-keys = [ "systems:tvbHIThn7MAwvgMSiYR3ULVlL6cBrA40afqGuextnNQ=" ];
   };
 
   nixpkgs.overlays = [
