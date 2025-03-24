@@ -255,6 +255,7 @@ in
       pkgs.tmuxPlugins.power-theme
     ];
     extraConfig = ''
+      		set-option -g status-position top
     '';
   };
 
