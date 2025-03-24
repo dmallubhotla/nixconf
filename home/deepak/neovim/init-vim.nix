@@ -1,5 +1,4 @@
-{ config }:
-''
+{config}: ''
   inoremap jj <Esc>
   inoremap kk <Esc>
 
@@ -161,7 +160,7 @@
   			## Summary of suggestions:
 
   			{a brief list of spelling, grammar and punctuation errors, with brief snippets of the original text so I can search and find each change, followed by summaries of what types of changes are in the slightly better and ideal versions}
-  			
+
   			## Corrected text:
 
   			{corrected text, or say "NO_CORRECTIONS_NEEDED" instead if there are no corrections made}

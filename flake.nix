@@ -1,5 +1,4 @@
 {
-
   description = "Configuration v1";
 
   inputs = {
@@ -53,47 +52,54 @@
       url = "git+ssh://git@gitea.deepak.science:2222/deepak/claude_mcp_bundle.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
   };
 
-  outputs =
-    {
-      self,
-      systems,
-      nixpkgs,
-      cmp-vimtex,
-      spaceport-nvim,
-      nomodoro,
-      ...
-    }@inputs:
-    let
-      customPackageOverlay =
-        (import ./overlays/default.nix {
-          inherit cmp-vimtex;
-          inherit spaceport-nvim;
-          inherit inputs;
-          inherit nomodoro;
-          parrot-nvim = inputs.parrot-nvim;
-        }).overlay;
-      # Small tool to iterate over each systems
-      eachSystem = f: nixpkgs.lib.genAttrs (import systems) (system: f nixpkgs.legacyPackages.${system});
+  outputs = {
+    self,
+    systems,
+    nixpkgs,
+    cmp-vimtex,
+    spaceport-nvim,
+    nomodoro,
+    ...
+  } @ inputs: let
+    customPackageOverlay =
+      (import ./overlays/default.nix {
+        inherit cmp-vimtex;
+        inherit spaceport-nvim;
+        inherit inputs;
+        inherit nomodoro;
+        parrot-nvim = inputs.parrot-nvim;
+      })
+      .overlay;
+    # Small tool to iterate over each systems
+    eachSystem = f: nixpkgs.lib.genAttrs (import systems) (system: f nixpkgs.legacyPackages.${system});
 
-      # Eval the treefmt modules from ./treefmt.nix
-      treefmtEval = eachSystem (pkgs: inputs.treefmt-nix.lib.evalModule pkgs ./treefmt.nix);
-    in
-    {
-      nixosConfigurations = (
-        import ./hosts/hosts.nix {
-          inherit inputs;
-          inherit customPackageOverlay;
-        }
-      );
+    # Eval the treefmt modules from ./treefmt.nix
+    treefmtEval = eachSystem (pkgs: inputs.treefmt-nix.lib.evalModule pkgs ./treefmt.nix);
+  in {
+    nixosConfigurations = (
+      import ./hosts/hosts.nix {
+        inherit inputs;
+        inherit customPackageOverlay;
+      }
+    );
 
-      formatter = eachSystem (pkgs: treefmtEval.${pkgs.system}.config.build.wrapper);
-      # for `nix flake check`
-      checks = eachSystem (pkgs: {
-        formatting = treefmtEval.${pkgs.system}.config.build.check self;
-      });
+    formatter = eachSystem (pkgs: treefmtEval.${pkgs.system}.config.build.wrapper);
+    # for `nix flake check`
+    checks = eachSystem (pkgs: {
+      formatting = treefmtEval.${pkgs.system}.config.build.check self;
+    });
 
-    };
+    devShells = eachSystem (pkgs: {
+      default = pkgs.mkShell {
+        buildInputs = with pkgs; [
+          kubernetes-helm
+          kubectl
+          jq
+          stern
+        ];
+      };
+    });
+  };
 }

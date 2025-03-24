@@ -3,15 +3,11 @@
   customPackageOverlay,
   modulesPath,
   ...
-}:
-
-let
-  custom-fonts = import ../../fonts { inherit pkgs; };
-in
-{
+}: let
+  custom-fonts = import ../../fonts {inherit pkgs;};
+in {
   imports = [
     "${modulesPath}/profiles/minimal.nix"
-
   ];
 
   wsl = {
@@ -28,7 +24,6 @@ in
     nativeSystemd = true;
 
     wslConf.interop.appendWindowsPath = false;
-
   };
 
   networking.hostName = "nixosWSL"; # Define your hostname.
@@ -90,5 +85,4 @@ in
 
   # Optional (default: 41641):
   services.tailscale.port = 62532;
-
 }

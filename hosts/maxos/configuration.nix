@@ -1,13 +1,13 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ pkgs, customPackageOverlay, ... }:
-
-let
-  custom-fonts = import ../../fonts { inherit pkgs; };
-in
 {
+  pkgs,
+  customPackageOverlay,
+  ...
+}: let
+  custom-fonts = import ../../fonts {inherit pkgs;};
+in {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -150,7 +150,7 @@ in
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
-  networking.firewall.allowedUDPPorts = [ 62532 ];
+  networking.firewall.allowedUDPPorts = [62532];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
@@ -161,5 +161,4 @@ in
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "20.09"; # Did you read the comment?
-
 }

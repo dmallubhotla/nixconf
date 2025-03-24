@@ -1,8 +1,4 @@
-{
-  pkgs ? import <nixpkgs> { },
-}:
-
-let
+{pkgs ? import <nixpkgs> {}}: let
   custom-fonts = pkgs.stdenvNoCC.mkDerivation {
     pname = "input";
     version = "1.0.2";
@@ -20,7 +16,6 @@ let
       description = "Input DJR font";
     };
   };
-in
-{
+in {
   inherit custom-fonts;
 }
