@@ -243,6 +243,7 @@ in
     historyLimit = 100000;
     clock24 = true;
     keyMode = "vi";
+    mouse = true;
     prefix = "M-,";
     plugins = [
       pkgs.tmuxPlugins.vim-tmux-navigator
