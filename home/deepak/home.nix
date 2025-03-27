@@ -39,7 +39,7 @@ in
       pkgs.sops
       pkgs.age
       pkgs.ydiff
-      pkgs.xclip
+      pkgs.xsel
       pkgs.delta
 
       pkgs-unstable.claude-code
@@ -258,10 +258,11 @@ in
       set-option -g status-position top
       unbind '"'
       unbind %
-      set -s copy-command 'xclip -i -sel pri'
+      set -s copy-command 'xsel -bi'
       bind -N "Horizontal split"  -T prefix | split-window -h
       bind -N "Vertical split"    -T prefix - split-window -v
       bind -N "Enter copy mode"   -T prefix Space copy-mode
+      bind -N "Load buffer from xsel and paste" -T prefix C-p run "xsel -ob | tmux load-buffer - ; tmux paste-buffer"
       set -g escape-time 1
       bind -N "Leave copy mode" -T copy-mode-vi Escape send-keys -X cancel
       bind -N "Leave copy mode" -T copy-mode-vi y      send -X copy-pipe
