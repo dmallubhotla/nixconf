@@ -39,6 +39,7 @@ in
       pkgs.sops
       pkgs.age
       pkgs.ydiff
+      pkgs.xclip
       pkgs.delta
 
       pkgs-unstable.claude-code
@@ -255,6 +256,17 @@ in
     ];
     extraConfig = ''
       set-option -g status-position top
+      unbind '"'
+      unbind %
+      set -s copy-command 'xclip -i -sel pri'
+      bind -N "Horizontal split"  -T prefix | split-window -h
+      bind -N "Vertical split"    -T prefix - split-window -v
+      bind -N "Enter copy mode"   -T prefix Space copy-mode
+      set -g escape-time 1
+      bind -N "Leave copy mode" -T copy-mode-vi Escape send-keys -X cancel
+      bind -N "Leave copy mode" -T copy-mode-vi y      send -X copy-pipe
+      bind -N "Selection toggle" -T copy-mode-vi Space  if -F "#{selection_present}" { send -X clear-selection } { send -X begin-selection }
+      bind -N "Copy and leave copy-mode" -T copy-mode-vi Enter  send -X copy-pipe-and-cancel
     '';
   };
 
