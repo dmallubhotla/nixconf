@@ -40,6 +40,7 @@ in
   '';
 
   nix.settings = {
+    trusted-users = [ "root" "@wheel" ];
     trusted-substituters = [ "http://attic.baklava" ];
     trusted-public-keys = [ "systems:tvbHIThn7MAwvgMSiYR3ULVlL6cBrA40afqGuextnNQ=" ];
   };
