@@ -26,6 +26,7 @@ in
       pkgs.ripgrep
       pkgs.just
       pkgs.chafa
+      pkgs.poppler_utils
       pkgs.tdf
       pkgs.viu
 
