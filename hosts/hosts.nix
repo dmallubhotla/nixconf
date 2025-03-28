@@ -55,7 +55,8 @@ in
     };
     modules = [
       (
-        {...}:{
+        { ... }:
+        {
           nix.registry.nixpkgs.flake = inputs.nixpkgs-24-11;
         }
       )
@@ -93,7 +94,8 @@ in
     };
     modules = [
       (
-        {...}:{
+        { ... }:
+        {
           nix.registry.nixpkgs.flake = inputs.nixpkgs-24-11;
         }
       )

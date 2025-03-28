@@ -140,6 +140,8 @@ in
       nvim-treesitter
       telescope-fzf-native-nvim
       telescope-file-browser-nvim
+      telescope-media-files-nvim
+      telescope-symbols-nvim
       # need fzf for parrot
       fzf-lua
       ctrlp-vim
