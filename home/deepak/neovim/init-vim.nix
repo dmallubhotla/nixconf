@@ -64,7 +64,7 @@
   -- load file browser and telescope
   ${builtins.readFile ./telescope.lua}
 
-  ${builtins.readFile ./spaceport.lua}
+  -- $ --{builtins.readFile ./spaceport.lua}
 
   -- color scheme
   require("rose-pine").setup({})

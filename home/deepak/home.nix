@@ -25,6 +25,9 @@ in
       pkgs.fd
       pkgs.ripgrep
       pkgs.just
+      pkgs.chafa
+      pkgs.tdf
+      pkgs.viu
 
       # cli markdown tool
       pkgs.glow
@@ -178,7 +181,7 @@ in
 
       # custom plugins from flakes
       pkgs.customVimPlugins.cmp-vimtex
-      pkgs.customVimPlugins.spaceport-nvim
+      # pkgs.customVimPlugins.spaceport-nvim
       pkgs.customVimPlugins.nomodoro
       pkgs.customVimPlugins.parrot-nvim
       pkgs.customVimPlugins.nvim-web-devicons
@@ -259,6 +262,7 @@ in
       unbind '"'
       unbind %
       set -s copy-command 'xsel -bi'
+      bind -N "Change layout"  -T prefix % next-layout
       bind -N "Horizontal split"  -T prefix | split-window -h
       bind -N "Vertical split"    -T prefix - split-window -v
       bind -N "Enter copy mode"   -T prefix Space copy-mode
