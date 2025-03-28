@@ -54,6 +54,11 @@ in
       withDocker = false;
     };
     modules = [
+      (
+        {...}:{
+          nix.registry.nixpkgs.flake = inputs.nixpkgs-24-11;
+        }
+      )
       ./commonWSL-configuration.nix
       inputs.sops-nix.nixosModules.sops
       inputs.homeManager-24-11.nixosModules.home-manager
@@ -87,6 +92,11 @@ in
       withDocker = true;
     };
     modules = [
+      (
+        {...}:{
+          nix.registry.nixpkgs.flake = inputs.nixpkgs-24-11;
+        }
+      )
       ./commonWSL-configuration.nix
       inputs.sops-nix.nixosModules.sops
       inputs.homeManager-24-11.nixosModules.home-manager
