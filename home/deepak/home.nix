@@ -37,7 +37,7 @@ in
       # lsps
       pkgs.nil
       # pkgs.nodePackages.pyright
-      # pkgs.pyright
+      pkgs.pyright
 
       pkgs.thefuck
       pkgs.fzf
