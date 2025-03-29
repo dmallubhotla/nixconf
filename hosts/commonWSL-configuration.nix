@@ -31,6 +31,12 @@ in
     wslConf.interop.appendWindowsPath = false;
   };
 
+  documentation = {
+    dev.enable = true;
+    man.generateCaches = true;
+    nixos.enable = true;
+  };
+
   networking.hostName = hostname; # Define your hostname.
 
   # Enable nix flakes
