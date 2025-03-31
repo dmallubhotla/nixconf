@@ -299,7 +299,9 @@ in
       bind -N "Leave copy mode" -T copy-mode-vi y      send -X copy-pipe
       bind -N "Selection toggle" -T copy-mode-vi Space  if -F "#{selection_present}" { send -X clear-selection } { send -X begin-selection }
       bind -N "Copy and leave copy-mode" -T copy-mode-vi Enter  send -X copy-pipe-and-cancel
-      set-option -g status-right "#[fg=#3a3a3a]#[fg=#ffb86c,bg=#3a3a3a]  %T #[fg=#ffb86c,bg=#3a3a3a]#[fg=#262626,bg=#ffb86c]  %F "
+      set-option -g status-right "#[fg=#ffb86c]#[fg=#262626,bg=#ffb86c]#(cat ${config.xdg.cacheHome}/weather/short-weather.txt) #[fg=#3a3a3a,bg=#ffb86c]#[fg=#ffb86c,bg=#3a3a3a]  %T #[fg=#ffb86c,bg=#3a3a3a]#[fg=#262626,bg=#ffb86c]  %F "
+
+
     '';
   };
 
@@ -325,7 +327,6 @@ in
     };
     Service = {
       Type = "oneshot";
-      # ExecStart = "${pkgs.isync}/bin/mbsync -a";
       ExecStart = pkgs.writeShellScript "cache-weather-script" ''
         set -euxo pipefail
         # PATH=$PATH:${lib.makeBinPath [ pkgs.wego ]}
@@ -334,10 +335,8 @@ in
         # mkdir -p ${config.xdg.cacheHome}/weather/
         ${pkgs.wego}/bin/wego --help
         ${pkgs.wego}/bin/wego -f json > ${config.xdg.cacheHome}/weather/weather-cache.json
+        ${pkgs.jq}/bin/jq -r '. | {location: .Location, current_tempc: .Current.TempC, current_tempf: ((1.8 * .Current.TempC + 32) |round), desc: .Current.Desc} | "\(.location): \(.current_tempf) F \(.desc)"' ~/.cache/weather/weather-cache.json > ${config.xdg.cacheHome}/weather/short-weather.txt
       '';
-      # ExecStartPost = "${notmuch-apply}/bin/notmuch-apply";
-      # we want notmuch applied even if there was a problem
-      # SuccessExitStatus = "0 1";
     };
   };
 
