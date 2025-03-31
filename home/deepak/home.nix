@@ -31,6 +31,7 @@ in
       pkgs.tdf
       pkgs.viu
 
+      pkgs.wego
       # cli markdown tool
       pkgs.glow
 
@@ -258,7 +259,28 @@ in
       pkgs.tmuxPlugins.better-mouse-mode
       pkgs.tmuxPlugins.sensible
       # pkgs.tmuxPlugins.tmux-powerline
-
+      # {
+      #   plugin = pkgs.tmuxPlugins.dracula;
+      #   extraConfig = ''
+      #     set -g @dracula-show-battery true
+      #     set -g @dracula-show-powerline true
+      #     set -g @dracula-refresh-rate 10
+      #     set -g @dracula-colors "
+      #       # simple catppuccin Color Pallette
+      #       pink='#cba6f7'
+      #       orange='#fab387'
+      #       yellow='#f9e2af'
+      #       green='#a6e3a1'
+      #       cyan='#89dceb'
+      #       light_purple='#b4befe'
+      #       white='#cdd6f4'
+      #       dark_gray='#313244'
+      #       red='#f38ba8'
+      #       gray='#45475a'
+      #       dark_purple='#6c7086'
+      #     "
+      #   '';
+      # }
       pkgs.tmuxPlugins.power-theme
     ];
     extraConfig = ''
@@ -276,6 +298,7 @@ in
       bind -N "Leave copy mode" -T copy-mode-vi y      send -X copy-pipe
       bind -N "Selection toggle" -T copy-mode-vi Space  if -F "#{selection_present}" { send -X clear-selection } { send -X begin-selection }
       bind -N "Copy and leave copy-mode" -T copy-mode-vi Enter  send -X copy-pipe-and-cancel
+      set-option -g status-right "#[fg=#3a3a3a]#[fg=#ffb86c,bg=#3a3a3a]  %T #[fg=#ffb86c,bg=#3a3a3a]#[fg=#262626,bg=#ffb86c]  %F "
     '';
   };
 
