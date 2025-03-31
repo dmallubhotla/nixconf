@@ -30,6 +30,7 @@ in
       pkgs.poppler_utils
       pkgs.tdf
       pkgs.viu
+      pkgs.jq
 
       pkgs.wego
       # cli markdown tool
