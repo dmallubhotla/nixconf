@@ -316,4 +316,42 @@ in
       newkey = { };
     };
   };
+
+
+  systemd.user.services.cacheweather = {
+    Unit = {
+      Description = "cache weather data";
+    };
+    Service = {
+      Type = "oneshot";
+      # ExecStart = "${pkgs.isync}/bin/mbsync -a";
+      ExecStart = pkgs.writeShellScript "cache-weather-script" ''
+        set -euxo pipefail
+        # PATH=$PATH:${lib.makeBinPath [ pkgs.wego ]}
+        echo "`date`"
+        echo "that's the date"
+        # mkdir -p ${config.xdg.cacheHome}/weather/
+        ${pkgs.wego}/bin/wego --help
+        ${pkgs.wego}/bin/wego -f json > ${config.xdg.cacheHome}/weather/weather-cache.json
+      '';
+      # ExecStartPost = "${notmuch-apply}/bin/notmuch-apply";
+      # we want notmuch applied even if there was a problem
+      # SuccessExitStatus = "0 1";
+    };
+  };
+
+  systemd.user.timers.cacheweather = {
+    Unit = {
+      Description = "cache weather data";
+    };
+    Timer = {
+      Unit = "cacheweather.service";
+      AccuracySec = "5s";
+      OnCalendar = "*:0/15";
+    };
+    Install = {
+      WantedBy = [ "timers.target" ];
+    };
+  };
+
 }
