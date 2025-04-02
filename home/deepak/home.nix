@@ -322,7 +322,6 @@ in
     };
   };
 
-
   systemd.user.services.cacheweather = {
     Unit = {
       Description = "cache weather data";
