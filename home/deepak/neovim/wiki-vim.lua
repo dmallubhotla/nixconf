@@ -1,4 +1,21 @@
-vim.g.wiki_root = "/home/deepak/wiki"
+-- vim.g.wiki_root = "/home/deepak/wiki"
+vim.g.wiki_root = vim.env.DPK_OBSIDIAN_DIR
+vim.g.wiki_journal = {
+	name = "100-daily",
+	date_format = {
+		daily = "%Y/%m/%Y-%m-%d",
+		weekly = "%Y/week_%V",
+		monthly = "%Y/%m/summary.md",
+	},
+}
+
+vim.g.wiki_select_method = {
+	-- pages = require("wiki.ui_select").pages,
+	pages = "wiki#fzf#pages",
+	tags = require("wiki.ui_select").tags,
+-- 	toc = require("wiki.ui_select").toc,
+-- 	links = require("wiki.ui_select").links,
+}
 
 local function find_wiki_path_for_file(filename)
 	-- recursively search for the file name in the wiki_root using ripgrep

@@ -160,6 +160,8 @@ in
       oil-nvim
 
       wiki-vim
+      # apparently these plugins can coexist
+      render-markdown-nvim
       vim-markdown
       cmp-buffer
       # vim-airline
