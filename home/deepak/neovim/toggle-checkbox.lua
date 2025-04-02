@@ -67,5 +67,4 @@ M.toggle = function()
 end
 
 vim.api.nvim_create_user_command("ToggleCheckbox", M.toggle, {})
-
-return M
+vim.api.nvim_set_keymap("n", "<leader>x", "<cmd>ToggleCheckbox<CR>", { noremap = true})

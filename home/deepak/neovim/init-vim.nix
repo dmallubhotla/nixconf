@@ -270,6 +270,6 @@
 
   ${builtins.readFile ./lualine.lua}
 
-  ${builtins.readFile ./toggle-checkboxes.lua}
+  ${builtins.readFile ./toggle-checkbox.lua}
   EOF
 ''
