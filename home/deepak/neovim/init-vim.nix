@@ -83,6 +83,10 @@
   vim.keymap.set('n', "[d", vim.diagnostic.goto_prev, { noremap = true, desc = "Previous diagnostic" })
   vim.keymap.set('n', "<leader>d", vim.diagnostic.open_float, { noremap = true, desc = "Open diagnostic" })
   vim.g.vim_markdown_folding_level = 2
+  vim.g.vim_markdown_math = 1
+  vim.g.vim_markdown_frontmatter = 1
+  vim.g.vim_markdown_strikethrough = 1
+  vim.g.vim_markdown_edit_url_in = 'vsplit'
   ${builtins.readFile ./wiki-vim.lua}
 
   vim.g.vimtex_fold_enabled = true
