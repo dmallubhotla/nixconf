@@ -302,8 +302,16 @@ in
       bind -N "Selection toggle" -T copy-mode-vi Space  if -F "#{selection_present}" { send -X clear-selection } { send -X begin-selection }
       bind -N "Copy and leave copy-mode" -T copy-mode-vi Enter  send -X copy-pipe-and-cancel
       set-option -g status-right "#[fg=#ffb86c]#[fg=#262626,bg=#ffb86c]#(cat ${config.xdg.cacheHome}/weather/short-weather.txt) #[fg=#3a3a3a,bg=#ffb86c]#[fg=#ffb86c,bg=#3a3a3a]  %T #[fg=#ffb86c,bg=#3a3a3a]#[fg=#262626,bg=#ffb86c]  %F "
+    '';
+  };
 
-
+  programs.newsboat = {
+    enable = true;
+    extraConfig = ''
+      urls-source "freshrss"
+      freshrss-url "https://freshrss.deepak.science/api/greader.php"
+      freshrss-login "deepak"
+      freshrss-passwordfile "${config.sops.secrets.freshrssapikey.path}"
     '';
   };
 
@@ -319,6 +327,7 @@ in
       };
       hello = { };
       newkey = { };
+      freshrssapikey = {};
     };
   };
 
