@@ -99,6 +99,23 @@
         "type": "github"
       }
     },
+    "mdt": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1687191858,
+        "narHash": "sha256-823Poh8vwhEAa6uJntDY7G2i/dCTzOffklhcPX8rgZM=",
+        "owner": "basilioss",
+        "repo": "mdt",
+        "rev": "8c8e47c43ae7dedc71285ecf28543ada8ebd1fdb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "basilioss",
+        "ref": "main",
+        "repo": "mdt",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1735554305,
@@ -286,6 +303,7 @@
         "claude-mcp-bundle": "claude-mcp-bundle",
         "cmp-vimtex": "cmp-vimtex",
         "homeManager-24-11": "homeManager-24-11",
+        "mdt": "mdt",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-24-11": "nixpkgs-24-11",
         "nomodoro": "nomodoro",

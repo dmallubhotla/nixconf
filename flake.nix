@@ -52,6 +52,12 @@
       url = "git+ssh://git@gitea.deepak.science:2222/deepak/claude_mcp_bundle.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    mdt = {
+      url = "github:basilioss/mdt/main";
+      flake = false;
+    };
+
   };
 
   outputs =
