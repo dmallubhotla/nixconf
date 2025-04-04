@@ -37,7 +37,8 @@ in
       pkgs.glow
 
       # lsps
-      pkgs.nil
+      # pkgs.nil
+      pkgs.nixd
       # pkgs.nodePackages.pyright
       pkgs.pyright
 

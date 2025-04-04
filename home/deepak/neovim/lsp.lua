@@ -43,5 +43,6 @@ cmp.setup({
 		end,
 	},
 })
-require("lspconfig").nil_ls.setup({})
+-- require("lspconfig").nil_ls.setup({})
 require("lspconfig").pyright.setup({})
+require("lspconfig").nixd.setup({})
