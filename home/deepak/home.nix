@@ -312,6 +312,49 @@ in
       freshrss-url "https://freshrss.deepak.science/api/greader.php"
       freshrss-login "deepak"
       freshrss-passwordfile "${config.sops.secrets.freshrssapikey.path}"
+
+
+      ## ## ## ## ## ## ##
+      ## ## Stolen from https://forums.freebsd.org/threads/newsboat-rss-reader-enable-vim-key-bindings.69448/
+      ## ##
+      ## ## Disabling the browser but could consider using w3m?
+      ## ##
+      ## ## ## ## ## ## ##
+      # general settings
+      auto-reload yes
+      max-items 50
+
+      # externel browser
+      # browser "/usr/local/bin/w3m %u"
+      # macro m set browser "/usr/local/bin/mpv %u"; open-in-browser ; set browser "/usr/local/bin/w3m %u"
+      # macro l set browser "/usr/local/bin/firefox %u"; open-in-browser ; set browser "/usr/local/bin/w3m %u"
+
+      # unbind keys
+      # unbind-key ENTER
+      unbind-key j
+      unbind-key k
+      unbind-key J
+      unbind-key K
+
+      # bind keys - vim style
+      bind-key j down
+      bind-key k up
+      # bind-key l open
+      # bind-key h quit
+
+      # solarized
+      color background         default   default
+      color listnormal         default   default
+      color listnormal_unread  default   default
+      color listfocus          black     cyan
+      color listfocus_unread   black     cyan
+      color info               default   black
+      color article            default   default
+
+      # highlights
+      highlight article "^(Title):.*$" blue default
+      highlight article "https?://[^ ]+" red default
+      highlight article "\\[image\\ [0-9]+\\]" green default
     '';
   };
 
