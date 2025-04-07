@@ -67,6 +67,7 @@ in
         home-manager.extraSpecialArgs = {
           withGUI = false;
           gitSigningKey = "8F904A3FC7021497";
+          obsidian_dir = "/mnt/d/applications/obsidian/vault01";
           inherit nixpkgs-unstable;
         };
         home-manager.useGlobalPkgs = true;

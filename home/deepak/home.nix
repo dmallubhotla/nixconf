@@ -81,6 +81,7 @@ in
   home.sessionVariables =
     let
       win_home_dir = specialArgs.win_home_dir or "/mnt/c/Users/Deepak";
+      obsidian_dir = specialArgs.obsidian_dir or "/mnt/c/Users/Deepak/Documents/vault01";
     in
     {
       # Namespace our own nixconf variables with DPK
@@ -90,7 +91,7 @@ in
       # Different per host
       #
       DPK_WIN_HOME_DIR = "${win_home_dir}";
-      DPK_OBSIDIAN_DIR = "/mnt/c/Users/Deepak/Documents/vault01";
+      DPK_OBSIDIAN_DIR = "${obsidian_dir}";
 
       # UV_PYTHON = "${default_python}";
     };
