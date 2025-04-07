@@ -20,7 +20,7 @@ cmp.setup({
 				end,
 			},
 		},
-		{ name = 'luasnip', option = { show_autosnippets = true } },
+		{ name = "luasnip", option = { show_autosnippets = true } },
 		-- { name = "luasnip" },
 		{ name = "vimtex" },
 	},
