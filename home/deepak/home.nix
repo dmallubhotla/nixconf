@@ -294,8 +294,9 @@ in
       unbind %
       set -s copy-command 'xsel -bi'
       bind -N "Change layout"  -T prefix % next-layout
-      bind -N "Horizontal split"  -T prefix | split-window -h
-      bind -N "Vertical split"    -T prefix - split-window -v
+      bind -N "Horizontal split"    -T prefix | split-window -h -c '#{pane_current_path}'
+      bind -N "Vertical split"      -T prefix - split-window -v -c '#{pane_current_path}'
+      bind -N "Create a new window" -T prefix c new-window -c '#{pane_current_path}'
       bind -N "Enter copy mode"   -T prefix Space copy-mode
       bind -N "Load buffer from xsel and paste" -T prefix C-p run "xsel -ob | tmux load-buffer - ; tmux paste-buffer"
       set -g escape-time 1
