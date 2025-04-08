@@ -298,7 +298,7 @@ in
       bind -N "Horizontal split"    -T prefix \ split-window -h -c '#{pane_current_path}'
       bind -N "Vertical split"      -T prefix - split-window -v -c '#{pane_current_path}'
       bind -N "Create a new window" -T prefix c new-window -c '#{pane_current_path}'
-      bind -N "Quick pane for obsidian todos" -T prefix . split-window -c $DPK_OBSIDIAN_DIR -h "vim todos.md" 
+      bind -N "Quick pane for obsidian todos" -T prefix . split-window -c $DPK_OBSIDIAN_DIR -h "vim todos.md"
       bind -N "Enter copy mode"   -T prefix Space copy-mode
       bind -N "Load buffer from xsel and paste" -T prefix C-p run "xsel -ob | tmux load-buffer - ; tmux paste-buffer"
       set -g escape-time 1
