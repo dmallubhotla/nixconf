@@ -295,7 +295,7 @@ in
       set -s copy-command 'xsel -bi'
       bind -N "Change layout"  -T prefix % next-layout
       bind -N "Horizontal split"    -T prefix | split-window -h -c '#{pane_current_path}'
-      bind -N "Horizontal split"    -T prefix \ split-window -h -c '#{pane_current_path}'
+      bind -N "Horizontal split"    -T prefix \\ split-window -h -c '#{pane_current_path}'
       bind -N "Vertical split"      -T prefix - split-window -v -c '#{pane_current_path}'
       bind -N "Create a new window" -T prefix c new-window -c '#{pane_current_path}'
       bind -N "Quick pane for obsidian todos" -T prefix . split-window -c $DPK_OBSIDIAN_DIR -h "vim todos.md"
