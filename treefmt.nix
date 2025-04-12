@@ -18,6 +18,9 @@
   programs.nixfmt.enable = true;
 
   programs.shellcheck.enable = true;
+  settings.formatter.shellcheck = {
+    excludes = [ "*.envrc*" ];
+  };
 
   programs.shfmt.enable = true;
   settings.formatter.shfmt.indent_size = 0;
