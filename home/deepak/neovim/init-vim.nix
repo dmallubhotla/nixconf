@@ -76,7 +76,7 @@
 
   require('flash').setup()
   vim.keymap.set('n', "<leader>ft", function() require("flash").toggle() end, {desc = "Toggle flash.nvim search", noremap = true})
-
+  require('guess-indent').setup {}
   require('which-key').setup({})
   ${builtins.readFile ./lsp.lua}
   vim.keymap.set('n', "]d", vim.diagnostic.goto_next, { noremap = true, desc = "Next diagnostic" })

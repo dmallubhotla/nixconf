@@ -157,6 +157,8 @@ in
       cmp_luasnip
       nvim-lspconfig
 
+      guess-indent-nvim
+
       vim-tmux-navigator
       # vim-vinegar
       oil-nvim
