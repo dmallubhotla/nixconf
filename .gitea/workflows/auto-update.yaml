@@ -24,7 +24,14 @@ jobs:
           # known_hosts: ${{ secrets.SSH_GITEA_KNOWN_HOSTS }}
           #- name: Fix SSH key
           # run: sed -i 's/\r$//g' /root/.ssh/gitea_action
-      - uses: cachix/install-nix-action@v20
+      - uses: cachix/install-nix-action@v31
+        name: Install Nix
+      - name: Setup Attic Cache
+        uses: ryanccn/attic-action@3354ae812cb672e1381be4c7914204c44db53866
+        with:
+          endpoint: ${{ secrets.ATTIC_ENDPOINT }}
+          cache: ${{ secrets.ATTIC_CACHE }}
+          token: ${{ secrets.ATTIC_TOKEN }}
       - run: nix flake update
       - run: nix flake check
       - uses: stefanzweifel/git-auto-commit-action@v4
