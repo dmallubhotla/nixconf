@@ -256,6 +256,7 @@ in
 
   programs.tmux = {
     enable = true;
+    package = pkgs-unstable.tmux;
     historyLimit = 100000;
     clock24 = true;
     keyMode = "vi";
