@@ -164,38 +164,6 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
-      "locked": {
-        "lastModified": 1744868846,
-        "narHash": "sha256-5RJTdUHDmj12Qsv7XOhuospjAjATNiTMElplWnJE9Hs=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "ebe4301cbd8f81c4f8d3244b3632338bbeb6d49c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_4": {
-      "locked": {
-        "lastModified": 1747958103,
-        "narHash": "sha256-qmmFCrfBwSHoWw7cVK4Aj+fns+c54EBP8cGqp/yK410=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "fe51d34885f7b5e3e7b59572796e1bcb427eccb1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nomodoro": {
       "flake": false,
       "locked": {
@@ -227,23 +195,6 @@
         "owner": "nvim-tree",
         "ref": "master",
         "repo": "nvim-web-devicons",
-        "type": "github"
-      }
-    },
-    "parrot-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1748727208,
-        "narHash": "sha256-HlZF5HvbivH6Kh5AgoZfO+q/d5KF1vU37fudu095LuE=",
-        "owner": "frankroeder",
-        "repo": "parrot.nvim",
-        "rev": "378d7706a392c06eabe0ddbbdc6ed5fa57ca4db0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "frankroeder",
-        "ref": "main",
-        "repo": "parrot.nvim",
         "type": "github"
       }
     },
@@ -308,7 +259,6 @@
         "nixpkgs-24-11": "nixpkgs-24-11",
         "nomodoro": "nomodoro",
         "nvim-web-devicons": "nvim-web-devicons",
-        "parrot-nvim": "parrot-nvim",
         "sops-nix": "sops-nix",
         "spaceport-nvim": "spaceport-nvim",
         "systems": "systems",
@@ -318,7 +268,9 @@
     },
     "sops-nix": {
       "inputs": {
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": [
+          "nixpkgs-24-11"
+        ]
       },
       "locked": {
         "lastModified": 1747603214,
@@ -385,7 +337,9 @@
     },
     "treefmt-nix_2": {
       "inputs": {
-        "nixpkgs": "nixpkgs_4"
+        "nixpkgs": [
+          "nixpkgs-24-11"
+        ]
       },
       "locked": {
         "lastModified": 1748243702,

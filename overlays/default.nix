@@ -2,7 +2,7 @@
   cmp-vimtex,
   spaceport-nvim,
   nomodoro,
-  parrot-nvim,
+  # parrot-nvim,
   inputs,
 }:
 let
@@ -22,10 +22,10 @@ let
         name = "nomodoro";
       };
 
-      parrotNvimPlugin = prev.vimUtils.buildVimPlugin {
-        src = parrot-nvim;
-        name = "parrot-nvim";
-      };
+      # parrotNvimPlugin = prev.vimUtils.buildVimPlugin {
+      #   src = parrot-nvim;
+      #   name = "parrot-nvim";
+      # };
 
       nvimWebDeviconPlugin = prev.vimUtils.buildVimPlugin {
         src = inputs.nvim-web-devicons;
@@ -42,7 +42,7 @@ let
         cmp-vimtex = cmpVimtexPlugin;
         spaceport-nvim = spaceportNvimPlugin;
         nomodoro = nomodoroNvimPlugin;
-        parrot-nvim = parrotNvimPlugin;
+        # parrot-nvim = parrotNvimPlugin;
         nvim-web-devicons = nvimWebDeviconPlugin;
       };
 

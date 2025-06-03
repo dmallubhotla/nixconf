@@ -26,7 +26,7 @@ require("lualine").setup({
 				icons_enabled = false,
 			},
 			require("nomodoro").status,
-			parrot_status,
+			-- parrot_status,
 		},
 		lualine_x = {
 			"encoding",

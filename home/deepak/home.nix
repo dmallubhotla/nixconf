@@ -195,7 +195,7 @@ in
       pkgs.customVimPlugins.cmp-vimtex
       # pkgs.customVimPlugins.spaceport-nvim
       pkgs.customVimPlugins.nomodoro
-      pkgs.customVimPlugins.parrot-nvim
+      # pkgs.customVimPlugins.parrot-nvim
       pkgs.customVimPlugins.nvim-web-devicons
 
       # syntax highlighting

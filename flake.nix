@@ -5,8 +5,15 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-24-11.url = "github:NixOS/nixpkgs/nixos-24.11";
 
-    treefmt-nix.url = "github:numtide/treefmt-nix";
-    sops-nix.url = "github:Mic92/sops-nix";
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs-24-11";
+    };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs-24-11";
+    };
 
     NixOS-WSL-2411 = {
       url = "github:nix-community/NixOS-WSL";
@@ -28,10 +35,10 @@
       flake = false;
     };
 
-    parrot-nvim = {
-      url = "github:frankroeder/parrot.nvim/main";
-      flake = false;
-    };
+    # parrot-nvim = {
+    #   url = "github:frankroeder/parrot.nvim/main";
+    #   flake = false;
+    # };
 
     nomodoro = {
       url = "github:dbinagi/nomodoro/main";
@@ -77,7 +84,7 @@
           inherit spaceport-nvim;
           inherit inputs;
           inherit nomodoro;
-          parrot-nvim = inputs.parrot-nvim;
+          # parrot-nvim = inputs.parrot-nvim;
         }).overlay;
       # Small tool to iterate over each systems
       eachSystem = f: nixpkgs.lib.genAttrs (import systems) (system: f nixpkgs.legacyPackages.${system});
