@@ -157,6 +157,8 @@ in
       cmp_luasnip
       nvim-lspconfig
 
+      guess-indent-nvim
+
       vim-tmux-navigator
       # vim-vinegar
       oil-nvim
@@ -254,6 +256,7 @@ in
 
   programs.tmux = {
     enable = true;
+    package = pkgs-unstable.tmux;
     historyLimit = 100000;
     clock24 = true;
     keyMode = "vi";
