@@ -16,34 +16,6 @@ let
   };
 in
 {
-  "maxos" = inputs.nixpkgs-24-11.lib.nixosSystem {
-    system = linuxSystem;
-    specialArgs = {
-      inherit customPackageOverlay;
-      inherit nixpkgs-unstable;
-      withDocker = false;
-    };
-    modules = [
-      ./maxos/configuration.nix
-      inputs.sops-nix.nixosModules.sops
-      inputs.homeManager-24-11.nixosModules.home-manager
-      {
-        home-manager.extraSpecialArgs = {
-          withGUI = true;
-          gitSigningKey = "976F3357369149AB";
-          rundirnum = "1000";
-          inherit nixpkgs-unstable;
-        };
-        home-manager.useGlobalPkgs = true;
-        home-manager.users.deepak = {
-          imports = [ ../home/deepak/home.nix ];
-        };
-        home-manager.sharedModules = [
-          inputs.sops-nix.homeManagerModules.sops
-        ];
-      }
-    ];
-  };
   "nixosWalrus" = inputs.nixpkgs-24-11.lib.nixosSystem {
     system = "x86_64-linux";
     specialArgs = {
