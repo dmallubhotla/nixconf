@@ -11,62 +11,61 @@ in
 # default_python = pkgs-unstable.python313;
 {
   programs.home-manager.enable = true;
-  home.packages =
-    [
-      pkgs.hello
-      # (pkgs.writeScriptBin "nixFlakes" ''
-      # 	exec ${pkgs.nixVersions.git}/bin/nix --experimental-features "nix-command flakes" "$@"
-      # '')
-      pkgs.cachix
-      pkgs.attic-client
-      pkgs.kubectl
-      pkgs.bat
-      pkgs.eza
-      pkgs.fd
-      pkgs.ripgrep
-      pkgs.just
-      pkgs.chafa
-      pkgs.fontpreview
-      pkgs.poppler_utils
-      pkgs.tdf
-      pkgs.viu
-      pkgs.jq
+  home.packages = [
+    pkgs.hello
+    # (pkgs.writeScriptBin "nixFlakes" ''
+    # 	exec ${pkgs.nixVersions.git}/bin/nix --experimental-features "nix-command flakes" "$@"
+    # '')
+    pkgs.cachix
+    pkgs.attic-client
+    pkgs.kubectl
+    pkgs.bat
+    pkgs.eza
+    pkgs.fd
+    pkgs.ripgrep
+    pkgs.just
+    pkgs.chafa
+    pkgs.fontpreview
+    pkgs.poppler_utils
+    pkgs.tdf
+    pkgs.viu
+    pkgs.jq
 
-      pkgs.wego
-      # cli markdown tool
-      pkgs.glow
+    pkgs.wego
+    # cli markdown tool
+    pkgs.glow
 
-      # lsps
-      # pkgs.nil
-      pkgs.nixd
-      # pkgs.nodePackages.pyright
-      pkgs.pyright
+    # lsps
+    # pkgs.nil
+    pkgs.nixd
+    # pkgs.nodePackages.pyright
+    pkgs.pyright
 
-      pkgs.thefuck
-      pkgs.fzf
-      pkgs.sops
-      pkgs.age
-      pkgs.ydiff
-      pkgs.xsel
-      pkgs.delta
+    pkgs.thefuck
+    pkgs.fzf
+    pkgs.sops
+    pkgs.age
+    pkgs.ydiff
+    pkgs.xsel
+    pkgs.delta
 
-      pkgs-unstable.claude-code
-      # default_python
-      # pkgs-unstable.uv
-      # pkgs-unstable.nodejs
+    pkgs-unstable.claude-code
+    # default_python
+    # pkgs-unstable.uv
+    # pkgs-unstable.nodejs
 
-      # From our claude bundle
-      pkgs.custom-servers.arxiv-mcp-server
-      pkgs.custom-servers.basic-memory-server
-      pkgs.custom-servers.mcp-text-editor
-    ]
-    ++ pkgs.lib.optionals specialArgs.withGUI [
-      pkgs.discord
-      pkgs.obsidian
-      pkgs.audacity
-      pkgs.nextcloud-client
-      pkgs.libreoffice-qt6-fresh
-    ];
+    # From our claude bundle
+    pkgs.custom-servers.arxiv-mcp-server
+    pkgs.custom-servers.basic-memory-server
+    pkgs.custom-servers.mcp-text-editor
+  ]
+  ++ pkgs.lib.optionals specialArgs.withGUI [
+    pkgs.discord
+    pkgs.obsidian
+    pkgs.audacity
+    pkgs.nextcloud-client
+    pkgs.libreoffice-qt6-fresh
+  ];
 
   home.homeDirectory = "/home/deepak";
   home.username = "deepak";
