@@ -23,7 +23,7 @@ in
       inherit nixpkgs-unstable;
       hostname = "nixosWalrus";
       stateVersion = "24.11";
-      withDocker = false;
+      withDocker = true;
     };
     modules = [
       (
