@@ -28,10 +28,6 @@
 
   vim.keymap.set("n", "<leader>N", "R<Enter><Esc>")
   vim.g.python_recommended_style = 0
-  -- ctrlp setup
-  vim.g.ctrlp_custom_ignore = {
-  	file = '\\v\\.(aux|bbl|blg|bcf|fdb_latexmk|fls|run.xml|tdo|toc|log|pdf)$'
-  }
 
   require('gitsigns').setup()
   require("oil").setup({
@@ -73,12 +69,17 @@
   require("nightfox").setup({})
   vim.cmd("colorscheme kanagawa-dragon")
 
+  vim.keymap.set('n', "<leader>z", '<Nop>', { noremap = true, desc = "Toggles"})
   vim.keymap.set('n', "<leader>zm", '<cmd>ZenMode<CR>', { noremap = true, desc = "Toggle zen-mode" })
 
   require('flash').setup()
-  vim.keymap.set('n', "<leader>ft", function() require("flash").toggle() end, {desc = "Toggle flash.nvim search", noremap = true})
+  vim.keymap.set('n', "<leader>zf", function() require("flash").toggle() end, {desc = "Toggle flash.nvim search", noremap = true})
 
-  vim.keymap.set('n', "<leader>tf", '<cmd>FzfLua<CR>', {desc = "Toggle flash.nvim search", noremap = true})
+  vim.keymap.set('n', "<leader>f", '<Nop>', { noremap = true, desc = "FzfLua"})
+  vim.keymap.set('n', "<leader>fl", '<cmd>FzfLua<CR>', {desc = "FzfLua", noremap = true})
+  vim.keymap.set('n', "<leader>ff", function() require("fzf-lua").files() end, {desc = "FzfLua file search", noremap = true})
+  -- set ctrlp for muscle memory
+  vim.keymap.set('n', "<C-p>", function() require("fzf-lua").files() end, {desc = "FzfLua file search", noremap = true})
 
   require('guess-indent').setup {}
   require('which-key').setup({})

@@ -148,7 +148,7 @@ in
       telescope-symbols-nvim
       # need fzf for parrot
       fzf-lua
-      ctrlp-vim
+      # ctrlp-vim
       # lsp stuff
       lsp-zero-nvim
       nvim-cmp
