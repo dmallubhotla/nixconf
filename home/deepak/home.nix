@@ -265,29 +265,6 @@ in
       pkgs.tmuxPlugins.vim-tmux-navigator
       pkgs.tmuxPlugins.better-mouse-mode
       pkgs.tmuxPlugins.sensible
-      # pkgs.tmuxPlugins.tmux-powerline
-      # {
-      #   plugin = pkgs.tmuxPlugins.dracula;
-      #   extraConfig = ''
-      #     set -g @dracula-show-battery true
-      #     set -g @dracula-show-powerline true
-      #     set -g @dracula-refresh-rate 10
-      #     set -g @dracula-colors "
-      #       # simple catppuccin Color Pallette
-      #       pink='#cba6f7'
-      #       orange='#fab387'
-      #       yellow='#f9e2af'
-      #       green='#a6e3a1'
-      #       cyan='#89dceb'
-      #       light_purple='#b4befe'
-      #       white='#cdd6f4'
-      #       dark_gray='#313244'
-      #       red='#f38ba8'
-      #       gray='#45475a'
-      #       dark_purple='#6c7086'
-      #     "
-      #   '';
-      # }
       pkgs.tmuxPlugins.power-theme
     ];
     extraConfig = ''
