@@ -16,6 +16,7 @@ in
     # (pkgs.writeScriptBin "nixFlakes" ''
     # 	exec ${pkgs.nixVersions.git}/bin/nix --experimental-features "nix-command flakes" "$@"
     # '')
+    pkgs.nix-search-cli
     pkgs.cachix
     pkgs.attic-client
     pkgs.kubectl
