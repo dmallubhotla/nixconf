@@ -49,6 +49,7 @@ in
     pkgs.ydiff
     pkgs.xsel
     pkgs.delta
+    pkgs.uair
 
     pkgs-unstable.claude-code
     # default_python
@@ -100,6 +101,7 @@ in
   programs.direnv.nix-direnv.enable = true;
 
   xdg.enable = true;
+  xdg.configFile."uair/uair.toml".source = ./config/uair.toml;
 
   services.nextcloud-client = pkgs.lib.mkIf specialArgs.withGUI {
     enable = true;
@@ -388,6 +390,22 @@ in
     };
     Install = {
       WantedBy = [ "timers.target" ];
+    };
+  };
+
+  systemd.user.services = {
+    uair = {
+      Unit = {
+        Description = "Uair pomodoro timer";
+      };
+      Service = {
+        Type = "simple";
+        ExecStart = "${pkgs.uair}/bin/uair -q";
+        Restart = "always";
+      };
+      Install = {
+        WantedBy = ["default.target"];
+      };
     };
   };
 
