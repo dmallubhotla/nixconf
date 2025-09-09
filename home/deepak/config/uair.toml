@@ -1,7 +1,9 @@
 loop_on_end = true
 
 [defaults]
-format = "🍅 {name}: {time} / {total}{end}\n"
+format = "🍅 {name} {state}: {time}\n"
+paused_state_text = "paused"
+resumed_state_text = "playing"
 
 [[sessions]]
 id = "work"
@@ -15,8 +17,3 @@ name = "Rest"
 duration = "5m"
 command = "notify-send 'Rest Done!'"
 
-[[sessions]]
-id = "hardwork"
-name = "Work, but harder"
-duration = "1h 30m"
-command = "notify-send 'Hard Work Done!'"
