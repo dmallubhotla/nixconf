@@ -101,7 +101,7 @@ in
   programs.direnv.nix-direnv.enable = true;
 
   xdg.enable = true;
-  xdg.configFile."uair/uair.toml".source = ./config/uair.toml;
+  xdg.configFile."uair".source = ./config/uair;
 
   services.nextcloud-client = pkgs.lib.mkIf specialArgs.withGUI {
     enable = true;
@@ -404,7 +404,7 @@ in
         Restart = "always";
       };
       Install = {
-        WantedBy = ["default.target"];
+        WantedBy = [ "default.target" ];
       };
     };
   };

@@ -8,12 +8,12 @@ resumed_state_text = "playing"
 [[sessions]]
 id = "work"
 name = "Work"
-duration = "30m"
-command = "notify-send 'Work Done!'"
+duration = "10m"
+command = '~/.config/uair/scripts/notify.sh "Work Done!"'
 
 [[sessions]]
 id = "rest"
 name = "Rest"
-duration = "5m"
-command = "notify-send 'Rest Done!'"
+duration = "2m"
+command = "~/.config/uair/scripts/break.sh"
 
