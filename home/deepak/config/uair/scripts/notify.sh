@@ -11,4 +11,3 @@ echo "sth"
 echo "$message"
 
 tmux display-popup -T "uair" "echo -e \"$message\""
-
