@@ -1,0 +1,19 @@
+loop_on_end = true
+
+[defaults]
+format = "🍅 {name} {state}: {time}\n"
+paused_state_text = "paused"
+resumed_state_text = "playing"
+
+[[sessions]]
+id = "work"
+name = "Work"
+duration = "10m"
+command = '~/.config/uair/scripts/notify.sh "Work Done!"'
+
+[[sessions]]
+id = "rest"
+name = "Rest"
+duration = "2m"
+command = "~/.config/uair/scripts/break.sh"
+
