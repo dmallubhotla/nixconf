@@ -368,8 +368,6 @@ in
       ExecStart = pkgs.writeShellScript "cache-weather-script" ''
         set -euxo pipefail
         # PATH=$PATH:${lib.makeBinPath [ pkgs.wego ]}
-        echo "`date`"
-        echo "that's the date"
         ${pkgs.wego}/bin/wego --help
         ${pkgs.wego}/bin/wego -f json > ${config.xdg.cacheHome}/weather/weather-cache.json
         ${pkgs.jq}/bin/jq -r '. | {location: .Location, current_tempc: .Current.TempC, current_tempf: ((1.8 * .Current.TempC + 32) |round), desc: .Current.Desc} | "\(.location): \(.current_tempf) F \(.desc)"' ~/.cache/weather/weather-cache.json > ${config.xdg.cacheHome}/weather/short-weather.txt
