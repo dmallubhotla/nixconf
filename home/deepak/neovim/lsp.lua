@@ -47,3 +47,4 @@ cmp.setup({
 -- require("lspconfig").nil_ls.setup({})
 require("lspconfig").pyright.setup({})
 require("lspconfig").nixd.setup({})
+require("lspconfig").terraformls.setup({})

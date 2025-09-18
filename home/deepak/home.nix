@@ -39,8 +39,8 @@ in
     # lsps
     # pkgs.nil
     pkgs.nixd
-    # pkgs.nodePackages.pyright
     pkgs.pyright
+    pkgs.terraform-ls
 
     pkgs.thefuck
     pkgs.fzf
