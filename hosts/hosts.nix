@@ -16,7 +16,7 @@ let
   };
 in
 {
-  "nixosWalrus" = inputs.nixpkgs-24-11.lib.nixosSystem {
+  "nixosWalrus" = inputs.nixpkgs-stable.lib.nixosSystem {
     system = "x86_64-linux";
     specialArgs = {
       inherit customPackageOverlay;
@@ -29,12 +29,12 @@ in
       (
         { ... }:
         {
-          nix.registry.nixpkgs.flake = inputs.nixpkgs-24-11;
+          nix.registry.nixpkgs.flake = inputs.nixpkgs-stable;
         }
       )
       ./commonWSL-configuration.nix
       inputs.sops-nix.nixosModules.sops
-      inputs.homeManager-24-11.nixosModules.home-manager
+      inputs.homeManager-stable.nixosModules.home-manager
       {
         home-manager.extraSpecialArgs = {
           withGUI = false;
@@ -53,10 +53,10 @@ in
         ];
       }
 
-      inputs.NixOS-WSL-2411.nixosModules.wsl
+      inputs.NixOS-WSL-stable.nixosModules.wsl
     ];
   };
-  "nixosEggYoke" = inputs.nixpkgs-24-11.lib.nixosSystem {
+  "nixosEggYoke" = inputs.nixpkgs-stable.lib.nixosSystem {
     system = "x86_64-linux";
     specialArgs = {
       inherit customPackageOverlay;
@@ -69,12 +69,12 @@ in
       (
         { ... }:
         {
-          nix.registry.nixpkgs.flake = inputs.nixpkgs-24-11;
+          nix.registry.nixpkgs.flake = inputs.nixpkgs-stable;
         }
       )
       ./commonWSL-configuration.nix
       inputs.sops-nix.nixosModules.sops
-      inputs.homeManager-24-11.nixosModules.home-manager
+      inputs.homeManager-stable.nixosModules.home-manager
       {
         home-manager.extraSpecialArgs = {
           withGUI = false;
@@ -89,7 +89,7 @@ in
           inputs.sops-nix.homeManagerModules.sops
         ];
       }
-      inputs.NixOS-WSL-2411.nixosModules.wsl
+      inputs.NixOS-WSL-stable.nixosModules.wsl
     ];
   };
 }

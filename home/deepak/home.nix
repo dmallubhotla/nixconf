@@ -135,7 +135,7 @@ in
     defaultEditor = true;
     vimAlias = true;
 
-    plugins = with pkgs.vimPlugins; [
+    plugins = with pkgs-unstable.vimPlugins; [
       {
         plugin = vimtex;
         config = "let g:nix_recommended_style = 0";
@@ -149,15 +149,18 @@ in
       telescope-file-browser-nvim
       telescope-media-files-nvim
       telescope-symbols-nvim
-      # need fzf for parrot
+
       fzf-lua
       # ctrlp-vim
+
       # lsp stuff
-      lsp-zero-nvim
+
       nvim-cmp
       cmp-nvim-lsp
       cmp_luasnip
       nvim-lspconfig
+      friendly-snippets
+      luasnip
 
       guess-indent-nvim
 
@@ -174,8 +177,6 @@ in
       vim-fugitive
       flash-nvim
       gitsigns-nvim
-      friendly-snippets
-      luasnip
       which-key-nvim
 
       overseer-nvim
@@ -207,6 +208,11 @@ in
   };
 
   programs.thefuck.enable = true;
+
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 
   programs.zsh = {
     enable = true;
@@ -251,7 +257,7 @@ in
       }
       pkgs.customZshPlugins.zsh-completions
     ];
-    initExtra = ''
+    initContent = ''
       eval "$(${pkgs.direnv}/bin/direnv hook zsh)"
     '';
   };

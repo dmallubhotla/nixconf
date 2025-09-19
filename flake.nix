@@ -3,26 +3,26 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-24-11.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
 
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
-      inputs.nixpkgs.follows = "nixpkgs-24-11";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs-24-11";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
-    NixOS-WSL-2411 = {
+    NixOS-WSL-stable = {
       url = "github:nix-community/NixOS-WSL";
-      inputs.nixpkgs.follows = "nixpkgs-24-11";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
-    homeManager-24-11 = {
-      url = "github:nix-community/home-manager/release-24.11";
-      inputs.nixpkgs.follows = "nixpkgs-24-11";
+    homeManager-stable = {
+      url = "github:nix-community/home-manager/release-25.05";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
     # Custom Vim Plugins

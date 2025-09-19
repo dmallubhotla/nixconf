@@ -12,14 +12,17 @@ let
       cmpVimtexPlugin = prev.vimUtils.buildVimPlugin {
         src = cmp-vimtex;
         name = "cmp-vimtex";
+        doCheck = false;
       };
       spaceportNvimPlugin = prev.vimUtils.buildVimPlugin {
         src = spaceport-nvim;
         name = "spaceport-nvim";
+        doCheck = false;
       };
       nomodoroNvimPlugin = prev.vimUtils.buildVimPlugin {
         src = nomodoro;
         name = "nomodoro";
+        doCheck = false;
       };
 
       # parrotNvimPlugin = prev.vimUtils.buildVimPlugin {
