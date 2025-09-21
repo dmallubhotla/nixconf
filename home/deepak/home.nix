@@ -32,7 +32,7 @@ in
     pkgs.viu
     pkgs.jq
 
-    pkgs.tea
+    pkgs-unstable.tea
 
     pkgs.wego
     # cli markdown tool
