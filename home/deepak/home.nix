@@ -32,6 +32,8 @@ in
     pkgs.viu
     pkgs.jq
 
+    pkgs.tea
+
     pkgs.wego
     # cli markdown tool
     pkgs.glow
