@@ -124,6 +124,10 @@ in
       init = {
         defaultBranch = "master";
       };
+      # git config --global --add url."git@github.com:".insteadOf "https://github.com/"
+      url = {
+        "git@github.com".insteadOf = "https://github.com";
+      };
     };
     includes = [
       # this allows us to have a local gitconfig maybe?
