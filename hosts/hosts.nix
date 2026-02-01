@@ -1,7 +1,7 @@
 {
   inputs,
   customPackageOverlay,
-# ...
+  # ...
 }:
 let
   linuxSystem = "x86_64-linux";
