@@ -100,10 +100,10 @@
         }
       );
 
-      formatter = eachSystem (pkgs: treefmtEval.${pkgs.system}.config.build.wrapper);
+      formatter = eachSystem (pkgs: treefmtEval.${pkgs.stdenv.hostPlatform.system}.config.build.wrapper);
       # for `nix flake check`
       checks = eachSystem (pkgs: {
-        formatting = treefmtEval.${pkgs.system}.config.build.check self;
+        formatting = treefmtEval.${pkgs.stdenv.hostPlatform.system}.config.build.check self;
       });
 
       devShells = eachSystem (pkgs: {
@@ -113,7 +113,7 @@
             kubectl
             jq
             stern
-            nixfmt-rfc-style
+            nixfmt
             alejandra
           ];
         };
