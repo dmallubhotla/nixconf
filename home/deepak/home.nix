@@ -33,6 +33,7 @@ in
     pkgs.jq
 
     pkgs-unstable.tea
+    pkgs-unstable.gh
 
     pkgs.wego
     # cli markdown tool
