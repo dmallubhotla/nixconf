@@ -27,7 +27,7 @@ in
     pkgs.just
     pkgs.chafa
     pkgs.fontpreview
-    pkgs.poppler_utils
+    pkgs.poppler-utils
     pkgs.tdf
     pkgs.viu
     pkgs.jq
@@ -45,7 +45,6 @@ in
     pkgs.pyright
     pkgs.terraform-ls
 
-    pkgs.thefuck
     pkgs.fzf
     pkgs.sops
     pkgs.age
@@ -112,13 +111,15 @@ in
 
   programs.git = {
     enable = true;
-    userName = "Deepak Mallubhotla";
-    userEmail = "dmallubhotla+github@gmail.com";
     signing = {
       key = specialArgs.gitSigningKey;
       signByDefault = true;
     };
-    extraConfig = {
+    settings = {
+      user = {
+        name = "Deepak Mallubhotla";
+        email = "dmallubhotla+github@gmail.com";
+      };
       core = {
         fileMode = false;
       };
@@ -214,8 +215,6 @@ in
     extraConfig = import ./neovim/init-vim.nix { inherit config; };
   };
 
-  programs.thefuck.enable = true;
-
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
@@ -230,7 +229,7 @@ in
     };
     history = {
       size = 10000;
-      path = "${lib.removePrefix "/home/deepak/" config.xdg.dataHome}/zsh/history";
+      path = "${config.xdg.dataHome}/zsh/history";
     };
     oh-my-zsh = {
       enable = true;

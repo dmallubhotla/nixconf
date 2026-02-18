@@ -82,7 +82,6 @@ in
     wget
     vim
     git
-    pinentry
     pinentry-curses
     gnupg
     tailscale
