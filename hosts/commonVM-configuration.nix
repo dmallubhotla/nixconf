@@ -105,6 +105,7 @@ in
     ]
     ++ lib.optionals withDocker [ "docker" ];
     shell = pkgs.zsh;
+    initialHashedPassword = "$y$j9T$cVagC4LC8iTozPVAW5uE10$vZiit3Ohx/fwA87p0C.9tzfz0D3ytec.hClUvOjnjF1";
     # Allow SSH key auth (add your keys here or via cloud-init)
     openssh = {
       authorizedKeys.keys = [
