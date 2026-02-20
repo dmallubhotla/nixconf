@@ -205,6 +205,10 @@ in
     home = "/var/lib/smriti";
     createHome = true;
     shell = pkgs.shadow; # nologin
+    packages = with pkgs; [
+      # Add user-specific packages here
+      gh
+    ];
   };
 
   users.groups.smriti = { };
