@@ -198,6 +198,45 @@
         "type": "github"
       }
     },
+    "openclaw": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1769955776,
+        "narHash": "sha256-sTm+hEBz5w7MhmW7SQJdO+NXz6lTwskEp55W+tVEsg4=",
+        "owner": "openclaw",
+        "repo": "openclaw",
+        "rev": "5d3c898a9496670f876a03cbd8368a9833f84148",
+        "type": "github"
+      },
+      "original": {
+        "owner": "openclaw",
+        "repo": "openclaw",
+        "rev": "5d3c898a9496670f876a03cbd8368a9833f84148",
+        "type": "github"
+      }
+    },
+    "openclaw-image": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-stable"
+        ],
+        "openclaw": "openclaw",
+        "treefmt-nix": "treefmt-nix_2"
+      },
+      "locked": {
+        "lastModified": 1770990484,
+        "narHash": "sha256-CZnqXWAQoMyeT0Cpia6rxuMsAt8PYp2pdigXyTUkCJ8=",
+        "ref": "refs/heads/master",
+        "rev": "4da26ec4957456e0274f3b4ba6b84c27fcaf5dbc",
+        "revCount": 51,
+        "type": "git",
+        "url": "ssh://git@github.com/dmallubhotla/openclaw-image"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/dmallubhotla/openclaw-image"
+      }
+    },
     "pyproject-build-systems": {
       "inputs": {
         "nixpkgs": [
@@ -259,10 +298,11 @@
         "nixpkgs-stable": "nixpkgs-stable",
         "nomodoro": "nomodoro",
         "nvim-web-devicons": "nvim-web-devicons",
+        "openclaw-image": "openclaw-image",
         "sops-nix": "sops-nix",
         "spaceport-nvim": "spaceport-nvim",
         "systems": "systems",
-        "treefmt-nix": "treefmt-nix_2",
+        "treefmt-nix": "treefmt-nix_3",
         "zsh-completions": "zsh-completions"
       }
     },
@@ -336,6 +376,27 @@
       }
     },
     "treefmt-nix_2": {
+      "inputs": {
+        "nixpkgs": [
+          "openclaw-image",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1769691507,
+        "narHash": "sha256-8aAYwyVzSSwIhP2glDhw/G0i5+wOrren3v6WmxkVonM=",
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "rev": "28b19c5844cc6e2257801d43f2772a4b4c050a1b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "treefmt-nix_3": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs-stable"

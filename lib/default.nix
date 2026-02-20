@@ -75,6 +75,7 @@ let
       inherit system;
       specialArgs = {
         inherit
+          inputs
           customPackageOverlay
           nixpkgs-unstable
           hostname

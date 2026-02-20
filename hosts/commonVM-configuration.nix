@@ -195,4 +195,39 @@ in
     man.generateCaches = true;
     nixos.enable = true;
   };
+
+  # Service account for openclaw gateway
+  users.users.smriti = {
+    isSystemUser = true;
+    group = "smriti";
+    home = "/var/lib/smriti";
+    createHome = true;
+    shell = pkgs.shadow; # nologin
+  };
+
+  users.groups.smriti = { };
+
+  # Openclaw gateway service
+  # systemd.services.openclaw-gateway = {
+  #   description = "OpenClaw WhatsApp Gateway";
+  #   wantedBy = [ "multi-user.target" ];
+  #   after = [ "network.target" ];
+  #
+  #   serviceConfig = {
+  #     Type = "simple";
+  #     User = "smriti";
+  #     Group = "smriti";
+  #     WorkingDirectory = "/var/lib/smriti";
+  #     ExecStart = "${inputs.openclaw-image.packages.${pkgs.system}.openclaw}/bin/openclaw";
+  #     Restart = "on-failure";
+  #     RestartSec = 10;
+  #
+  #     # Hardening
+  #     NoNewPrivileges = true;
+  #     ProtectSystem = "strict";
+  #     ProtectHome = true;
+  #     PrivateTmp = true;
+  #     ReadWritePaths = [ "/var/lib/smriti" ];
+  #   };
+  # };
 }
