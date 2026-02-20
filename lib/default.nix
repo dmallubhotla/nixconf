@@ -17,10 +17,12 @@ let
   };
 
   # Common modules shared across all host types
-  commonModules = [
-    inputs.sops-nix.nixosModules.sops
-    inputs.homeManager-stable.nixosModules.home-manager
-  ];
+  commonModules =
+    withSops:
+    [
+      inputs.homeManager-stable.nixosModules.home-manager
+    ]
+    ++ lib.optionals withSops [ inputs.sops-nix.nixosModules.sops ];
 
   # Pin nixpkgs registry to stable
   pinRegistry =
@@ -35,6 +37,7 @@ let
       username,
       homeModule,
       withGUI ? false,
+      withSops ? true,
       gitSigningKey ? null,
       obsidian_dir ? null,
       win_home_dir ? null,
@@ -46,6 +49,7 @@ let
         extraSpecialArgs = {
           inherit
             withGUI
+            withSops
             gitSigningKey
             nixpkgs-unstable
             obsidian_dir
@@ -56,7 +60,7 @@ let
         users.${username} = {
           imports = [ homeModule ];
         };
-        sharedModules = [
+        sharedModules = lib.optionals withSops [
           inputs.sops-nix.homeManagerModules.sops
         ];
       };
@@ -68,6 +72,7 @@ let
       hostname,
       system ? linuxSystem,
       stateVersion,
+      withSops ? true,
       modules,
       specialArgs ? { },
     }:
@@ -86,7 +91,7 @@ let
       modules = [
         pinRegistry
       ]
-      ++ commonModules
+      ++ (commonModules withSops)
       ++ modules;
     };
 
@@ -133,6 +138,7 @@ let
       stateVersion,
       withDocker ? false,
       withGUI ? false,
+      withSops ? false,
       gitSigningKey,
       # VM-specific options
       withQemuAgent ? true,
@@ -143,7 +149,7 @@ let
       extraSpecialArgs ? { },
     }:
     mkHost {
-      inherit hostname stateVersion;
+      inherit hostname stateVersion withSops;
       specialArgs = {
         inherit
           withDocker
@@ -159,7 +165,7 @@ let
         (mkHomeManagerConfig {
           username = "deepak";
           homeModule = ../home/deepak/home.nix;
-          inherit withGUI gitSigningKey;
+          inherit withGUI withSops gitSigningKey;
         })
       ]
       ++ extraModules;
