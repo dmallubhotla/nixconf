@@ -38,11 +38,11 @@
         "rev": "c4facee8ddf8ec44e00e7d09bb21b23a30ad8346",
         "revCount": 17,
         "type": "git",
-        "url": "ssh://git@github.com/dmallubhotla/claude_mcp_bundle.git"
+        "url": "ssh://git@github.com/dmallubhotla/claude_mcp_bundle"
       },
       "original": {
         "type": "git",
-        "url": "ssh://git@github.com/dmallubhotla/claude_mcp_bundle.git"
+        "url": "ssh://git@github.com/dmallubhotla/claude_mcp_bundle"
       }
     },
     "cmp-vimtex": {

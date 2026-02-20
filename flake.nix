@@ -56,7 +56,7 @@
     };
 
     claude-mcp-bundle = {
-      url = "git+ssh://git@github.com/dmallubhotla/claude_mcp_bundle.git";
+      url = "git+ssh://git@github.com/dmallubhotla/claude_mcp_bundle";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
