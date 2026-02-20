@@ -209,6 +209,7 @@ in
     packages = with pkgs; [
       # Add user-specific packages here
       gh
+      python3
     ];
   };
 
