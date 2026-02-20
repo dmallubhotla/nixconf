@@ -106,7 +106,11 @@ in
     ++ lib.optionals withDocker [ "docker" ];
     shell = pkgs.zsh;
     # Allow SSH key auth (add your keys here or via cloud-init)
-    openssh.authorizedKeys.keys = [ ];
+    openssh = {
+      authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC+yAxaiQ+98tfV2aAkwDVvWzEz5UCnkunrXzSkG8omp dmallubhotla@gmail.com"
+      ];
+    };
   };
 
   programs.zsh.enable = true;
