@@ -102,6 +102,7 @@ in
     extraGroups = [
       "wheel"
       "networkmanager"
+      "users"
     ]
     ++ lib.optionals withDocker [ "docker" ];
     shell = pkgs.zsh;
@@ -200,6 +201,7 @@ in
   users.users.smriti = {
     isSystemUser = true;
     group = "smriti";
+    extraGroups = [ "users" ];
     home = "/var/lib/smriti";
     createHome = true;
     shell = pkgs.shadow; # nologin
@@ -213,14 +215,22 @@ in
   #   wantedBy = [ "multi-user.target" ];
   #   after = [ "network.target" ];
   #
+  #   environment = {
+  #     OPENCLAW_CONFIG_PATH = "/var/lib/smriti/config/openclaw.json";
+  #     OPENCLAW_STATE_DIR = "/var/lib/smriti";
+  #   };
+  #
   #   serviceConfig = {
   #     Type = "simple";
   #     User = "smriti";
   #     Group = "smriti";
   #     WorkingDirectory = "/var/lib/smriti";
-  #     ExecStart = "${inputs.openclaw-image.packages.${pkgs.system}.openclaw}/bin/openclaw";
+  #     ExecStart = "${inputs.openclaw-image.packages.${pkgs.system}.openclaw}/bin/openclaw gateway --bind lan --port 18789 --allow-unconfigured";
   #     Restart = "on-failure";
   #     RestartSec = 10;
+  #
+  #     # Secrets via environment file (create /var/lib/smriti/secrets.env with GITHUB_PAT and OPENCLAW_GATEWAY_TOKEN)
+  #     EnvironmentFile = "/var/lib/smriti/secrets.env";
   #
   #     # Hardening
   #     NoNewPrivileges = true;
@@ -230,4 +240,7 @@ in
   #     ReadWritePaths = [ "/var/lib/smriti" ];
   #   };
   # };
+
+  # Firewall port for openclaw gateway
+  # networking.firewall.allowedTCPPorts = [ 18789 ];
 }
