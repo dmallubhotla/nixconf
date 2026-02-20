@@ -1,14 +1,18 @@
 {
   pkgs,
   config,
-  specialArgs,
   lib,
+  # These come from extraSpecialArgs (works in both NixOS module and standalone mode)
+  nixpkgs-unstable,
+  withGUI ? false,
+  gitSigningKey ? null,
+  obsidian_dir ? null,
+  win_home_dir ? null,
   ...
 }:
 let
-  pkgs-unstable = specialArgs.nixpkgs-unstable;
+  pkgs-unstable = nixpkgs-unstable;
 in
-# default_python = pkgs-unstable.python313;
 {
   programs.home-manager.enable = true;
   home.packages = [
@@ -63,7 +67,7 @@ in
     pkgs.custom-servers.basic-memory-server
     pkgs.custom-servers.mcp-text-editor
   ]
-  ++ pkgs.lib.optionals specialArgs.withGUI [
+  ++ pkgs.lib.optionals withGUI [
     pkgs.discord
     pkgs.obsidian
     pkgs.audacity
@@ -74,8 +78,9 @@ in
   home.homeDirectory = "/home/deepak";
   home.username = "deepak";
 
-  # required, was previously default
-  home.stateVersion = "18.09";
+  # Update from 18.09 to fix pure flake evaluation issues
+  # See: https://github.com/nix-community/home-manager/issues/1981
+  home.stateVersion = "24.11";
 
   home.sessionPath = [
     "$HOME/.local/bin"
@@ -83,18 +88,17 @@ in
 
   home.sessionVariables =
     let
-      win_home_dir = specialArgs.win_home_dir or "/mnt/c/Users/Deepak";
-      obsidian_dir = specialArgs.obsidian_dir or "/mnt/c/Users/Deepak/Documents/vault01";
+      # Use provided values or defaults
+      win_home = if win_home_dir != null then win_home_dir else "/mnt/c/Users/Deepak";
+      obsidian = if obsidian_dir != null then obsidian_dir else "/mnt/c/Users/Deepak/Documents/vault01";
     in
     {
       # Namespace our own nixconf variables with DPK
 
       # Set a common directory for Windows for WSL installs
-      #
       # Different per host
-      #
-      DPK_WIN_HOME_DIR = "${win_home_dir}";
-      DPK_OBSIDIAN_DIR = "${obsidian_dir}";
+      DPK_WIN_HOME_DIR = win_home;
+      DPK_OBSIDIAN_DIR = obsidian;
 
       # UV_PYTHON = "${default_python}";
     };
@@ -105,14 +109,14 @@ in
   xdg.enable = true;
   xdg.configFile."uair".source = ./config/uair;
 
-  services.nextcloud-client = pkgs.lib.mkIf specialArgs.withGUI {
+  services.nextcloud-client = pkgs.lib.mkIf withGUI {
     enable = true;
   };
 
   programs.git = {
     enable = true;
-    signing = {
-      key = specialArgs.gitSigningKey;
+    signing = lib.mkIf (gitSigningKey != null) {
+      key = gitSigningKey;
       signByDefault = true;
     };
     settings = {

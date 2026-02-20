@@ -91,16 +91,39 @@
 
       # Eval the treefmt modules from ./treefmt.nix
       treefmtEval = eachSystem (pkgs: inputs.treefmt-nix.lib.evalModule pkgs ./treefmt.nix);
+      # Import our lib for host and home creation
+      myLib = import ./lib {
+        inherit inputs customPackageOverlay;
+      };
     in
     {
-      nixosConfigurations = (
-        import ./hosts/hosts.nix {
-          inherit inputs;
-          inherit customPackageOverlay;
-        }
-      );
+      nixosConfigurations = import ./hosts/hosts.nix {
+        inherit inputs customPackageOverlay;
+      };
+
+      # Standalone home-manager configurations
+      # Usage: home-manager switch --flake .#deepak
+      # Or: home-manager switch --flake .#deepak-gui
+      homeConfigurations = {
+        # CLI-only configuration (for servers/VMs/WSL)
+        "deepak" = myLib.mkHomeConfiguration {
+          username = "deepak";
+          homeModule = ./home/deepak/home.nix;
+          withGUI = false;
+          gitSigningKey = "8F904A3FC7021497";
+        };
+
+        # GUI-enabled configuration (for desktops)
+        "deepak-gui" = myLib.mkHomeConfiguration {
+          username = "deepak";
+          homeModule = ./home/deepak/home.nix;
+          withGUI = true;
+          gitSigningKey = "8F904A3FC7021497";
+        };
+      };
 
       formatter = eachSystem (pkgs: treefmtEval.${pkgs.stdenv.hostPlatform.system}.config.build.wrapper);
+
       # for `nix flake check`
       checks = eachSystem (pkgs: {
         formatting = treefmtEval.${pkgs.stdenv.hostPlatform.system}.config.build.check self;
