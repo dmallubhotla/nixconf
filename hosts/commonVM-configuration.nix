@@ -211,7 +211,7 @@ in
 
   # Openclaw gateway service
   # systemd.services.openclaw-gateway = {
-  #   description = "OpenClaw WhatsApp Gateway";
+  #   description = "OpenClaw Gateway";
   #   wantedBy = [ "multi-user.target" ];
   #   after = [ "network.target" ];
   #
