@@ -205,7 +205,7 @@ in
     extraGroups = [ "users" ];
     home = "/var/lib/smriti";
     createHome = true;
-    shell = pkgs.shadow; # nologin
+    shell = pkgs.zsh; # nologin
     packages = with pkgs; [
       # Add user-specific packages here
       gh
