@@ -166,7 +166,10 @@ in
   # Firewall
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 22 18789 ];
+    allowedTCPPorts = [
+      22
+      18789
+    ];
     allowedUDPPorts = [ 62532 ];
   };
 
@@ -204,12 +207,14 @@ in
     group = "smriti";
     extraGroups = [ "users" ];
     home = "/var/lib/smriti";
+    homeMode = "750";
     createHome = true;
     shell = pkgs.zsh; # nologin
     packages = with pkgs; [
       # Add user-specific packages here
       gh
       python3
+      uv
     ];
   };
 
@@ -231,7 +236,9 @@ in
       User = "smriti";
       Group = "smriti";
       WorkingDirectory = "/var/lib/smriti";
-      ExecStart = "${inputs.openclaw-image.packages.${pkgs.system}.openclaw}/bin/openclaw gateway --bind lan --port 18789 --allow-unconfigured";
+      ExecStart = "${
+        inputs.openclaw-image.packages.${pkgs.system}.openclaw
+      }/bin/openclaw gateway --bind lan --port 18789 --allow-unconfigured";
       Restart = "on-failure";
       RestartSec = 10;
 
