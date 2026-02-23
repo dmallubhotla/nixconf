@@ -42,7 +42,7 @@ in
 
   system.stateVersion = "22.05";
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define a user account. Don't forget to set a password with 'passwd'.
   users.users.deepak = {
     isNormalUser = true;
     home = "/home/deepak";
@@ -50,8 +50,26 @@ in
     extraGroups = [
       "wheel"
       "networkmanager"
-    ]; # Enable ‘sudo’ for the user.
+      "docker"
+    ]; # Enable 'sudo' for the user.
     shell = pkgs.zsh;
+  };
+
+  # Enable rootless Docker for unprivileged container operations
+  virtualisation.docker = {
+    enable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
+
+  # Security wrapper for rootlesskit (enables port binding <1024)
+  security.wrappers.docker-rootlesskit = {
+    owner = "root";
+    group = "root";
+    capabilities = "cap_net_bind_service+ep";
+    source = "${pkgs.rootlesskit}/bin/rootlesskit";
   };
 
   programs.zsh.enable = true;

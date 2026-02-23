@@ -206,7 +206,7 @@ in
   users.users.smriti = {
     isSystemUser = true;
     group = "smriti";
-    extraGroups = [ "users" ];
+    extraGroups = [ "users" ] ++ lib.optionals withDocker [ "docker" ];
     home = "/var/lib/smriti";
     homeMode = "750";
     createHome = true;
