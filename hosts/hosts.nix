@@ -30,7 +30,7 @@ in
   "nixosVM" = lib.mkVMHost {
     hostname = "nixosVM";
     stateVersion = "25.11";
-    gitSigningKey = "YOUR_KEY_HERE";
+    gitSigningKey = "047D7BB1D577BB54";
     withDocker = true;
     withQemuAgent = true; # QEMU guest agent for host communication
     withCloudInit = false; # Enable for cloud deployments

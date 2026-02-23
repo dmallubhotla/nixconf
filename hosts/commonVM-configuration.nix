@@ -104,6 +104,7 @@ in
       "wheel"
       "networkmanager"
       "users"
+      "smriti"
     ]
     ++ lib.optionals withDocker [ "docker" ];
     shell = pkgs.zsh;
