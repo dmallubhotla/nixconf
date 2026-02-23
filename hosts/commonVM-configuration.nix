@@ -216,6 +216,7 @@ in
       gh
       python3
       uv
+      just
     ];
   };
 
