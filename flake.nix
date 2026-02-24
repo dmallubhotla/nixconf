@@ -67,7 +67,6 @@
 
     openclaw-image = {
       url = "git+ssh://git@github.com/dmallubhotla/openclaw-image";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
   };
