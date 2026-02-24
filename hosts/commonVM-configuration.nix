@@ -120,17 +120,22 @@ in
   programs.zsh.enable = true;
 
   # Essential system packages
-  environment.systemPackages = with pkgs; [
-    wget
-    vim
-    git
-    pinentry-curses
-    gnupg
-    tailscale
-    # VM-specific tools
-    cloud-utils # for growpart
-    parted
-  ];
+  environment.systemPackages =
+    with pkgs;
+    [
+      wget
+      vim
+      git
+      pinentry-curses
+      gnupg
+      tailscale
+      # VM-specific tools
+      cloud-utils # for growpart
+      parted
+    ]
+    ++ [
+      inputs.openclaw-image.packages.${pkgs.system}.openclaw
+    ];
 
   # Fonts
   fonts.packages = with pkgs; [
@@ -176,6 +181,12 @@ in
 
   # Timezone
   time.timeZone = "America/Chicago";
+
+  # Openclaw environment variables for deepak user
+  environment.sessionVariables = {
+    OPENCLAW_CONFIG_PATH = "/var/lib/smriti/config/openclaw.json";
+    OPENCLAW_STATE_DIR = "/var/lib/smriti";
+  };
 
   # Docker (optional)
   virtualisation.docker = lib.mkIf withDocker {

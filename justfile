@@ -4,7 +4,7 @@ default:
 
 # does a nixos-rebuild test of current flake
 install:
-    sudo nixos-rebuild test --flake .
+    nixos-rebuild test --flake . --sudo
 
 # run nix flake check
 test:
