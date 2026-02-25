@@ -232,6 +232,7 @@ in
         uv
         just
         tmux
+        jq
       ]
       ++ (with nixpkgs-unstable; [
         claude-code
