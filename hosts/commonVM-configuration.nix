@@ -5,6 +5,7 @@
   customPackageOverlay,
   hostname,
   stateVersion,
+  nixpkgs-unstable,
   withDocker ? false,
   withQemuAgent ? true,
   withCloudInit ? false,
@@ -222,13 +223,19 @@ in
     homeMode = "750";
     createHome = true;
     shell = pkgs.zsh; # nologin
-    packages = with pkgs; [
-      # Add user-specific packages here
-      gh
-      python3
-      uv
-      just
-    ];
+    packages =
+      with pkgs;
+      [
+        # Add user-specific packages here
+        gh
+        python3
+        uv
+        just
+        tmux
+      ]
+      ++ (with nixpkgs-unstable; [
+        claude-code
+      ]);
   };
 
   users.groups.smriti = { };
