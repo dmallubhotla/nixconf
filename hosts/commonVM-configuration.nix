@@ -268,7 +268,7 @@ in
       WorkingDirectory = "/var/lib/smriti";
       ExecStart = "${
         inputs.openclaw-image.packages.${pkgs.system}.openclaw
-      }/bin/openclaw gateway --tailscale serve";
+      }/bin/openclaw gateway --tailscale serve --allow-unconfigured";
       Restart = "on-failure";
       RestartSec = 10;
 
