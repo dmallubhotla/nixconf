@@ -259,7 +259,7 @@ in
       WorkingDirectory = "/var/lib/smriti";
       ExecStart = "${
         inputs.openclaw-image.packages.${pkgs.system}.openclaw
-      }/bin/openclaw gateway --bind lan --port 18789 --allow-unconfigured";
+      }/bin/openclaw gateway --tailscale serve";
       Restart = "on-failure";
       RestartSec = 10;
 
