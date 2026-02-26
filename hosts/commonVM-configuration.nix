@@ -242,6 +242,9 @@ in
   users.groups.smriti = { };
 
   # Openclaw gateway service
+  # NOTE: Requires `sudo tailscale login` before first use to authenticate the node.
+  # The gateway uses `tailscale serve` to expose the service, which won't work until
+  # the machine is authenticated with your Tailscale network.
   systemd.services.openclaw-gateway = {
     description = "OpenClaw Gateway";
     wantedBy = [ "multi-user.target" ];
@@ -271,7 +274,10 @@ in
       ProtectSystem = "strict";
       ProtectHome = true;
       PrivateTmp = true;
-      ReadWritePaths = [ "/var/lib/smriti" ];
+      ReadWritePaths = [
+        "/var/lib/smriti"
+        "/var/run/tailscale" # Allow tailscale serve to communicate with tailscaled
+      ];
     };
   };
 
