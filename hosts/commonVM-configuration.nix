@@ -169,6 +169,7 @@ in
   # Tailscale
   services.tailscale.enable = true;
   services.tailscale.port = 62532;
+  services.tailscale.extraSetFlags = [ "--operator=smriti" ];
 
   # Firewall
   networking.firewall = {
@@ -248,7 +249,12 @@ in
   systemd.services.openclaw-gateway = {
     description = "OpenClaw Gateway";
     wantedBy = [ "multi-user.target" ];
-    after = [ "network.target" ];
+    after = [
+      "network.target"
+      "tailscaled.service"
+    ];
+
+    path = [ pkgs.tailscale ];
 
     environment = {
       OPENCLAW_CONFIG_PATH = "/var/lib/smriti/config/openclaw.json";
