@@ -282,7 +282,7 @@ in
       PrivateTmp = true;
       ReadWritePaths = [
         "/var/lib/smriti"
-        "/var/run/tailscale" # Allow tailscale serve to communicate with tailscaled
+        "/run/tailscale" # Allow tailscale serve to communicate with tailscaled
       ];
     };
   };
