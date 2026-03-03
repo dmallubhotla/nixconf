@@ -135,7 +135,7 @@ in
       parted
     ]
     ++ [
-      inputs.openclaw-image.packages.${pkgs.system}.openclaw
+      inputs.openclaw-image.packages.${pkgs.stdenv.hostPlatform.system}.openclaw
     ];
 
   # Fonts
@@ -267,7 +267,7 @@ in
       Group = "smriti";
       WorkingDirectory = "/var/lib/smriti";
       ExecStart = "${
-        inputs.openclaw-image.packages.${pkgs.system}.openclaw
+        inputs.openclaw-image.packages.${pkgs.stdenv.hostPlatform.system}.openclaw
       }/bin/openclaw gateway --tailscale serve --allow-unconfigured";
       Restart = "on-failure";
       RestartSec = 10;
