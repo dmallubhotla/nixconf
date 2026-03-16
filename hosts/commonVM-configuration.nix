@@ -287,4 +287,44 @@ in
     };
   };
 
+  # Bommalata Staging Server
+  # Agent orchestration server for testing/development
+  # Runs on port 8081 (separate from demo on 8080)
+  systemd.services.bommalata-staging = {
+    description = "Bommalata Staging Server";
+    documentation = [ "https://github.com/antahkarana/bommalata" ];
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network.target" ];
+
+    environment = {
+      PATH = lib.makeBinPath [
+        pkgs.coreutils
+        pkgs.bash
+      ];
+    };
+
+    serviceConfig = {
+      Type = "simple";
+      User = "smriti";
+      Group = "smriti";
+      WorkingDirectory = "/var/lib/smriti/bommalata-staging";
+      ExecStart = "/var/lib/smriti/bommalata-staging/bommalata --config config.yaml";
+      Restart = "on-failure";
+      RestartSec = 5;
+
+      # Hardening
+      NoNewPrivileges = true;
+      ProtectSystem = "strict";
+      ProtectHome = true;
+      PrivateTmp = true;
+      ReadWritePaths = [
+        "/var/lib/smriti/bommalata-staging"
+      ];
+
+      # Logging
+      StandardOutput = "journal";
+      StandardError = "journal";
+    };
+  };
+
 }
