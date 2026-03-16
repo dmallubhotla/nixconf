@@ -5,6 +5,7 @@
   customPackageOverlay,
   hostname,
   stateVersion,
+  nixpkgs-unstable,
   withDocker ? false,
   withQemuAgent ? true,
   withCloudInit ? false,
@@ -134,7 +135,7 @@ in
       parted
     ]
     ++ [
-      inputs.openclaw-image.packages.${pkgs.system}.openclaw
+      inputs.openclaw-image.packages.${pkgs.stdenv.hostPlatform.system}.openclaw
     ];
 
   # Fonts
@@ -168,6 +169,7 @@ in
   # Tailscale
   services.tailscale.enable = true;
   services.tailscale.port = 62532;
+  services.tailscale.extraSetFlags = [ "--operator=smriti" ];
 
   # Firewall
   networking.firewall = {
@@ -222,22 +224,37 @@ in
     homeMode = "750";
     createHome = true;
     shell = pkgs.zsh; # nologin
-    packages = with pkgs; [
-      # Add user-specific packages here
-      gh
-      python3
-      uv
-      just
-    ];
+    packages =
+      with pkgs;
+      [
+        # Add user-specific packages here
+        gh
+        python3
+        uv
+        just
+        tmux
+        jq
+      ]
+      ++ (with nixpkgs-unstable; [
+        claude-code
+      ]);
   };
 
   users.groups.smriti = { };
 
   # Openclaw gateway service
+  # NOTE: Requires `sudo tailscale login` before first use to authenticate the node.
+  # The gateway uses `tailscale serve` to expose the service, which won't work until
+  # the machine is authenticated with your Tailscale network.
   systemd.services.openclaw-gateway = {
     description = "OpenClaw Gateway";
     wantedBy = [ "multi-user.target" ];
-    after = [ "network.target" ];
+    after = [
+      "network.target"
+      "tailscaled.service"
+    ];
+
+    path = [ pkgs.tailscale ];
 
     environment = {
       OPENCLAW_CONFIG_PATH = "/var/lib/smriti/config/openclaw.json";
@@ -250,8 +267,8 @@ in
       Group = "smriti";
       WorkingDirectory = "/var/lib/smriti";
       ExecStart = "${
-        inputs.openclaw-image.packages.${pkgs.system}.openclaw
-      }/bin/openclaw gateway --bind lan --port 18789 --allow-unconfigured";
+        inputs.openclaw-image.packages.${pkgs.stdenv.hostPlatform.system}.openclaw
+      }/bin/openclaw gateway --tailscale serve --allow-unconfigured";
       Restart = "on-failure";
       RestartSec = 10;
 
@@ -263,7 +280,10 @@ in
       ProtectSystem = "strict";
       ProtectHome = true;
       PrivateTmp = true;
-      ReadWritePaths = [ "/var/lib/smriti" ];
+      ReadWritePaths = [
+        "/var/lib/smriti"
+        "/run/tailscale" # Allow tailscale serve to communicate with tailscaled
+      ];
     };
   };
 
