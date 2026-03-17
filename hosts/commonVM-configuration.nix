@@ -219,7 +219,10 @@ in
   users.users.smriti = {
     isSystemUser = true;
     group = "smriti";
-    extraGroups = [ "users" ];
+    extraGroups = [
+      "users"
+      "systemd-journal"
+    ];
     home = "/var/lib/smriti";
     homeMode = "750";
     createHome = true;
@@ -296,12 +299,10 @@ in
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" ];
 
-    environment = {
-      PATH = lib.makeBinPath [
-        pkgs.coreutils
-        pkgs.bash
-      ];
-    };
+    path = [
+      pkgs.coreutils
+      pkgs.bash
+    ];
 
     serviceConfig = {
       Type = "simple";
