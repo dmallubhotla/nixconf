@@ -320,6 +320,7 @@ in
       Group = "smriti";
       WorkingDirectory = "/var/lib/smriti/bommalata-staging";
       ExecStart = "/var/lib/smriti/bommalata-staging/bommalata --config config.yaml";
+      EnvironmentFile = "/var/lib/smriti/bommalata-staging/secrets.env";
       Restart = "on-failure";
       RestartSec = 5;
 
