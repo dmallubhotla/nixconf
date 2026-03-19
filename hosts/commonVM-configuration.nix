@@ -207,6 +207,16 @@ in
       source = "${pkgs.rootlesskit}/bin/rootlesskit";
     };
   };
+  security.polkit.extraConfig = ''
+    polkit.addRule(function(action, subject) {
+    if (action.id == "org.freedesktop.systemd1.manage-units" &&
+        action.lookup("unit") == "bommalata-staging.service" &&
+        (action.lookup("verb") == "start" || action.lookup("verb") == "restart" || action.lookup("verb") == "stop") &&
+        subject.user == "smriti") {
+      return polkit.Result.YES;
+    }
+    });
+  '';
 
   # Documentation
   documentation = {
