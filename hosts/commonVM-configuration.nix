@@ -267,11 +267,30 @@ in
       "tailscaled.service"
     ];
 
-    path = [ pkgs.tailscale ];
+    path = with pkgs; [
+      tailscale
+
+      # Tools that openclaw can invoke at runtime
+      ffmpeg
+      sox
+      go
+      pandoc
+      poppler-utils
+      imagemagick
+      tesseract
+      ripgrep
+      curl
+      jq
+      git
+      nodejs_22
+      python3
+    ];
 
     environment = {
       OPENCLAW_CONFIG_PATH = "/var/lib/smriti/config/openclaw.json";
       OPENCLAW_STATE_DIR = "/var/lib/smriti";
+      PLAYWRIGHT_BROWSERS_PATH = "${pkgs.playwright-driver.browsers}";
+      NODE_ENV = "production";
     };
 
     serviceConfig = {

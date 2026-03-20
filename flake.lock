@@ -238,11 +238,11 @@
         "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
-        "lastModified": 1773969056,
-        "narHash": "sha256-MwNlo686wD8MtznDuVShvI7mQKraTHEjTD6IFEphoMo=",
+        "lastModified": 1773987180,
+        "narHash": "sha256-akFgqq61lbluZh+50Q2jnetgVXwVrGat6pNWuHNi7tU=",
         "ref": "refs/heads/master",
-        "rev": "7dfaca4ac669c85cebc33983a7a50bf7522adaf8",
-        "revCount": 56,
+        "rev": "074822709ef27043b2966bd68f271629fdba7adf",
+        "revCount": 57,
         "type": "git",
         "url": "ssh://git@github.com/dmallubhotla/openclaw-image"
       },
