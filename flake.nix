@@ -71,7 +71,8 @@
 
     proxmox-nixos = {
       url = "github:SaumonNet/proxmox-nixos";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
+      # Note: proxmox-nixos uses nixpkgs-stable internally; we let it use its
+      # own pinned nixpkgs to avoid ABI mismatches in the Proxmox packages.
     };
 
   };
