@@ -21,7 +21,7 @@ remote-update ip hostname:
     nixos-rebuild switch --flake .#{{ hostname }} --target-host deepak@{{ ip }} --sudo --ask-sudo-password
 
 # Build a bootable installer ISO for a bare-metal host (e.g. shannon).
-# Uses the isoImages.<hostname> flake output, which is a NixOS installer
+# Uses the packages.<system>.<hostname>-iso flake output, which is a NixOS installer
 # with useful packages (git, parted, ipmitool) and the proxmox-nixos cache
 # pre-configured so nixos-install is fast.
 #
@@ -40,7 +40,7 @@ remote-update ip hostname:
 build-iso hostname out="./result":
     nix build \
         --out-link {{ out }} \
-        '.#isoImages.{{ hostname }}.config.system.build.isoImage'
+        '.#packages.x86_64-linux.{{ hostname }}-iso'
     @echo ""
     @echo "ISO built:"
     @ls {{ out }}/iso/nixos-*.iso

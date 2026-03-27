@@ -112,7 +112,7 @@
       };
 
       # Bootable installer ISOs for bare-metal hosts.
-      # Build with: nix build .#isoImages.shannon
+      # Build with: nix build .#packages.x86_64-linux.shannon-iso
       # Flash with: dd if=result/iso/nixos-*.iso of=/dev/sdX bs=4M status=progress
       #
       # The ISO boots a standard NixOS installer. After booting:
@@ -120,56 +120,58 @@
       #   2. nixos-generate-config --root /mnt
       #   3. Replace hosts/<hostname>/hardware-configuration.nix
       #   4. nixos-install --flake /path/to/nixconf#<hostname>
-      isoImages = {
-        shannon = inputs.nixpkgs-stable.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = {
-            inherit inputs customPackageOverlay;
+      packages.x86_64-linux.shannon-iso =
+        let
+          isoSystem = inputs.nixpkgs-stable.lib.nixosSystem {
+            system = "x86_64-linux";
+            specialArgs = {
+              inherit inputs customPackageOverlay;
+            };
+            modules = [
+              # Standard NixOS installer base
+              "${inputs.nixpkgs-stable}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+              # Include useful hardware support for Dell PowerEdge
+              "${inputs.nixpkgs-stable}/nixos/modules/profiles/all-hardware.nix"
+              (
+                { pkgs, lib, ... }:
+                {
+                  # Include git and nix so you can fetch + apply the flake during install
+                  environment.systemPackages = with pkgs; [
+                    git
+                    vim
+                    parted
+                    gptfdisk
+                    ipmitool # iDRAC/IPMI management
+                    smartmontools
+                    pciutils
+                  ];
+
+                  # Add proxmox-nixos binary cache so install is fast
+                  nix.settings = {
+                    substituters = [
+                      "https://cache.nixos.org"
+                      "https://cache.saumon.network/proxmox-nixos"
+                    ];
+                    trusted-public-keys = [
+                      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+                      "proxmox-nixos:D9RYSWpQQC/msZUWphOY2I5RLH5Dd6yQcaHIuug7dWM="
+                    ];
+                    experimental-features = [ "nix-command" "flakes" ];
+                  };
+
+                  # Enable SSH in installer for remote access (e.g. via iDRAC console)
+                  services.openssh = {
+                    enable = true;
+                    settings.PermitRootLogin = "yes";
+                  };
+
+                  users.users.root.initialPassword = "nixos"; # change immediately after install
+                }
+              )
+            ];
           };
-          modules = [
-            # Standard NixOS installer base
-            "${inputs.nixpkgs-stable}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-            # Include useful hardware support for Dell PowerEdge
-            "${inputs.nixpkgs-stable}/nixos/modules/profiles/all-hardware.nix"
-            (
-              { pkgs, lib, ... }:
-              {
-                # Include git and nix so you can fetch + apply the flake during install
-                environment.systemPackages = with pkgs; [
-                  git
-                  vim
-                  parted
-                  gptfdisk
-                  ipmitool # iDRAC/IPMI management
-                  smartmontools
-                  pciutils
-                ];
-
-                # Add proxmox-nixos binary cache so install is fast
-                nix.settings = {
-                  substituters = [
-                    "https://cache.nixos.org"
-                    "https://cache.saumon.network/proxmox-nixos"
-                  ];
-                  trusted-public-keys = [
-                    "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-                    "proxmox-nixos:D9RYSWpQQC/msZUWphOY2I5RLH5Dd6yQcaHIuug7dWM="
-                  ];
-                  experimental-features = [ "nix-command" "flakes" ];
-                };
-
-                # Enable SSH in installer for remote access (e.g. via iDRAC console)
-                services.openssh = {
-                  enable = true;
-                  settings.PermitRootLogin = "yes";
-                };
-
-                users.users.root.initialPassword = "nixos"; # change immediately after install
-              }
-            )
-          ];
-        };
-      };
+        in
+        isoSystem.config.system.build.isoImage;
 
       # Standalone home-manager configurations
       # Usage: home-manager switch --flake .#deepak
