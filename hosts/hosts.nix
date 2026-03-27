@@ -26,23 +26,18 @@ in
 
   # Bare-metal Proxmox-NixOS hosts
   #
-  # Shannon: Dell PowerEdge R730 running Proxmox VE on NixOS kernel.
-  # Uses proxmox-nixos (github:SaumonNet/proxmox-nixos) to avoid the
-  # Proxmox installer kernel, which triggers MCEs on this hardware.
-  # After install: join to Alan's cluster via Datacenter > Cluster > Join.
-  #
   # Required before first deploy:
-  #   1. Run nixos-generate-config on Shannon and replace
+  #   1. Run nixos-generate-config on shannon and replace
   #      hosts/shannon/hardware-configuration.nix with the output
   #   2. Update networking.bridges.vmbr0.interfaces in proxmox-configuration.nix
   #      with the correct NIC interface name (check `ip link` on installer)
-  #   3. Set ipAddress below to Shannon's static IP
+  #   3. 192.168.1.41 for shannon
   "shannon" = lib.mkProxmoxHost {
     hostname = "shannon";
     stateVersion = "25.11";
     gitSigningKey = "047D7BB1D577BB54"; # update with Shannon's key if different
     hardwareConfig = ./shannon/hardware-configuration.nix;
-    ipAddress = "192.168.1.XX"; # PLACEHOLDER — set Shannon's static IP
+    ipAddress = "192.168.1.41";
     bridges = [ "vmbr0" ];
     # Declarative VMs (optional — can also manage via Proxmox web UI)
     # vms = {

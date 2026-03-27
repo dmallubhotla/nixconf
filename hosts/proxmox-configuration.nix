@@ -8,13 +8,11 @@
   customPackageOverlay,
   hostname,
   stateVersion,
-  nixpkgs-unstable,
   proxmox-nixos,
   ipAddress,
   bridges ? [ "vmbr0" ],
   vms ? { },
   withDocker ? false,
-  inputs,
   ...
 }:
 let
