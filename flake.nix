@@ -69,6 +69,11 @@
       url = "git+ssh://git@github.com/dmallubhotla/openclaw-image";
     };
 
+    proxmox-nixos = {
+      url = "github:SaumonNet/proxmox-nixos";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
+
   };
 
   outputs =
