@@ -76,6 +76,9 @@ let
       modules,
       specialArgs ? { },
     }:
+    let
+      proxmox-nixos = inputs.proxmox-nixos or null;
+    in
     inputs.nixpkgs-stable.lib.nixosSystem {
       inherit system;
       specialArgs = {
@@ -85,6 +88,7 @@ let
           nixpkgs-unstable
           hostname
           stateVersion
+          proxmox-nixos
           ;
       }
       // specialArgs;
@@ -200,6 +204,50 @@ let
       ++ extraModules;
     };
 
+  # Proxmox-NixOS bare-metal host builder
+  # Runs Proxmox VE services on top of a NixOS kernel.
+  # Use for physical servers where the Proxmox installer kernel is problematic.
+  mkProxmoxHost =
+    {
+      hostname,
+      stateVersion,
+      hardwareConfig,
+      ipAddress,
+      withDocker ? false,
+      withGUI ? false,
+      withSops ? true,
+      gitSigningKey,
+      # Proxmox-specific options
+      bridges ? [ "vmbr0" ],
+      vms ? { },
+      extraModules ? [ ],
+      extraSpecialArgs ? { },
+    }:
+    mkHost {
+      inherit hostname stateVersion withSops;
+      specialArgs = {
+        inherit
+          withDocker
+          ipAddress
+          bridges
+          vms
+          ;
+      }
+      // extraSpecialArgs;
+      modules = [
+        hardwareConfig
+        ../hosts/proxmox-configuration.nix
+        (mkHomeManagerConfig {
+          username = "deepak";
+          homeModule = ../home/deepak/home.nix;
+          inherit withGUI withSops gitSigningKey;
+        })
+        # proxmox-nixos overlay and module are applied in proxmox-configuration.nix
+        # via the inputs.proxmox-nixos reference passed through specialArgs
+      ]
+      ++ extraModules;
+    };
+
   # Standalone home-manager configuration builder (for flake outputs)
   # Usage: home-manager switch --flake .#username
   mkHomeConfiguration =
@@ -257,6 +305,7 @@ in
     mkWSLHost
     mkVMHost
     mkDesktopHost
+    mkProxmoxHost
     mkHomeConfiguration
     nixpkgs-unstable
     ;
