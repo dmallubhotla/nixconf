@@ -36,7 +36,8 @@ remote-update ip hostname:
 #   2. nixos-generate-config --root /mnt
 #   3. Copy hosts/shannon/hardware-configuration.nix from the generated output
 #   4. nixos-install --flake github:smritibot/nixconf#shannon
-#      (or from a local clone: nixos-install --flake /path/to/nixconf#shannon)
+
+# (or from a local clone: nixos-install --flake /path/to/nixconf#shannon)
 build-iso hostname out="./result":
     nix build \
         --out-link {{ out }} \

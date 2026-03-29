@@ -133,7 +133,7 @@
               # Include useful hardware support for Dell PowerEdge
               "${inputs.nixpkgs-stable}/nixos/modules/profiles/all-hardware.nix"
               (
-                { pkgs, lib, ... }:
+                { pkgs, ... }:
                 {
                   # Include git and nix so you can fetch + apply the flake during install
                   environment.systemPackages = with pkgs; [
@@ -156,7 +156,10 @@
                       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
                       "proxmox-nixos:D9RYSWpQQC/msZUWphOY2I5RLH5Dd6yQcaHIuug7dWM="
                     ];
-                    experimental-features = [ "nix-command" "flakes" ];
+                    experimental-features = [
+                      "nix-command"
+                      "flakes"
+                    ];
                   };
 
                   # Enable SSH in installer for remote access (e.g. via iDRAC console)

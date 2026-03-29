@@ -103,7 +103,7 @@ in
   # The bridge vmbr0 is configured here; Proxmox just references it by name.
   # Update the interface name (e.g., eno1, enp3s0) to match your hardware.
   # Run `ip link` on the installed system to find the right name.
-  networking.bridges.vmbr0.interfaces = [ "eno1" ]; # PLACEHOLDER — update after install
+  networking.bridges.vmbr0.interfaces = [ "eno4" ];
   networking.interfaces.vmbr0 = {
     useDHCP = lib.mkDefault true;
   };
