@@ -57,6 +57,5 @@ in
 {
   overlay = inputs.nixpkgs.lib.composeManyExtensions [
     pluginoverlay
-    inputs.claude-mcp-bundle.overlays.default
   ];
 }

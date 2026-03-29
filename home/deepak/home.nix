@@ -66,9 +66,9 @@ lib.mkMerge (
         # pkgs-unstable.nodejs
 
         # From our claude bundle
-        pkgs.custom-servers.arxiv-mcp-server
-        pkgs.custom-servers.basic-memory-server
-        pkgs.custom-servers.mcp-text-editor
+        # pkgs.custom-servers.arxiv-mcp-server
+        # pkgs.custom-servers.basic-memory-server
+        # pkgs.custom-servers.mcp-text-editor
       ]
       ++ pkgs.lib.optionals withGUI [
         pkgs.discord
