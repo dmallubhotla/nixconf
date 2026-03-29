@@ -61,10 +61,9 @@ in
   # Boot: bare metal, not a VM
   boot.loader.grub = {
     enable = true;
-    device = "nodev";
-    efiSupport = true;
+    device = "/dev/sdb";
   };
-  boot.loader.efi.canTouchEfiVariables = true;
+  # boot.loader.efi.canTouchEfiVariables = true;
 
   # Dell PowerEdge hardware support
   boot.initrd.availableKernelModules = [
