@@ -39,6 +39,7 @@ in
     hardwareConfig = ./shannon/hardware-configuration.nix;
     ipAddress = "192.168.1.41";
     bridges = [ "vmbr0" ];
+    withSops = false;
     # Declarative VMs (optional — can also manage via Proxmox web UI)
     # vms = {
     #   talos-worker-01 = {
