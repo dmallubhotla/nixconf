@@ -224,17 +224,17 @@
     "openclaw": {
       "flake": false,
       "locked": {
-        "lastModified": 1773466477,
-        "narHash": "sha256-OUPUKDfvKQezDhbpfrKw+4q2qssIVN7eAjS044Z2KJg=",
+        "lastModified": 1774748021,
+        "narHash": "sha256-mv1G9AWo/aGrJZGLE5mbvQrJDEgfvuvBlDBfi7EPnbc=",
         "owner": "openclaw",
         "repo": "openclaw",
-        "rev": "61d171ab0b2fe4abc9afe89c518586274b4b76c2",
+        "rev": "f9b1079283a8ee25a7cee77c8f8225d5c813bc30",
         "type": "github"
       },
       "original": {
         "owner": "openclaw",
         "repo": "openclaw",
-        "rev": "61d171ab0b2fe4abc9afe89c518586274b4b76c2",
+        "rev": "f9b1079283a8ee25a7cee77c8f8225d5c813bc30",
         "type": "github"
       }
     },
@@ -245,11 +245,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1773987180,
-        "narHash": "sha256-akFgqq61lbluZh+50Q2jnetgVXwVrGat6pNWuHNi7tU=",
+        "lastModified": 1774915565,
+        "narHash": "sha256-gHt0RqE7JLsLgLoLzDSRZEduMpB/ua0vH96ENcUOcvg=",
         "ref": "refs/heads/master",
-        "rev": "074822709ef27043b2966bd68f271629fdba7adf",
-        "revCount": 57,
+        "rev": "6fe3c2a664ce2c03e652e10846bf4d90adb9e2c0",
+        "revCount": 59,
         "type": "git",
         "url": "ssh://git@github.com/dmallubhotla/openclaw-image"
       },

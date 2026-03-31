@@ -144,8 +144,8 @@ in
     gnupg
     pinentry-curses
     # needed for lvm on proxmox
-    gptfdisk   # provides sgdisk
-    lvm2       # provides pvcreate, vgcreate etc.
+    gptfdisk # provides sgdisk
+    lvm2 # provides pvcreate, vgcreate etc.
   ];
 
   fonts.packages = with pkgs; [
