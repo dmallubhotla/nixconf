@@ -88,6 +88,7 @@ in
     "megaraid_sas"
     "ipmi_devintf"
     "ipmi_si" # iDRAC/IPMI support
+    "dm-thin-pool" # LVM thin provisioning for local-lvm
   ];
 
   # Enable IP forwarding for VM networking
@@ -122,6 +123,16 @@ in
     ++ lib.optionals withDocker [ "docker" ];
     shell = pkgs.zsh;
     initialHashedPassword = "$y$j9T$cVagC4LC8iTozPVAW5uE10$vZiit3Ohx/fwA87p0C.9tzfz0D3ytec.hClUvOjnjF1";
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC+yAxaiQ+98tfV2aAkwDVvWzEz5UCnkunrXzSkG8omp dmallubhotla@gmail.com"
+    ];
+  };
+
+  # Terraform/OpenTofu service account for Proxmox API (PAM auth)
+  users.users.terraform = {
+    isNormalUser = true;
+    home = "/home/terraform";
+    shell = pkgs.bash;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC+yAxaiQ+98tfV2aAkwDVvWzEz5UCnkunrXzSkG8omp dmallubhotla@gmail.com"
     ];
