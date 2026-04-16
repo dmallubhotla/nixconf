@@ -104,6 +104,7 @@ lib.mkMerge (
           DPK_OBSIDIAN_DIR = obsidian;
 
           # UV_PYTHON = "${default_python}";
+
         };
 
       programs.direnv.enable = true;
@@ -275,6 +276,15 @@ lib.mkMerge (
         ];
         initContent = ''
           eval "$(${pkgs.direnv}/bin/direnv hook zsh)"
+
+          # Build KUBECONFIG from default config + all files in configs.d
+          () {
+            local kubeconfigs="$HOME/.kube/config"
+            for f in "$HOME"/.kube/configs.d/*(N); do
+              kubeconfigs="$kubeconfigs:$f"
+            done
+            export KUBECONFIG="$kubeconfigs"
+          }
         '';
       };
 
