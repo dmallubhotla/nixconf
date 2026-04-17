@@ -133,7 +133,7 @@
               # Include useful hardware support for Dell PowerEdge
               "${inputs.nixpkgs-stable}/nixos/modules/profiles/all-hardware.nix"
               (
-                { pkgs, ... }:
+                { pkgs, lib, ... }:
                 {
                   # Include git and nix so you can fetch + apply the flake during install
                   environment.systemPackages = with pkgs; [
@@ -168,7 +168,10 @@
                     settings.PermitRootLogin = "yes";
                   };
 
-                  users.users.root.initialPassword = "nixos"; # change immediately after install
+                  users.users.root = {
+                    initialPassword = "nixos"; # change immediately after install
+                    initialHashedPassword = lib.mkForce null;
+                  };
                 }
               )
             ];
