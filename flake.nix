@@ -75,6 +75,11 @@
       # own pinned nixpkgs to avoid ABI mismatches in the Proxmox packages.
     };
 
+    hanko = {
+      url = "github:dmallubhotla/hanko";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
+
   };
 
   outputs =

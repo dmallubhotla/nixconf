@@ -57,5 +57,6 @@ in
 {
   overlay = inputs.nixpkgs.lib.composeManyExtensions [
     pluginoverlay
+    inputs.hanko.overlays.default
   ];
 }
