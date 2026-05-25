@@ -80,6 +80,11 @@
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
+    kestrel = {
+      url = "git+ssh://git@github.com/dmallubhotla/kestrel";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
+
   };
 
   outputs =

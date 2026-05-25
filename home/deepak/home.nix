@@ -62,6 +62,7 @@ lib.mkMerge (
 
         pkgs-unstable.claude-code
         pkgs.hanko
+        pkgs.kest
         # default_python
         # pkgs-unstable.uv
         # pkgs-unstable.nodejs
