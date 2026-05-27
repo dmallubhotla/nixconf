@@ -266,11 +266,11 @@
         "treefmt-nix": "treefmt-nix_3"
       },
       "locked": {
-        "lastModified": 1779464710,
-        "narHash": "sha256-MHs7awRNxtrsprRfVSOD53Cmm0xsyW+OGxIX9XYRRRw=",
+        "lastModified": 1779840340,
+        "narHash": "sha256-ANzxjGaKuGPHrCIzGHl/Dz4+YZW+MPuML1z+EQPUgsk=",
         "ref": "refs/heads/master",
-        "rev": "298d8c2d46574556982befe01457155f2133b02c",
-        "revCount": 71,
+        "rev": "8052815f369e0e18594a2f7cbe19225712cedd28",
+        "revCount": 86,
         "type": "git",
         "url": "ssh://git@github.com/dmallubhotla/kestrel"
       },
