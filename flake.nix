@@ -193,6 +193,7 @@
         "deepak" = myLib.mkHomeConfiguration {
           username = "deepak";
           homeModule = ./home/deepak/home.nix;
+          sopsModule = ./home/deepak/sops.nix;
           withGUI = false;
           gitSigningKey = "8F904A3FC7021497";
         };
@@ -201,6 +202,7 @@
         "deepak-gui" = myLib.mkHomeConfiguration {
           username = "deepak";
           homeModule = ./home/deepak/home.nix;
+          sopsModule = ./home/deepak/sops.nix;
           withGUI = true;
           gitSigningKey = "8F904A3FC7021497";
         };

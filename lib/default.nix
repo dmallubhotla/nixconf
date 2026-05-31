@@ -36,6 +36,7 @@ let
     {
       username,
       homeModule,
+      sopsModule ? null,
       withGUI ? false,
       withSops ? true,
       gitSigningKey ? null,
@@ -49,7 +50,6 @@ let
         extraSpecialArgs = {
           inherit
             withGUI
-            withSops
             gitSigningKey
             nixpkgs-unstable
             obsidian_dir
@@ -58,7 +58,7 @@ let
         }
         // extraSpecialArgs;
         users.${username} = {
-          imports = [ homeModule ];
+          imports = [ homeModule ] ++ lib.optionals (withSops && sopsModule != null) [ sopsModule ];
         };
         sharedModules = lib.optionals withSops [
           inputs.sops-nix.homeManagerModules.sops
@@ -123,6 +123,7 @@ let
         (mkHomeManagerConfig {
           username = "deepak";
           homeModule = ../home/deepak/home.nix;
+          sopsModule = ../home/deepak/sops.nix;
           inherit
             withGUI
             gitSigningKey
@@ -169,6 +170,7 @@ let
         (mkHomeManagerConfig {
           username = "deepak";
           homeModule = ../home/deepak/home.nix;
+          sopsModule = ../home/deepak/sops.nix;
           inherit withGUI withSops gitSigningKey;
         })
       ]
@@ -198,6 +200,7 @@ let
         (mkHomeManagerConfig {
           username = "deepak";
           homeModule = ../home/deepak/home.nix;
+          sopsModule = ../home/deepak/sops.nix;
           inherit withGUI gitSigningKey;
         })
       ]
@@ -240,6 +243,7 @@ let
         (mkHomeManagerConfig {
           username = "deepak";
           homeModule = ../home/deepak/home.nix;
+          sopsModule = ../home/deepak/sops.nix;
           inherit withGUI withSops gitSigningKey;
         })
         # proxmox-nixos overlay and module are applied in proxmox-configuration.nix
@@ -254,8 +258,10 @@ let
     {
       username,
       homeModule,
+      sopsModule ? null,
       system ? linuxSystem,
       withGUI ? false,
+      withSops ? true,
       gitSigningKey ? null,
       obsidian_dir ? null,
       win_home_dir ? null,
@@ -294,8 +300,10 @@ let
       // extraSpecialArgs;
       modules = [
         homeModule
-        inputs.sops-nix.homeManagerModules.sops
-      ];
+      ]
+      ++ lib.optionals withSops (
+        [ inputs.sops-nix.homeManagerModules.sops ] ++ lib.optionals (sopsModule != null) [ sopsModule ]
+      );
     };
 
 in
