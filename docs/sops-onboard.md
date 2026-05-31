@@ -60,9 +60,11 @@ shared user secrets (Anthropic API key, etc.).
 
 ### System-level (NixOS) sops — for FlakeHub etc.
 
-Needed if the host opts into `withFlakehub = true` (or any other secret that
-nix-daemon or a system service reads). Reuses the user age key — no new key
-material per host beyond what user-level sops already requires.
+System sops gets pulled in automatically for any host built with
+`withSops = true` (the default for WSL/Proxmox/Desktop builders). There's
+no separate opt-in flag — if system sops is on, the host expects to be
+able to decrypt `hosts/secrets/system.yaml`. Reuses the user age key, so
+no new key material per host beyond what user-level sops already requires.
 
 1. Make sure user-level sops onboarding (above) is done first. The system
    sops module decrypts with the same key.
@@ -85,7 +87,8 @@ material per host beyond what user-level sops already requires.
    ```
    (Skip if `system.yaml` doesn't exist yet — see "Adding a new secret"
    below for the create case.)
-4. Flip `withFlakehub = true` for the host in `hosts/hosts.nix` and rebuild.
+4. Rebuild. `nix-cache-substituters.nix` is auto-imported by mkHost when
+   `withSops = true`, so no host-level flag to flip.
 
 ---
 
@@ -113,16 +116,19 @@ material per host beyond what user-level sops already requires.
    ```
    sops will pick up the recipients from `hosts/secrets/.sops.yaml` and
    encrypt to all of them on save.
-2. Add the key. For multi-line secrets (e.g. netrc body) use a literal block:
+2. Add the key. For multi-line secrets (e.g. netrc body) use a literal block.
+   The `nix-netrc` key is shared across every cache that needs auth — add
+   one `machine` line per host:
    ```yaml
-   flakehub-netrc: |
+   nix-netrc: |
      machine cache.flakehub.com login flakehub password flakehub1_...
      machine api.flakehub.com login flakehub password flakehub1_...
      machine flakehub.com login flakehub password flakehub1_...
+     machine attic.baklava login ... password ...
    ```
-3. Declare the secret in the NixOS module that needs it. For FlakeHub this
-   is already done in `hosts/modules/flakehub-cache.nix`; for a new secret,
-   follow the same pattern:
+3. Declare the secret in the NixOS module that needs it. For the netrc
+   this is already done in `hosts/modules/nix-cache-substituters.nix`;
+   for a new secret, follow the same pattern:
    ```nix
    sops.secrets.my-secret = {
      sopsFile = ../secrets/system.yaml;

@@ -73,14 +73,11 @@ let
       system ? linuxSystem,
       stateVersion,
       withSops ? true,
-      withFlakehub ? false,
       modules,
       specialArgs ? { },
     }:
     let
       proxmox-nixos = inputs.proxmox-nixos or null;
-      # withFlakehub requires the NixOS sops-nix module for /etc/nix/flakehub-netrc.
-      effectiveWithSops = withSops || withFlakehub;
     in
     inputs.nixpkgs-stable.lib.nixosSystem {
       inherit system;
@@ -98,8 +95,11 @@ let
       modules = [
         pinRegistry
       ]
-      ++ (commonModules effectiveWithSops)
-      ++ lib.optionals withFlakehub [ ../hosts/modules/flakehub-cache.nix ]
+      ++ (commonModules withSops)
+      # nix-cache-substituters needs system sops; tie it to withSops rather
+      # than a separate flag. Hosts with withSops on are expected to have
+      # the system.yaml netrc decryptable.
+      ++ lib.optionals withSops [ ../hosts/modules/nix-cache-substituters.nix ]
       ++ modules;
     };
 
@@ -110,7 +110,6 @@ let
       stateVersion,
       withDocker ? true,
       withGUI ? false,
-      withFlakehub ? false,
       gitSigningKey,
       obsidian_dir ? null,
       win_home_dir ? null,
@@ -118,7 +117,7 @@ let
       extraSpecialArgs ? { },
     }:
     mkHost {
-      inherit hostname stateVersion withFlakehub;
+      inherit hostname stateVersion;
       specialArgs = {
         inherit withDocker;
       }
@@ -149,7 +148,6 @@ let
       withDocker ? false,
       withGUI ? false,
       withSops ? false,
-      withFlakehub ? false,
       gitSigningKey,
       # VM-specific options
       withQemuAgent ? true,
@@ -164,7 +162,6 @@ let
         hostname
         stateVersion
         withSops
-        withFlakehub
         ;
       specialArgs = {
         inherit
@@ -196,13 +193,12 @@ let
       hardwareConfig,
       withDocker ? true,
       withGUI ? true,
-      withFlakehub ? false,
       gitSigningKey,
       extraModules ? [ ],
       extraSpecialArgs ? { },
     }:
     mkHost {
-      inherit hostname stateVersion withFlakehub;
+      inherit hostname stateVersion;
       specialArgs = {
         inherit withDocker;
       }
@@ -231,7 +227,6 @@ let
       withDocker ? false,
       withGUI ? false,
       withSops ? true,
-      withFlakehub ? false,
       gitSigningKey,
       # Proxmox-specific options
       bridges ? [ "vmbr0" ],
@@ -244,7 +239,6 @@ let
         hostname
         stateVersion
         withSops
-        withFlakehub
         ;
       specialArgs = {
         inherit

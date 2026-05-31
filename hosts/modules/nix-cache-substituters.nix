@@ -1,27 +1,29 @@
-# FlakeHub Cache substituter (pull-side, system-level).
+# Extra Nix cache substituters (pull-side, system-level).
 #
-# Imported only when the host builder is called with `withFlakehub = true`.
-# The host builder also forces `withSops = true` so the NixOS sops-nix module
-# is loaded. Eval is identical to the no-flakehub case for hosts that don't
-# opt in.
+# Auto-imported by mkHost whenever `withSops = true` (which is the default
+# for WSL/Proxmox/Desktop builders). Currently wires FlakeHub Cache and
+# carries netrc credentials for any other private caches (e.g. attic) via
+# a single system-level netrc deployed by sops. Add more
+# `extra-substituters` here as new caches come online; keep their
+# credentials in the same netrc.
 #
 # Identity: system sops reuses the user's age key at
 # ~/.config/sops/age/keys.txt -- the same one user-level sops uses for
 # home/deepak/secrets.yaml. sops-nix activation runs as root and root can
 # read 0600 user-owned files, so no separate machine identity is needed.
 #
-# Bootstrap (one-time per host):
-#   1. Make sure ~/.config/sops/age/keys.txt exists for deepak on this host
-#      (i.e. user-level sops works). If it doesn't, see docs/sops-onboard.md.
-#   2. Generate a FlakeHub token (FlakeHub UI -> Tokens) and edit
-#      ../secrets/system.yaml with `sops`. Put the three netrc lines under
-#      the `flakehub-netrc` key as a literal block.
-#   3. Flip `withFlakehub = true` on the host in hosts/hosts.nix and rebuild.
+# Prereq: any withSops host must have:
+#   1. ~/.config/sops/age/keys.txt present for deepak (i.e. user-level
+#      sops works) -- see docs/sops-onboard.md.
+#   2. Its age recipient listed in ../secrets/.sops.yaml AND included in
+#      the system.yaml creation_rules group.
+#   3. The `nix-netrc` key populated in ../secrets/system.yaml (one literal
+#      block holding every netrc `machine ...` line you need).
 { config, ... }:
 {
   sops = {
     age.keyFile = "/home/deepak/.config/sops/age/keys.txt";
-    secrets.flakehub-netrc = {
+    secrets.nix-netrc = {
       sopsFile = ../secrets/system.yaml;
       restartUnits = [ "nix-daemon.service" ];
     };
@@ -38,6 +40,6 @@
       "cache.flakehub.com-4:Asi8qIv291s0aYLyH6IOnr5Kf6+OF14WVjkE6t3xMio="
     ];
 
-    netrc-file = config.sops.secrets.flakehub-netrc.path;
+    netrc-file = config.sops.secrets.nix-netrc.path;
   };
 }
