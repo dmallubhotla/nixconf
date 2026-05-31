@@ -266,17 +266,17 @@
         "treefmt-nix": "treefmt-nix_3"
       },
       "locked": {
-        "lastModified": 1779850602,
-        "narHash": "sha256-Hb4Q1HIKR6lrc2hKmJLRTBInaF7f1adupwalzv8r1Ug=",
-        "ref": "refs/heads/master",
-        "rev": "cff873a7d60e750fca9faf365bd8cc65e315e3b2",
-        "revCount": 89,
-        "type": "git",
-        "url": "ssh://git@github.com/dmallubhotla/kestrel"
+        "lastModified": 1780195158,
+        "narHash": "sha256-f1L3FzGARKe7t99Km+Vr2TsnOYEdLYa3MBO7jcRxTjA=",
+        "owner": "dmallubhotla",
+        "repo": "kestrel",
+        "rev": "ed4a9f2b904ecd6125531171546eb4a80f7a5359",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "ssh://git@github.com/dmallubhotla/kestrel"
+        "owner": "dmallubhotla",
+        "repo": "kestrel",
+        "type": "github"
       }
     },
     "mdt": {
@@ -360,22 +360,6 @@
         "type": "github"
       }
     },
-    "nixpkgs_2": {
-      "locked": {
-        "lastModified": 1769789167,
-        "narHash": "sha256-kKB3bqYJU5nzYeIROI82Ef9VtTbu4uA3YydSk/Bioa8=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "62c8382960464ceb98ea593cb8321a2cf8f9e3e5",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nomodoro": {
       "flake": false,
       "locked": {
@@ -408,43 +392,6 @@
         "ref": "master",
         "repo": "nvim-web-devicons",
         "type": "github"
-      }
-    },
-    "openclaw": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1776375932,
-        "narHash": "sha256-QsoiV52a0rcTL4fvF6c/aC1/Krq4qKptYOwlW4N6/4c=",
-        "owner": "openclaw",
-        "repo": "openclaw",
-        "rev": "041266a6699cac3baef8ef39db41fa26f29f9db3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "openclaw",
-        "ref": "v2026.4.15",
-        "repo": "openclaw",
-        "type": "github"
-      }
-    },
-    "openclaw-image": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_2",
-        "openclaw": "openclaw",
-        "treefmt-nix": "treefmt-nix_4"
-      },
-      "locked": {
-        "lastModified": 1776643402,
-        "narHash": "sha256-WNR9yKDnR8UKiEUnLW+TPmO7RBoxk3FqAmcWtBXFl2E=",
-        "ref": "refs/heads/master",
-        "rev": "f026745ac4534e76c0ceb32ea53a2892b30ce229",
-        "revCount": 60,
-        "type": "git",
-        "url": "ssh://git@github.com/dmallubhotla/openclaw-image"
-      },
-      "original": {
-        "type": "git",
-        "url": "ssh://git@github.com/dmallubhotla/openclaw-image"
       }
     },
     "proxmox-nixos": {
@@ -480,12 +427,11 @@
         "nixpkgs-stable": "nixpkgs-stable",
         "nomodoro": "nomodoro",
         "nvim-web-devicons": "nvim-web-devicons",
-        "openclaw-image": "openclaw-image",
         "proxmox-nixos": "proxmox-nixos",
         "sops-nix": "sops-nix",
         "spaceport-nvim": "spaceport-nvim",
         "systems": "systems_5",
-        "treefmt-nix": "treefmt-nix_5",
+        "treefmt-nix": "treefmt-nix_4",
         "zsh-completions": "zsh-completions"
       }
     },
@@ -665,27 +611,6 @@
       }
     },
     "treefmt-nix_4": {
-      "inputs": {
-        "nixpkgs": [
-          "openclaw-image",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1769691507,
-        "narHash": "sha256-8aAYwyVzSSwIhP2glDhw/G0i5+wOrren3v6WmxkVonM=",
-        "owner": "numtide",
-        "repo": "treefmt-nix",
-        "rev": "28b19c5844cc6e2257801d43f2772a4b4c050a1b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "treefmt-nix",
-        "type": "github"
-      }
-    },
-    "treefmt-nix_5": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs-stable"
