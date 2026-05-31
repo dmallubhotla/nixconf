@@ -65,10 +65,6 @@
       flake = false;
     };
 
-    openclaw-image = {
-      url = "git+ssh://git@github.com/dmallubhotla/openclaw-image";
-    };
-
     proxmox-nixos = {
       url = "github:SaumonNet/proxmox-nixos";
       # Note: proxmox-nixos uses nixpkgs-stable internally; we let it use its
@@ -81,7 +77,7 @@
     };
 
     kestrel = {
-      url = "git+ssh://git@github.com/dmallubhotla/kestrel";
+      url = "github:dmallubhotla/kestrel";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 

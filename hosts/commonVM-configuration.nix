@@ -133,10 +133,9 @@ in
       # VM-specific tools
       cloud-utils # for growpart
       parted
-    ]
-    ++ [
-      inputs.openclaw-image.packages.${pkgs.stdenv.hostPlatform.system}.openclaw
     ];
+  # TODO: re-add openclaw once the openclaw-image flake input is back. Was:
+  #   ++ [ inputs.openclaw-image.packages.${pkgs.stdenv.hostPlatform.system}.openclaw ];
 
   # Fonts
   fonts.packages = with pkgs; [
@@ -255,69 +254,72 @@ in
 
   users.groups.smriti = { };
 
-  # Openclaw gateway service
-  # NOTE: Requires `sudo tailscale login` before first use to authenticate the node.
-  # The gateway uses `tailscale serve` to expose the service, which won't work until
-  # the machine is authenticated with your Tailscale network.
-  systemd.services.openclaw-gateway = {
-    description = "OpenClaw Gateway";
-    wantedBy = [ "multi-user.target" ];
-    after = [
-      "network.target"
-      "tailscaled.service"
-    ];
-
-    path = with pkgs; [
-      tailscale
-
-      # Tools that openclaw can invoke at runtime
-      ffmpeg
-      sox
-      go
-      pandoc
-      poppler-utils
-      imagemagick
-      tesseract
-      ripgrep
-      curl
-      jq
-      git
-      nodejs_22
-      python3
-    ];
-
-    environment = {
-      OPENCLAW_CONFIG_PATH = "/var/lib/smriti/config/openclaw.json";
-      OPENCLAW_STATE_DIR = "/var/lib/smriti";
-      PLAYWRIGHT_BROWSERS_PATH = "${pkgs.playwright-driver.browsers}";
-      NODE_ENV = "production";
-    };
-
-    serviceConfig = {
-      Type = "simple";
-      User = "smriti";
-      Group = "smriti";
-      WorkingDirectory = "/var/lib/smriti";
-      ExecStart = "${
-        inputs.openclaw-image.packages.${pkgs.stdenv.hostPlatform.system}.openclaw
-      }/bin/openclaw gateway --tailscale serve --allow-unconfigured";
-      Restart = "on-failure";
-      RestartSec = 10;
-
-      # Secrets via environment file (create /var/lib/smriti/secrets.env with GITHUB_PAT and OPENCLAW_GATEWAY_TOKEN)
-      EnvironmentFile = "/var/lib/smriti/smriti.env";
-
-      # Hardening
-      NoNewPrivileges = true;
-      ProtectSystem = "strict";
-      ProtectHome = true;
-      PrivateTmp = true;
-      ReadWritePaths = [
-        "/var/lib/smriti"
-        "/run/tailscale" # Allow tailscale serve to communicate with tailscaled
-      ];
-    };
-  };
+  # TODO: openclaw-image flake input was removed (private repo, blocked CI on
+  # GitHub Actions). Re-add the input and uncomment this block to restore the
+  # openclaw-gateway service.
+  # # Openclaw gateway service
+  # # NOTE: Requires `sudo tailscale login` before first use to authenticate the node.
+  # # The gateway uses `tailscale serve` to expose the service, which won't work until
+  # # the machine is authenticated with your Tailscale network.
+  # systemd.services.openclaw-gateway = {
+  #   description = "OpenClaw Gateway";
+  #   wantedBy = [ "multi-user.target" ];
+  #   after = [
+  #     "network.target"
+  #     "tailscaled.service"
+  #   ];
+  #
+  #   path = with pkgs; [
+  #     tailscale
+  #
+  #     # Tools that openclaw can invoke at runtime
+  #     ffmpeg
+  #     sox
+  #     go
+  #     pandoc
+  #     poppler-utils
+  #     imagemagick
+  #     tesseract
+  #     ripgrep
+  #     curl
+  #     jq
+  #     git
+  #     nodejs_22
+  #     python3
+  #   ];
+  #
+  #   environment = {
+  #     OPENCLAW_CONFIG_PATH = "/var/lib/smriti/config/openclaw.json";
+  #     OPENCLAW_STATE_DIR = "/var/lib/smriti";
+  #     PLAYWRIGHT_BROWSERS_PATH = "${pkgs.playwright-driver.browsers}";
+  #     NODE_ENV = "production";
+  #   };
+  #
+  #   serviceConfig = {
+  #     Type = "simple";
+  #     User = "smriti";
+  #     Group = "smriti";
+  #     WorkingDirectory = "/var/lib/smriti";
+  #     ExecStart = "${
+  #       inputs.openclaw-image.packages.${pkgs.stdenv.hostPlatform.system}.openclaw
+  #     }/bin/openclaw gateway --tailscale serve --allow-unconfigured";
+  #     Restart = "on-failure";
+  #     RestartSec = 10;
+  #
+  #     # Secrets via environment file (create /var/lib/smriti/secrets.env with GITHUB_PAT and OPENCLAW_GATEWAY_TOKEN)
+  #     EnvironmentFile = "/var/lib/smriti/smriti.env";
+  #
+  #     # Hardening
+  #     NoNewPrivileges = true;
+  #     ProtectSystem = "strict";
+  #     ProtectHome = true;
+  #     PrivateTmp = true;
+  #     ReadWritePaths = [
+  #       "/var/lib/smriti"
+  #       "/run/tailscale" # Allow tailscale serve to communicate with tailscaled
+  #     ];
+  #   };
+  # };
 
   # Bommalata Staging Server
   # Agent orchestration server for testing/development
