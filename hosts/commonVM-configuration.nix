@@ -11,7 +11,6 @@
   withCloudInit ? false,
   withGrowpart ? true,
   withSerialConsole ? true,
-  inputs,
   ...
 }:
 let
@@ -121,19 +120,17 @@ in
   programs.zsh.enable = true;
 
   # Essential system packages
-  environment.systemPackages =
-    with pkgs;
-    [
-      wget
-      vim
-      git
-      pinentry-curses
-      gnupg
-      tailscale
-      # VM-specific tools
-      cloud-utils # for growpart
-      parted
-    ];
+  environment.systemPackages = with pkgs; [
+    wget
+    vim
+    git
+    pinentry-curses
+    gnupg
+    tailscale
+    # VM-specific tools
+    cloud-utils # for growpart
+    parted
+  ];
   # TODO: re-add openclaw once the openclaw-image flake input is back. Was:
   #   ++ [ inputs.openclaw-image.packages.${pkgs.stdenv.hostPlatform.system}.openclaw ];
 
