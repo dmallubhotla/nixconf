@@ -112,8 +112,10 @@ in
 
   virtualisation.docker = pkgs.lib.mkIf withDocker {
     enable = true;
+    package = pkgs.docker_29;
     rootless = {
       enable = true;
+      package = pkgs.docker_29;
       setSocketVariable = true;
     };
   };

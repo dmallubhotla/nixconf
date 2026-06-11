@@ -204,6 +204,7 @@ in
 
   virtualisation.docker = lib.mkIf withDocker {
     enable = true;
+    package = pkgs.docker_29;
   };
 
   nixpkgs.config.allowUnfree = false;
