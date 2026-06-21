@@ -651,11 +651,11 @@
     "zsh-completions": {
       "flake": false,
       "locked": {
-        "lastModified": 1781482071,
-        "narHash": "sha256-9ao6BPipJQwzFvwFK5skvIusfE7tEuuPuPbInOPyq3k=",
+        "lastModified": 1781917473,
+        "narHash": "sha256-Shj+lWb7ySpGWHginoFkNFY8s23xb7/rb4bjcXrhsn4=",
         "owner": "zsh-users",
         "repo": "zsh-completions",
-        "rev": "4b23ecd62a9ad79ddf2ac03c0bd8a7b43266508c",
+        "rev": "24e22843b96588773bed3c139db94701ca605c32",
         "type": "github"
       },
       "original": {
