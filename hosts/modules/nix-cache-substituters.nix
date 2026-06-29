@@ -30,7 +30,10 @@
   };
 
   nix.settings = {
-    extra-substituters = [ "https://cache.flakehub.com" ];
+    extra-substituters = [
+      "https://cache.flakehub.com"
+      "https://attic.i.hruday.me/homelab"
+    ];
 
     # FlakeHub rotates and appends keys over time. Run `fh login` periodically
     # and copy the CURRENT full set it emits into this list -- a stale or
@@ -38,8 +41,12 @@
     extra-trusted-public-keys = [
       "cache.flakehub.com-3:hJuILl5sVK4iKm86JzgdXW12Y2Hwd5G07qKtHTOcDCM="
       "cache.flakehub.com-4:Asi8qIv291s0aYLyH6IOnr5Kf6+OF14WVjkE6t3xMio="
+      "homelab:rhI8NPdqQ5lR/WwO8QvYR7z/qT5bWQwhL3XIgZ55R9w="
     ];
 
     netrc-file = config.sops.secrets.nix-netrc.path;
+
+    # Fail fast so an unreachable cache can't hang a build.
+    connect-timeout = 5;
   };
 }
