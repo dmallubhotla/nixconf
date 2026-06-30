@@ -5,15 +5,19 @@ on:
   push:
   workflow_dispatch:
 concurrency:
-  group: ci-${{ gitea.ref }}
-  cancel-in-progress: true
+  group: ci
+  cancel-in-progress: false
 jobs:
   build:
     # Only build the default branch (or manual runs). A standard `branches:` filter
     # can't be used: mirror sync strips the refs/heads/ prefix so it never matches (gitea #24824).
     if: gitea.ref_name == 'master' || gitea.event_name == 'workflow_dispatch'
     runs-on: nix-runner
-    timeout-minutes: 30
+    # A cold build (no attic cache yet) compiles pve-qemu from source and builds the
+    # installer ISO, which runs ~40 min on this runner. Warm runs are ~4 min, so the
+    # high ceiling only matters until attic is seeded — it must not kill the warm-up
+    # before the post-step pushes to attic.
+    timeout-minutes: 120
     # nix is baked into the nix-runner image, so no installer step.
     # The build host still needs the proxmox-nixos cache to fetch proxmox packages (shannon).
     env:
