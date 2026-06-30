@@ -72,12 +72,12 @@
     };
 
     hanko = {
-      url = "github:dmallubhotla/hanko";
+      url = "github:deepak-science/hanko";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
     kestrel = {
-      url = "github:dmallubhotla/kestrel";
+      url = "github:deepak-science/kestrel";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
