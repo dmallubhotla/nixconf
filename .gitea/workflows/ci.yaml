@@ -1,0 +1,40 @@
+name: ci
+# No branch filter on push: on pull-mirror sync Gitea passes a bare branch name
+# without the refs/heads/ prefix, so a branch filter silently never matches (gitea #24824).
+on:
+  push:
+  workflow_dispatch:
+concurrency:
+  group: ci-${{ gitea.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    # Only build the default branch (or manual runs). A standard `branches:` filter
+    # can't be used: mirror sync strips the refs/heads/ prefix so it never matches (gitea #24824).
+    if: gitea.ref_name == 'master' || gitea.event_name == 'workflow_dispatch'
+    runs-on: nix-runner
+    timeout-minutes: 30
+    # nix is baked into the nix-runner image, so no installer step.
+    # The build host still needs the proxmox-nixos cache to fetch proxmox packages (shannon).
+    env:
+      NIX_CONFIG: |
+        extra-substituters = https://cache.saumon.network/proxmox-nixos
+        extra-trusted-public-keys = proxmox-nixos:D9RYSWpQQC/msZUWphOY2I5RLH5Dd6yQcaHIuug7dWM=
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Setup Attic cache
+        uses: ryanccn/attic-action@5635a15ef0c5462194ffbd05d1daeddc74625c3a # v0.5.0
+        with:
+          endpoint: ${{ secrets.ATTIC_ENDPOINT }}
+          cache: ${{ secrets.ATTIC_CACHE }}
+          token: ${{ secrets.ATTIC_TOKEN }}
+      - name: Flake check
+        run: nix flake check --print-build-logs
+      - name: Build nixosWalrus (WSL)
+        run: nix build --no-link --print-build-logs .#nixosConfigurations.nixosWalrus.config.system.build.toplevel
+      - name: Build nixosEggYoke (WSL)
+        run: nix build --no-link --print-build-logs .#nixosConfigurations.nixosEggYoke.config.system.build.toplevel
+      - name: Build shannon (Proxmox)
+        run: nix build --no-link --print-build-logs .#nixosConfigurations.shannon.config.system.build.toplevel
+      - name: Build nixosVM
+        run: nix build --no-link --print-build-logs .#nixosConfigurations.nixosVM.config.system.build.toplevel
