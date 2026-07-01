@@ -40,7 +40,10 @@ jobs:
         run: |
           conf="${XDG_CONFIG_HOME:-$HOME/.config}/nix/nix.conf"
           mkdir -p "$(dirname "$conf")"
+          # Leading newline: attic's `attic use` writes this file without a trailing newline,
+          # so appending directly would glue the first line onto its `netrc-file =` line.
           {
+            echo ''
             echo 'extra-substituters = https://cache.saumon.network/proxmox-nixos'
             echo 'extra-trusted-public-keys = proxmox-nixos:D9RYSWpQQC/msZUWphOY2I5RLH5Dd6yQcaHIuug7dWM='
           } >> "$conf"
