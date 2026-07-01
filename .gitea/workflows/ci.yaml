@@ -33,6 +33,17 @@ jobs:
           endpoint: ${{ secrets.ATTIC_ENDPOINT }}
           cache: ${{ secrets.ATTIC_CACHE }}
           token: ${{ secrets.ATTIC_TOKEN }}
+      # attic-action's `attic use` rewrites the user nix.conf with base `substituters =`/`trusted-public-keys =`,
+      # which overrides the image's /etc/nix/nix.conf `extra-` lines and drops the proxmox cache.
+      # Re-append it here (after that step) so pve-qemu is fetched from saumon instead of a ~45 min compile.
+      - name: Add proxmox-nixos substituter
+        run: |
+          conf="${XDG_CONFIG_HOME:-$HOME/.config}/nix/nix.conf"
+          mkdir -p "$(dirname "$conf")"
+          {
+            echo 'extra-substituters = https://cache.saumon.network/proxmox-nixos'
+            echo 'extra-trusted-public-keys = proxmox-nixos:D9RYSWpQQC/msZUWphOY2I5RLH5Dd6yQcaHIuug7dWM='
+          } >> "$conf"
       - name: Flake check
         run: nix flake check --print-build-logs
       - name: Build nixosWalrus (WSL)
