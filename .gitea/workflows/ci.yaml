@@ -19,6 +19,59 @@ jobs:
         sandbox = true
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+      # Diagnostics: when a proxmox path unexpectedly compiles, these record the
+      # effective config, cache reachability, and build plan at the instant of the
+      # run — the transient state that can't be reconstructed after the fact.
+      # All non-fatal so a diagnostic hiccup never fails the build.
+      - name: Diagnose — nix config & cache reachability
+        continue-on-error: true
+        run: |
+          echo "## effective nix config"
+          nix config show | grep -E '^(substituters|trusted-public-keys|netrc-file|require-sigs|trusted-substituters) ' || true
+          echo
+          echo "## substituter reachability (HTTP status for nix-cache-info)"
+          for url in \
+            https://attic.i.hruday.me/homelab \
+            https://cache.saumon.network/proxmox-nixos \
+            https://cache.nixos.org; do
+            code=$(curl --netrc-file /etc/nix/netrc -s -m 15 -o /dev/null -w '%{http_code}' "$url/nix-cache-info" || echo 000)
+            printf '  %-52s %s\n' "$url" "$code"
+          done
+
+      - name: Diagnose — proxmox cache coverage (pve-qemu out)
+        continue-on-error: true
+        run: |
+          p=$(nix eval --raw ".#nixosConfigurations.shannon.pkgs.pve-qemu.outPath")
+          echo "pve-qemu out: $p"
+          hash=$(basename "$p"); hash=${hash%%-*}
+          echo "## $hash.narinfo across substituters (200 = cached, 404 = miss -> would compile)"
+          for url in \
+            https://attic.i.hruday.me/homelab \
+            https://cache.saumon.network/proxmox-nixos \
+            https://cache.nixos.org; do
+            code=$(curl --netrc-file /etc/nix/netrc -s -m 15 -o /dev/null -w '%{http_code}' "$url/$hash.narinfo" || echo 000)
+            printf '  %-52s %s\n' "$url" "$code"
+          done
+
+      - name: Diagnose — build plan (what will compile vs fetch)
+        continue-on-error: true
+        run: |
+          for host in nixosWalrus nixosEggYoke shannon nixosVM; do
+            echo "==================== $host ===================="
+            plan=$(nix build --dry-run ".#nixosConfigurations.$host.config.system.build.toplevel" 2>&1 || true)
+            echo "$plan" | grep -E 'will be built|will be fetched' || echo "  (everything already present)"
+            # Flag any proxmox/qemu path in the BUILD set — that's a cache miss that will compile.
+            built=$(echo "$plan" | awk '/will be built/{f=1;next} /will be fetched/{f=0} f')
+            hits=$(echo "$built" | grep -iE 'pve-|proxmox|qemu' || true)
+            if [ -n "$hits" ]; then
+              echo "  !! proxmox/qemu paths that WILL COMPILE (cache miss):"
+              echo "$hits" | sed 's/^/    /'
+            else
+              echo "  ok: no proxmox/qemu paths in the build set"
+            fi
+          done
+
       - name: Flake check
         run: nix flake check --print-build-logs
       - name: Build nixosWalrus (WSL)
