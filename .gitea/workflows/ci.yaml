@@ -19,7 +19,6 @@ jobs:
         sandbox = true
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
-
       # Diagnostics: when a proxmox path unexpectedly compiles, these record the
       # effective config, cache reachability, and build plan at the instant of the
       # run — the transient state that can't be reconstructed after the fact.
@@ -38,7 +37,6 @@ jobs:
             code=$(curl --netrc-file /etc/nix/netrc -s -m 15 -o /dev/null -w '%{http_code}' "$url/nix-cache-info" || echo 000)
             printf '  %-52s %s\n' "$url" "$code"
           done
-
       - name: Diagnose — proxmox cache coverage (pve-qemu out)
         continue-on-error: true
         run: |
@@ -53,7 +51,6 @@ jobs:
             code=$(curl --netrc-file /etc/nix/netrc -s -m 15 -o /dev/null -w '%{http_code}' "$url/$hash.narinfo" || echo 000)
             printf '  %-52s %s\n' "$url" "$code"
           done
-
       - name: Diagnose — build plan (what will compile vs fetch)
         continue-on-error: true
         run: |
@@ -71,7 +68,6 @@ jobs:
               echo "  ok: no proxmox/qemu paths in the build set"
             fi
           done
-
       - name: Flake check
         run: nix flake check --print-build-logs
       - name: Build nixosWalrus (WSL)
