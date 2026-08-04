@@ -60,7 +60,6 @@ in
       "@wheel"
     ];
     substituters = [ "https://cache.nixos.org" ];
-    trusted-public-keys = [ "systems:tvbHIThn7MAwvgMSiYR3ULVlL6cBrA40afqGuextnNQ=" ];
     download-buffer-size = 524288000;
   };
 
