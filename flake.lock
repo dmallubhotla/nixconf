@@ -708,11 +708,11 @@
     "zsh-completions": {
       "flake": false,
       "locked": {
-        "lastModified": 1785301781,
-        "narHash": "sha256-XQJUL/yM3B256OQZYO2evvPxD9qtpBSgmPvkdkxEkeI=",
+        "lastModified": 1787271068,
+        "narHash": "sha256-/yCvFIhFUQg7k1YfSfEeJhyFBOxUtWuT9wbk2bZbR4g=",
         "owner": "zsh-users",
         "repo": "zsh-completions",
-        "rev": "6ea4709fbc64f813ffa013fdd062fa0f0d9a0dab",
+        "rev": "8cd3bd78e8b1f17271cfdd8269074e5557d8d7b8",
         "type": "github"
       },
       "original": {
