@@ -35,6 +35,8 @@ let
         name = "nvim-web-devicons";
       };
 
+      herdrPackage = inputs.herdr.packages.${prev.stdenv.hostPlatform.system}.default;
+
       zshCompletionPlugin = {
         name = "zsh-completions";
         src = inputs.zsh-completions;
@@ -52,6 +54,9 @@ let
       customZshPlugins = {
         zsh-completions = zshCompletionPlugin;
       };
+
+      # Taking the package output rather than herdr.overlays.default, which composes rust-overlay into the whole pkgs set.
+      herdr = herdrPackage;
     };
 in
 {

@@ -81,6 +81,12 @@
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
+    herdr = {
+      url = "github:herdrdev/herdr";
+      # No `follows`: the build needs herdr's pinned rust-overlay toolchain and zig_0_15 to compile its vendored libghostty-vt.
+      # Repointing nixpkgs is a known way to break it.
+    };
+
   };
 
   outputs =

@@ -58,6 +58,7 @@ in
     pkgs.uair
 
     pkgs-unstable.claude-code
+    pkgs.herdr
     pkgs.hanko
     pkgs.kest
     # default_python
