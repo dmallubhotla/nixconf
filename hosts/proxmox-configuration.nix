@@ -13,6 +13,9 @@
   bridges ? [ "vmbr0" ],
   vms ? { },
   withDocker ? false,
+  lanSubnet,
+  uplinkInterface,
+  bootDevice,
   ...
 }:
 let
@@ -58,10 +61,12 @@ in
     vms = lib.mkIf (vms != { }) vms;
   };
 
-  # Boot: bare metal, not a VM
+  # Boot: bare metal, not a VM.
+  # Address the disk by stable /dev/disk/by-id path — bare sdX names shift when install media is present,
+  # which is how this ended up pointing at a nonexistent /dev/sdb and failing every grub-install.
   boot.loader.grub = {
     enable = true;
-    device = "/dev/sdb";
+    device = bootDevice;
   };
   # boot.loader.efi.canTouchEfiVariables = true;
 
@@ -101,9 +106,8 @@ in
   networking.useDHCP = lib.mkDefault false; # Proxmox manages networking
 
   # The bridge vmbr0 is configured here; Proxmox just references it by name.
-  # Update the interface name (e.g., eno1, enp3s0) to match your hardware.
-  # Run `ip link` on the installed system to find the right name.
-  networking.bridges.vmbr0.interfaces = [ "eno4" ];
+  # Set uplinkInterface per host to match the hardware — `ip link` on the installed system.
+  networking.bridges.vmbr0.interfaces = [ uplinkInterface ];
   networking.interfaces.vmbr0 = {
     useDHCP = lib.mkDefault true;
   };
@@ -179,10 +183,35 @@ in
     };
   };
 
+  # Bare-metal Proxmox hosts double as the tailnet's subnet routers, so remote
+  # access to the LAN never depends on a VM or on the k8s cluster being up.
+  # Both hosts advertise the same CIDR; tailscale fails over between them.
   services.tailscale = {
     enable = true;
     port = 62532;
-    extraSetFlags = [ "--operator=deepak" ];
+    # "server" enables the IP-forwarding sysctls a subnet router / exit node needs.
+    # Without it the routes below are advertised but silently never forward.
+    useRoutingFeatures = "server";
+    extraSetFlags = [
+      "--operator=deepak"
+      "--advertise-routes=${lanSubnet}"
+      "--advertise-exit-node"
+    ];
+  };
+
+  # Without UDP GRO forwarding the kernel re-segments forwarded tailscale traffic
+  # and subnet-router/exit-node throughput drops hard.
+  # Applied to the physical uplink rather than vmbr0 — offload knobs don't exist on a bridge.
+  systemd.services.tailscale-uplink-offload = {
+    description = "Tune ${uplinkInterface} offloads for tailscale subnet routing";
+    wantedBy = [ "multi-user.target" ];
+    wants = [ "network-online.target" ];
+    after = [ "network-online.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      ExecStart = "${pkgs.ethtool}/bin/ethtool -K ${uplinkInterface} rx-udp-gro-forwarding on rx-gro-list off";
+    };
   };
 
   networking.firewall = {
@@ -197,7 +226,10 @@ in
       5405 # Corosync (cluster, if joining Alan)
     ];
     # Allow all traffic on the bridge interface (VM networking)
-    trustedInterfaces = [ "vmbr0" ];
+    trustedInterfaces = [
+      "vmbr0"
+      "tailscale0"
+    ];
   };
 
   time.timeZone = "America/Chicago";

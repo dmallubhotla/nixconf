@@ -39,6 +39,7 @@ in
     hardwareConfig = ./shannon/hardware-configuration.nix;
     ipAddress = "192.168.1.41";
     bridges = [ "vmbr0" ];
+    bootDevice = "/dev/disk/by-id/wwn-0x64cd98f096c3df00312a711b12b7874f";
     withSops = false;
     # Declarative VMs (optional — can also manage via Proxmox web UI)
     # vms = {

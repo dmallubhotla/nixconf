@@ -231,6 +231,12 @@ let
       # Proxmox-specific options
       bridges ? [ "vmbr0" ],
       vms ? { },
+      # LAN CIDR this host advertises as a tailnet subnet router
+      lanSubnet ? "192.168.1.0/24",
+      # Physical NIC enslaved to vmbr0; also where tailscale offloads are tuned
+      uplinkInterface ? "eno4",
+      # GRUB target, as a stable /dev/disk/by-id path (no default — it is per-machine)
+      bootDevice,
       extraModules ? [ ],
       extraSpecialArgs ? { },
     }:
@@ -246,6 +252,9 @@ let
           ipAddress
           bridges
           vms
+          lanSubnet
+          uplinkInterface
+          bootDevice
           ;
       }
       // extraSpecialArgs;
