@@ -153,10 +153,13 @@ in
     package = pkgs-unstable.neovim-unwrapped;
     defaultEditor = true;
     vimAlias = true;
+    withRuby = true;
+    withPython3 = true;
 
     plugins = with pkgs-unstable.vimPlugins; [
       {
         plugin = vimtex;
+        type = "viml";
         config = "let g:nix_recommended_style = 0";
       }
       vim-nix
@@ -233,6 +236,7 @@ in
 
   programs.zsh = {
     enable = true;
+    dotDir = config.home.homeDirectory;
     shellAliases = {
       doo = "./do.sh";
       wttr = "curl wttr.in";
